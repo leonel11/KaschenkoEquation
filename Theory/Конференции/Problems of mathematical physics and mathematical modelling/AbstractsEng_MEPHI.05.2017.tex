@@ -1,0 +1,66 @@
+\documentclass{article} 
+\usepackage[russian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{multirow}
+ 
+\begin{document}
+
+\begin{center}
+\textbf{ The loss of stability for null solution in parabolic boundary-value problem with the deviate in edge condition }
+\end{center}
+
+Let us consider the following parabolic boundary-value problem:
+
+\begin{equation}\label{ivanovsky-eq1}
+	u' = d \ddot{u} - \gamma u + F(u),
+\end{equation}
+At points $ x = 0 $ and $ x = x_0 $ there are set zero and linear edge conditions: 
+$$  u'\mid_{x=0} \, = 0, $$
+$$ u'\mid_{x=x_0} \, = \alpha\,u\mid_{x=0}. $$ 
+Function $ u = u(x, t) $, parameters  $ \alpha, \gamma \in \mathbb{R}, \; d > 0 $. This differential equation is based on the similar equation in [1].
+
+By means of following substitutions
+
+$$ t_1 = dt, \qquad u(x, t) = w(x)\,\mbox{exp}\left( \lambda - \frac{\gamma}{d}t \right) $$ 
+in the case of $ x_0 = 0 $ system \eqref{ivanovsky-eq1} is transformed to simplified parabolic boundary-value problem
+
+\begin{equation}\label{ivanovsky-eq2}
+\begin{array}{l}
+	w'' - \lambda w = 0, \\
+	w'(0) = 0, \\
+	w'(1) = \alpha\,w(0),
+\end{array}
+\end{equation}
+which has a solution
+
+$$ w(x) = c\,ch(\mu\, x), $$
+where $ c $ is a constant and $ \mu^2 = \lambda $. In the case of $ \mu \in \mathbb{C}, \, \mu = \tau + i \omega, $ the solution of differential equation \eqref{ivanovsky-eq2} can be transformed to the following system:
+
+\begin{equation}\label{ivanovsky-eq3}
+\begin{array}{l}
+\begin{cases}
+f(\tau, \omega) = 0 \\
+g(\tau, \omega) - \alpha = 0. \\
+\end{cases}
+\end{array}
+\end{equation}
+$$ f(\tau, \omega) = \tau\,\mbox{cth}\,\tau + \omega\,\mbox{ctg}\,\omega, $$
+$$ g(\tau, \omega) = \tau\,\mbox{sh}\,\tau\,\mbox{cos}\,\omega - \omega\,\mbox{sh}\,\tau\,\mbox{sin}\,\omega. $$
+
+Functions  $ f, g $ are even for variables $ \tau $ and $ \omega $.
+
+The task of research was to find values of parameter $ \alpha = \alpha_{cr} $, when for the solution of system \eqref{ivanovsky-eq3}, $ \mbox{Re}(\lambda)  = \gamma $. In this case for equation \eqref{ivanovsky-eq2} there will be the loss of stability for null solution.
+
+The research was carried out by means of special software. All calculations of roots for system \eqref{ivanovsky-eq3} are performed on a large number of independent streams on GPU. As a result of research there were get values of parameters $ \alpha = \alpha_{cr} $ and $ \lambda $, when the null solution of equation \eqref{ivanovsky-eq2} will lose the stability.
+
+\begin{thebibliography}{99}
+
+\bibitem{pr_first}
+\textit{ Landis E.M. } 
+{ Second Order Equations of Elliptic and Parabolic Type. M., 1971. } 
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,66 @@
+\documentclass{article} 
+\usepackage[russian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{multirow}
+ 
+\begin{document}
+
+\begin{center}
+\textbf{ Потеря устойчивости нулевого решения в параболической краевой задаче с отклонением в краевом условии }
+\end{center}
+
+Рассмотрим уравнение параболического типа с одним потоком:
+
+\begin{equation}\label{ivanovsky-eq1}
+	u' = d \ddot{u} - \gamma u + f(u),
+\end{equation}
+В дополнение к этому дифференциальному уравнению, в точках $ x = 0 $ и $ x = x_0 $ заданы нулевое и линейное краевые условия соответственно 
+$$  u'\mid_{x=0} \, = 0, $$
+$$ u'\mid_{x=x_0} \, = \alpha\,u\mid_{x=0}. $$ 
+Функция $ u = u(x, t) $, а параметры  $ \alpha, \gamma \in \mathbb{R}, \; d > 0 $.
+
+С помощью замен вида
+
+$$ t_1 = dt, \qquad u(x, t) = w(x)\,\mbox{exp}\left( \lambda - \frac{\gamma}{d}t \right) $$ 
+система \eqref{ivanovsky-eq1} сводится к параболическому уравнению более простого вида
+
+\begin{equation}\label{ivanovsky-eq2}
+\begin{array}{l}
+	w'' - \lambda w = 0, \\
+	w'(0) = 0, \\
+	w'(1) = \alpha\,w(0),
+\end{array}
+\end{equation}
+решение которого записывается в виде
+
+$$ w(x) = c\,ch(\mu\, x), $$
+где $ c $ -- константа, а $ \mu^2 = \lambda $. В случае, если $ \mu \in \mathbb{C}, \, \mu = \tau + i \omega, $ решение дифференциального уравнения \eqref{ivanovsky-eq2} можно переписать в виде представленной ниже системы, выделив действительную и мнимую части:
+
+\begin{equation}\label{ivanovsky-eq3}
+\begin{array}{l}
+\begin{cases}
+f(\tau, \omega) = 0 \\
+g(\tau, \omega) - \alpha = 0. \\
+\end{cases}
+\end{array}
+\end{equation}
+Функции  $ f, g $ являются четными по переменным $ \tau $ и $ \omega $ и записываются в следующем виде:
+
+$$ f(\tau, \omega) = \tau\,\mbox{cth}\,\tau + \omega\,\mbox{ctg}\,\omega, $$
+$$ g(\tau, \omega) = \tau\,\mbox{sh}\,\tau\,\mbox{cos}\,\omega - \omega\,\mbox{sh}\,\tau\,\mbox{sin}\,\omega. $$
+
+Задача исследования состояла в поиске такого значения параметра $ \alpha_{cr} $, при которых, исходя из решения системы \eqref{ivanovsky-eq3},  $ \mbox{Re}(\lambda)  = \gamma $. В таком случае, для уравнения \eqref{ivanovsky-eq2} будет иметь место потеря устойчивости нулевого решения.
+
+Поскольку найти нужные значения $ \alpha_{cr} $ с использованием одного лишь аналитического аппарата затруднительно, исследование осуществлялось с помощью специально разработанного приложения. Вычисление корней системы \eqref{ivanovsky-eq3} методом дихотомии осуществлялось параллельно, на независимых потоках графического процессора. В результате исследования были получены некоторые значения параметров $ \alpha_{cr} $ и $ \lambda $, при которых для уравнения \eqref{ivanovsky-eq2} нулевое решение теряло бы свою устойчивость.
+
+\begin{thebibliography}{99}
+
+\bibitem{pr_first}
+\textit{ Авторы } 
+{ Источник } 
+
+\end{thebibliography}
+
+\end{document}
