@@ -1,0 +1,18 @@
+# Files
+*.aux
+*.synctex.gz
+*.out
+*.toc
+*.nav
+*.out
+*.log
+*.sdf
+*.suo
+*.pdb
+*.snm
+*.orig
+*.pro.user
+*.user
+
+#Folders
+*/.idea
