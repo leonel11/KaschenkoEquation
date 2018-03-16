@@ -1,9 +1,8 @@
 """
 @package modelling
-Модуль для запуска программы
+Main module of launching the program
 """
 
-import sys
 from argparse import ArgumentParser
 from controller import Controller
 

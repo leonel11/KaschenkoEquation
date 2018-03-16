@@ -8,10 +8,10 @@ ax = fig.gca(projection='3d')
 
 # Make data
 shift = 0.0
-gamma = -0.5
+gamma = 2.0
 
-alphas = np.linspace(-2.5, 2.5, 6001)
-omegas = np.linspace(-2.5, 2.5, 6001)
+alphas = np.linspace(-2.5, 2.5, 2001)
+omegas = np.linspace(-2.5, 2.5, 2001)
 F = np.zeros((len(alphas), len(omegas)))
 for i in range(F.shape[0]):
 	for j in range(F.shape[1]):
