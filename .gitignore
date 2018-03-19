@@ -13,6 +13,11 @@
 *.orig
 *.pro.user
 *.user
+*.json
+*.csv
+*.png
 
 #Folders
 */.idea
+*/venv
+*/src/__pycache__
