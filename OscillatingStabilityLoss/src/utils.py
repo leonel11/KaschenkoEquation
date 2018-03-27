@@ -13,6 +13,7 @@ def time_to_str(t):
     @param t float time
     return time string in format min:sec.ms
     """
+    # FIXME: output seconds with leading zero in some cases
     return '{}:{:.3f}'.format(int(t//60), t%60)
 
 
