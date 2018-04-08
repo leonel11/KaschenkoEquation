@@ -8,23 +8,28 @@ from numba import jit
 def func(F, omegas, alphas):
 	for i in range(F.shape[0]):
 		for j in range(F.shape[1]):
-			mu = cmath.sqrt(complex(-gamma, omegas[j]))
-			F[i, j] = abs(mu * cmath.sinh(mu) - alphas[i] * cmath.cosh(mu * shift))
+			mu = cmath.sqrt(complex(-gamma, omegas[i, j]))
+			F[i, j] = abs(mu * cmath.sinh(mu) - alphas[i, j] * cmath.cosh(mu * shift))
+			#F[i, j] = (mu * cmath.sinh(mu) - alphas[i, j] * cmath.cosh(mu) * cmath.exp(complex(0, omegas[i, j] * shift))).real	
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')
+ax.set_xlabel('\u03B1')
+ax.set_ylabel('\u03C9')
+ax.set_zlabel('F')
 
 # Make data
 shift = 0.0
-gamma = 2.0
+gamma = 0.5
 
-alphas = np.linspace(-2.5, 2.5, 2001)
-omegas = np.linspace(-2.5, 2.5, 2001)
-F = np.zeros((len(alphas), len(omegas)))
+alphas = np.linspace(-75.0, 75.0, 3701)
+omegas = np.linspace(-75.0, 75.0, 3701)
+alphas, omegas = np.meshgrid(alphas, omegas)
+F = np.zeros(alphas.shape)
 func(F, omegas, alphas)
 print(F.min(), F.argmin())
 
-#ax.plot_surface(alphas, omegas, F)
+ax.plot_surface(alphas, omegas, F)
 
-#plt.show()
+plt.show()
 

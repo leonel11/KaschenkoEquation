@@ -1,0 +1,111 @@
+\nonstopmode
+
+\documentclass[a4paper, 12pt, oneside]{ncc}
+\usepackage[warn]{mathtext}          % русские буквы в формулах, с предупреждением
+\usepackage{ucs}                     % Unicode input support
+\usepackage[T2A]{fontenc}            % внутренняя кодировка  TeX
+\usepackage[utf8x]{inputenc}         % кодовая страница документа
+\usepackage[english, russian]{babel} % локализация и переносы
+\usepackage{indentfirst}             % русский стиль: отступ первого абзаца раздела
+\usepackage{misccorr}                % точка в номерах заголовков
+\usepackage{cmap}                    % русский поиск в pdf
+\usepackage{graphicx}                % Работа с графикой \includegraphics{}
+\usepackage{caption}                 % Работа с подписями для фигур, таблиц и пр.
+\usepackage{soul}                    % Разряженный текст \so{} и подчеркивание \ul{}
+\usepackage{soulutf8}                % Поддержка UTF8 в soul
+\usepackage{fancyhdr}                % Для работы с колонтитулами
+\usepackage{multirow}                % Аналог multicolumn для строк
+\usepackage{ltxtable}                % Микс tabularx и longtable
+\usepackage{paralist}                % Списки с отступом только в первой строчке
+\usepackage[shortcuts]{extdash}      % Переносы в словах с дефисами
+\usepackage[perpage]{footmisc}       % Нумерация сносок на каждой странице с 1
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% Задаем отступы: слева 30 мм, справа 10 мм, сверху до колонтитула 10 мм снизу 25 мм
+\usepackage[a4paper, top=20mm, left=30mm, right=10mm, bottom=25mm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% цвета для гиперссылок
+\definecolor{linkcolor}{HTML}{340DAB} % цвет ссылок
+\definecolor{urlcolor}{HTML}{340DAB} % цвет гиперссылок
+
+
+\hypersetup{unicode=true, linkcolor=linkcolor, urlcolor=urlcolor, colorlinks=true, breaklinks=true}
+
+\def\EUR{\,\euro}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE]{\textit{ Конференция <<Ломоносов 2018>>}}
+\fancyhead[LO]{\textit{ Конференция <<Ломоносов 2018>>}}
+\fancyfoot{}
+\fancyfoot[RE,RO]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\title{ Колебательная потеря устойчивости нулевого решения в одной нелинейной краевой задаче с запаздыванием }
+\author{ Ивановский Леонид Игоревич }
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\begin{document}
+\begin{flushright}
+Секция <<Дифференциальные уравнения, динамические системы и оптимальное управление>>
+\end{flushright}
+
+\begin{center}
+\textbf{Колебательная потеря устойчивости нулевого решения в одной нелинейной краевой задаче с запаздыванием}
+\end{center}
+
+\begin{center}
+\textbf{Научный руководитель -- Глызин Сергей Дмитриевич }\\
+\vspace{0.2cm}
+                                                                                                        }
+
+    \textit{Ивановский Л.И.$^{1}$, Куксёнок И.С.$^{2}$}}\\
+    \small{
+    1 - Ярославский государственный университет им. П.Г. Демидова, Ярославль, Россия; 2 - Национальный исследовательский ядерный университет <<МИФИ>>, Москва, Россия}}\\
+\\
+\end{center}
+
+Рассмотрим нелинейную краевую задачу c запаздыванием: 
+\begin{equation}\label{eq1}
+	\dot{u} = u'' + \gamma u(t - h) - u^3,
+\end{equation}
+\begin{equation}\label{eq2}
+	u'(0, t) = 0, \quad u'(0, t) = \alpha u(x_0, t - \tau),
+\end{equation}
+где $ \alpha, \, \gamma \in \mathbb{R}, \, \tau, \, h \geqslant 0, \, x_0 \in [0, 1] $.
+
+Нулевое состояние равновесия краевой задачи \eqref{eq1}, \eqref{eq2} колебательно теряет устойчивость в том случае, если все собственные числа лежат в левой комплексной полуплоскости, а одна из пар находится на мнимой оси.
+
+Рассмотрим разложение решения краевой задачи \eqref{eq1}, \eqref{eq2} в нормальной форме по степеням малого параметра $ \varepsilon $
+\begin{equation}\label{eq3}
+	\sum\limits_{j=1}^{\infty} \varepsilon^{\frac{j+1}{2}} u_j(t, s, x),
+\end{equation}
+где $ s = \varepsilon t $ -- медленное время, а $ u_0 $ имеет вид
+$$ u_0 = z(s) e^{iwt} w(x) + \overline{z(s)} e^{-iwt} \overline{w(x)}. $$
+
+Подстановка разложения \eqref{eq3} в задачу \eqref{eq1}, \eqref{eq2} приводит к системе последовательно разрешимых краевых задач с модифицированными краевыми условиями. Эта система позволяет получить уравнение на амплитуду колебаний нулевого решения вида
+\begin{equation}\label{eq4}
+	\dot{z} = \phi z + dz|z|^2.
+\end{equation}
+Для исследования экспоненциально-орбитально устойчивого цикла, описываемого формулой \eqref{eq3}, достаточно изучить зависимость действительных частей параметров $ \phi $ и $ d $ дифференциального уравнения \eqref{eq4} от значений параметров краевой задачи \eqref{eq1}, \eqref{eq2}.
+
+Исследование выполнено за счет гранта Российского научного фонда (проект №14-21-00158).
+
+\begin{center}\textbf{Источники и литература}\end{center}
+\begin{enumerate}
+\item Кащенко С.А. О бифуркациях при малых возмущениях в логистическом уравнении с запаздыванием // Моделирование и анализ информационных систем. 2017. Т. 24, №2. С. 168 – 185.{\sloppy
+
+}
+\end{enumerate}
+\\
+
+
+\end{document}
