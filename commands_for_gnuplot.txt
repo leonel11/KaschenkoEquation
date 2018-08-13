@@ -1,2 +1,0 @@
-splot "C:\\_Glyzin\\Search cycles for maps\\risovalka\\risovalka\\trajectories.txt" with lines lt rgb "red",\ 
-"C:\\_Glyzin\\Search cycles for maps\\risovalka\\risovalka\\all_stationary_points.txt" with points lt rgb "blue" pointtype 7 pointsize 0.5
