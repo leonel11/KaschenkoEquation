@@ -105,7 +105,7 @@ $$ \sqrt{-\gamma + i \omega} \; \mbox{sh} \sqrt{-\gamma + i \omega} \, = \, \alp
 %\hspace{0.5cm}
 \includegraphics[scale=0.48]{scheme.png}
 \end{minipage}
-\caption{ Схематическое разбиение области параметров, соответствующих разным состояниям устойчивости нулевого состояния равновесия. }
+\caption{ Разбиение области параметров на области устойчивости нулевого состояния равновесия. }
 \end{figure}
 
 Существует также иной способ получения кривой $ \alpha_c $. Он связан с численным решением краевой задачи (3), (4) и поиском значений $ \alpha_c(\gamma, x_0) $, при которых нулевое решение теряет устойчивость. Для этого рассмотрим цепочку из $ n $ связанных осцилляторов, численно моделирующую краевую задачу (1), (2):
@@ -114,8 +114,7 @@ $$ \sqrt{-\gamma + i \omega} \; \mbox{sh} \sqrt{-\gamma + i \omega} \, = \, \alp
 \end{equation}
 При этом краевые условия заменяются на
 \begin{gather}\label{ivanovsky-eq2}	
-	u_0 = u_1, \\
-	u_{n+1} = 	u_n + \frac{\alpha_c}{n} u_k. \nonumber
+	u_0 = u_1, \quad n(u_{n+1} - u_n) = \alpha u_k.
 \end{gather}
 Значение индекса $ k \in [1,n] $ соответствующего осциллятора $ u_k $ определяется, исходя из значения сдвига $ x_0 $ в краевых условиях (2).
 
@@ -131,7 +130,7 @@ $$ \sqrt{-\gamma + i \omega} \; \mbox{sh} \sqrt{-\gamma + i \omega} \, = \, \alp
 \caption{ Критические значения параметров $ \alpha $. }
 \end{figure}
 
-Как показано на рис. 1 и 2, кривые $ \alpha_c $ и $ \alpha_u $ пересекаются в точке с координатами $ (\gamma_*, \alpha_*) $, где $ \gamma_* > 0 $. Согласно результатам численного исследования, при увеличении значения параметра $ x_0 $ эти кривые продолжают пересекаться, а точка их пересечения смещается вправо по оси $ \gamma $.  Как следствие из этого, была сформулирована следующая теорема.
+Как показано на рис. 1 и 2, кривые $ \alpha_c $ и $ \alpha_u $ пересекаются в точке с координатами $ (\gamma_*, \alpha_*) $, где $ \gamma_* \geqslant 0 $. Согласно результатам численного исследования, при увеличении значения параметра $ x_0 $ эти кривые продолжают пересекаться, а точка их пересечения смещается вправо по оси $ \gamma $.  Как следствие из этого, была сформулирована следующая теорема.
 \newtheorem{theorem}{Теорема} 
 \begin{theorem}
 $ \forall \, \gamma < \gamma_* $ нулевое состояние равновесия краевой задачи (9), (10) будет асимптотически устойчивым, в случае если $ \alpha > \alpha_c $ и $ \alpha < \alpha_u $.
@@ -192,8 +191,10 @@ u_2'(0, t) = 0, \quad u_2'(1, t) = \alpha_u\,u_2(x_0, t) + u_0(x_0, t).
 	\rho' = \phi \rho + d \rho^3.
 \end{equation}
 Коэффициенты $ \phi $ и $ d $ будут выглядеть следующим образом
-$$ \phi = \frac{ 2 \mu \, \mbox{ch} \mu x_0 }{ 2 \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_c \, x_0 \, \mbox{sh} \mu x_0 }, $$
-$$ d = c^2 \frac{ 12 \mu^2 (\mbox{sh} \mu + \mu \mbox{ch} \mu - x_0 \, \mbox{sh} \mu x_0 ) + \alpha_c \mbox{ch} 3 \mu x_0 - 3 \mu \mbox{sh} 3 \mu }{16 \mu ( 2 \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_c \, x_0 \, \mbox{sh} \mu x_0 )}, $$
+%$$ \phi = \frac{ 2 \mu \, \mbox{ch} \mu x_0 }{ 2 \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_c \, x_0 \, \mbox{sh} \mu x_0 }, $$
+$$ \phi = \frac{ 4 \mu^2 \, \mbox{ch} \mu x_0 }{ \mu \mbox{sh} \mu + \alpha \mbox{ch} \mu x_0 + 2 \mu ( \mu \mbox{ch} \mu + \alpha x_0 \mbox{sh} \mu x_0 ) }, $$
+$$ d = \frac{ 3 \mu \mbox{sh} 3 \mu - \alpha \mbox{ch} 3 \mu x_0 + 6 \mu \mbox{sh} \mu + 6 \alpha \mbox{ch} \mu x_0 + 12 \mu^2 \mbox{ch} \mu -12 \alpha x_0 \mu \mbox{sh} \mu x_0 }{ 8 (\mu \mbox{sh} \mu + \alpha \mbox{ch} \mu x_0 + 2 \mu ( \mu \mbox{ch} \mu + \alpha x_0 \mbox{sh} \mu x_0 ) ) } $$
+%$$ d = c^2 \frac{ 12 \mu^2 (\mbox{sh} \mu + \mu \mbox{ch} \mu - x_0 \, \mbox{sh} \mu x_0 ) + \alpha_c \mbox{ch} 3 \mu x_0 - 3 \mu \mbox{sh} 3 \mu }{16 \mu ( 2 \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_c \, x_0 \, \mbox{sh} \mu x_0 )}, $$
 где $ c $ --- константа, а $ \mu = \sqrt{-\gamma} $. Исходя из полученных результатов, была выведена следующая теорема.
 \begin{theorem}
 Если в уравнении (17) $ Re(\phi)>0 $, а  $ Re(d)<0 $, то  $ \exists \varepsilon_0 > 0 \;\; \forall \varepsilon \in (0,\varepsilon_0] $, что в фазовом пространстве краевой задачи (3), (4) нулевое состояние равновесия теряет свою устойчивость.
