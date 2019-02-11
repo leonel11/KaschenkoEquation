@@ -1,0 +1,251 @@
+\documentclass[12pt]{extarticle} 
+\usepackage[T2A]{fontenc} 
+\usepackage[cp1251]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{mathtext}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{lscape}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage[left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+\parindent=1cm
+\pagestyle{plain}
+\onehalfspacing
+
+\renewcommand{\thesection}{\thechapter\arabic{section}.}
+
+\begin{document}
+
+{\large \textbf{\begin{center}
+Потеря устойчивости нулевого состояния равновесия в одной краевой задаче с линейным отклонением в краевом условии
+\end{center}}}
+
+\begin{center}
+\textbf{ Ивановский Л.И. }
+\end{center}
+
+\begin{center}
+\textit{ ЯрГУ им. П.Г. Демидова }
+\end{center}
+
+\begin{center}
+leon19unknown@gmail.com
+\end{center}
+
+\section*{Аннотация}
+
+В статье рассматривается краевая задача с линейным отклонением в краевом условии. Для нее изучаются вопросы колебательной и дивергентной потери устойчивости нулевого состояния равновесия, а также какие при этом решения от него ответвляются. Для поставленной задачи в комплексе применяются аналитические и численные методы для решения. При численном исследовании динамической системы, представляющей собой цепочку из связанных осцилляторов, моделирующую изначальную краевую задачу. При исследовании особое внимание уделяется значениям начальных параметров, при которых нулевое решение краевой задачи меняет свою устойчивость.
+
+\section{Постановка задачи}
+
+Рассмотрим краевую задачу c линейным отклонением в одном из краевых условий
+\begin{equation}\label{ivanovsky-eq1}
+	\dot u = u'' + \gamma u - u^3,	
+\end{equation}
+\vspace{-1cm}
+\begin{equation}\label{ivanovsky-eq2}	
+	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t),
+\end{equation}
+где параметры $ \alpha, \gamma \in \mathbb{R} $, а $ x_0 \in [0,1] $.
+
+Краевая задача (1), (2) имеет очевидным образом нулевое решение. В зависимости от значений параметров, это решение может быть устойчивым или неустойчивым. Представляет интерес определить условие устойчивости этого состояния равновесия и выяснить какие решения от него ответвляются при потере устойчивости. В данном случае основными способами потери устойчивости являются дивергентный, когда в спектре устойчивости состояния равновесия появляется нулевое значение, и колебательный, соответствующий случаю выхода пары собственных значений  на мнимую ось.
+
+\section{Линейный анализ}
+
+Как и в статье [1], рассмотрим линеаризованную в нуле краевую задачу (1), (2):
+\begin{equation}\label{ivanovsky-eq3}
+	\dot u = u'' + \gamma u,	
+\end{equation}
+\vspace{-0.8cm}
+\begin{equation}\label{ivanovsky-eq4}	
+	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t),
+\end{equation}
+
+Для выяснения устойчивости нулевого решения выполним стандартную эйлерову замену вида $ u(x, t) = e^{\lambda t} \, v(x) $. Тогда для функции $ v(x) $ получим следующую задачу на собственные значения:
+\begin{equation}\label{ivanovsky-eq5}
+	v'' + (\gamma - \lambda)v = 0,	
+\end{equation}
+\vspace{-0.8cm}
+\begin{equation}\label{ivanovsky-eq6}	
+	v'(0) \, = 0, \qquad v'(1) \, = \alpha\,v(x_0),
+\end{equation}
+
+Решая обыкновенное дифференциальное уравнение (5) и применяя первое из краевых условий (6), получаем, что 
+\begin{equation}\label{ivanovsky-eq7}
+	v(x) = c \, \mbox{ch} x,
+\end{equation}
+где $ c \in \mathbb{R} $ --- константа. Применяя к (7) второе краевое условие из (6), имеем следующее выражение
+\begin{equation}\label{ivanovsky-eq8}
+	\sqrt{-\gamma + \lambda} \; \mbox{sh} \sqrt{-\gamma + \lambda} \, = \, \alpha \, \mbox{ch} (\sqrt{-\gamma + \lambda} \; x_0),
+\end{equation}
+которое представляет собой характеристическое уравнение этой краевой задачи. Выяснение устойчивости нулевого состояния равновесия в данном случае сталкивается со следующими трудностями: мы можем найти значения, при которых корни характеристического уравнения (8) пересекают мнимую ось. Однако в таком случае не удается доказать, что все остальные корни будут лежать слева от мнимой оси. В связи с этим будем в комплексе применять аналитические и численные методы для решения данной задачи.
+
+Выясним сначала важный вопрос, при каких критических значениях $\alpha_{cr}$ для фиксированных параметров параметров $ \gamma $ и $ x_0 $ корни характеристического уравнения (8) выходят на мнимую ось. Выделим здесь два случая. В первом случае будем считать, что собственное число $ \lambda $ обращается в $ 0 $, т.е. может происходить так называемая дивергентная потеря устойчивости. Подстановка $ \lambda = 0 $ в характеристическое уравнение (8) приводит к аналитической зависимости критического значения $ \alpha_{cr}=\alpha_d $ от величин $ \gamma $ и $ x_0 $:
+\begin{equation}\label{ivanovsky-eq9}
+	\alpha_d = \frac{ \sqrt{-\gamma} \; \mbox{sh} \sqrt{-\gamma}}{\mbox{ch} \sqrt{-\gamma} \; x_0 }
+\end{equation}
+На рис. 1 эта кривая $ \alpha_d $ изображена синим цветом.
+\newpage
+\begin{figure}[h]
+\begin{minipage}[h]{0.48\linewidth}
+%\hspace{0.5cm}
+\includegraphics[scale=0.48]{scheme.png}
+\end{minipage}
+\caption{ Схематичное разбиение области параметров на области устойчивости нулевого состояния равновесия. }
+\end{figure}
+
+Теперь переходим к построению зависимостей критического значения параметра $ \alpha_{cr} $ от величин $ \gamma $ и $ x_0 $ в случае колебательной потери устойчивости, т.е. считаем, что в уравнении (8) $ \lambda = i \omega $. Тогда для критических значений $ \alpha_{cr}=\alpha_c $ получаем следующее трансцендентное уравнение:
+\begin{equation}\label{ivanovsky-eq10}
+\sqrt{-\gamma + i \omega} \; \mbox{sh} \sqrt{-\gamma + i \omega} \, = \, \alpha_c \, \mbox{ch} (\sqrt{-\gamma + i \omega} \; x_0),
+\end{equation}
+Кривую $ \alpha_c $, соответствующую этому уравнению, можно получить лишь численно и она на рис. 1 показана красным цветом.
+
+Существует также иной способ получения кривой $ \alpha_c $. Он связан с численным решением краевой задачи (3), (4) и поиском значений $ \alpha_c(\gamma, x_0) $, при которых нулевое решение теряет устойчивость. Для этого рассмотрим цепочку из $ n $ связанных осцилляторов, численно моделирующую краевую задачу (1), (2):
+\begin{equation}\label{ivanovsky-eq11} 
+	\dot{u}_j =  n^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \quad j = \overline{1, n}. 
+\end{equation}
+При этом краевые условия заменяются на
+\begin{gather}\label{ivanovsky-eq12}	
+	u_0 = u_1, \quad n(u_{n+1} - u_n) = \alpha_c u_k.
+\end{gather}
+Значение индекса $ k \in [1,n] $ соответствующего осциллятора $ u_k $ определяется, исходя из значения сдвига $ x_0 $ в краевых условиях (2).
+
+Численный способ получения критической величины $ \alpha_{c}(\gamma, x_0) $ состоит в решении линеаризованной системы обыкновенных дифференциальных уравнений (11) с краевыми условиями (12), для которой значение $ \alpha $ при заданном параметре $ \gamma $ выбирается из условий устойчивости или неустойчивости нулевого состояния равновесия. Исследование осуществлялось с помощью специально разработанного приложения. При численном моделировании уравнения (11), количество осцилляторов $ n $ считалось равным 50. Графическая визуализация численных экспериментов для определенных значений параметра $ x_0 $ изображена на рис. 2. 
+\begin{figure}[h]
+\begin{minipage}[h]{0.23\linewidth}
+\center{\includegraphics[scale=0.23]{x0=0,00.png} \\ (a) $ x_0 = 0.0 $ }
+\end{minipage}
+\hspace{4.5cm}
+\begin{minipage}[h]{0.23\linewidth}
+\center{\includegraphics[scale=0.23]{x0=0,49.png} \\ (b) $ x_0 = 0.49 $ }
+\end{minipage}
+\caption{ Критические значения параметров $ \alpha $. }
+\end{figure}
+
+Как показано на рис. 1 и 2, кривые $ \alpha_c $ и $ \alpha_d $ пересекаются в точке с координатами $ (\gamma_*, \alpha_*) $, где $ \gamma_* \geqslant 0 $. Согласно результатам численного исследования, при увеличении значения параметра $ x_0 $ эти кривые продолжают пересекаться, а точка их пересечения смещается вправо по оси $ \gamma $. Кривые $ \alpha_c $ и $ \alpha_d $, изображенные на рис. 1, являются важнейшими элементами для построения областей значений параметров, определяющих устойчивость нулевого состояния равновесия краевой задачи (3), (4).
+
+\section{Локальный анализ краевой задачи (1), (2)}
+
+В этом разделе методами возмущений построим режим, ответвляющийся от нулевого состояния равновесия задачи (1), (2).
+
+\subsection{Случай дивергентной потери устойчивости}
+
+Для изучения фазового портрета краевой задачи (1), (2) около нулевого состояния равновесия используется нормальная форма, которая получается в результате разложения решения по степеням малого параметра
+\begin{equation}\label{ivanovsky-eq13}
+	u = \sqrt{\varepsilon}u_0 + \varepsilon u_1 + \varepsilon^{\frac{3}{2}} u_2 + O(\varepsilon^2).
+\end{equation}
+Малый параметр $ \varepsilon=\alpha-\alpha_{d} $, где $ \alpha_{d} $ вычисляется по формуле (9), косвенно характеризует собой отклонение от положения равновесия. Для нормальный формы (13) функция $ u_0 $, в случае дивергентной потери устойчивости принимает вид
+\begin{equation}\label{ivanovsky-eq14}
+	u_0 = \rho(s) v(x),
+\end{equation}
+где параметр $ s = \varepsilon t $ --- медленное время. Подстановка в уравнение (1) разложения (13) с учетом (14) приводит к системе последовательно разрешимых краевых задач следующего вида
+\begin{equation}\label{ivanovsky-eq15}
+	v'' + \gamma v = 0
+\end{equation}
+\vspace{-0.7cm}
+\begin{equation}\label{ivanovsky-eq16}
+	v'(0) = 0, \quad v'(1) = \alpha_{d}\,v(x_0),
+\end{equation}
+
+\begin{equation}\label{ivanovsky-eq17}
+	\frac{\partial u_0}{\partial s} + \dot{u}_2 = u''_2 + \gamma u_2 - u_0^3
+\end{equation}
+\vspace{-0.7cm}
+\begin{equation}\label{ivanovsky-eq18}
+u_2'(0, t) = 0, \quad u_2'(1, t) = \alpha_d\,u_2(x_0, t) + u_0(x_0, t).
+\end{equation}
+Граничные условия (16) и (18) для каждой краевой задачи формируются путем подстановки формулы (13) с учетом (14) в краевые условия (2).
+
+Решая краевую задачу (17), (18) можно получить уравнение вида
+\begin{equation}\label{ivanovsky-eq19}
+	\rho' = \phi_0 \rho + d_0 \rho^3.
+\end{equation}
+Значения ляпуновских величин $ \phi_0 $ и $ d_0 $ будут выглядеть следующим образом
+\begin{equation}\label{ivanovsky-eq20} 
+\phi_0 = \frac{ 2 \mu \mbox{ch} \mu x_0 }{ \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_d x_0 \mbox{sh} \mu x_0 }, \end{equation}
+\begin{equation}\label{ivanovsky-eq21} 
+d_0 = \frac{ 3 \mu^2 \mbox{sh} 3 \mu - 12 \mbox{sh} \mu - 12 \mu \mbox{ch} \mu - a_d \mu \mbox{ch} 3 \mu x_0 + 12 \alpha_d x_0 \mbox{sh} \mu x_0 }{ 16 ( \mu \mbox{ch} \mu + \mbox{sh} \mu - \alpha_d x_0 \mbox{sh} \mu x_0 ) } 
+\end{equation}
+%$$ d = c^2 \frac{ 12 \mu^2 (\mbox{sh} \mu + \mu \mbox{ch} \mu - x_0 \, \mbox{sh} \mu x_0 ) + \alpha_c \mbox{ch} 3 \mu x_0 - 3 \mu \mbox{sh} 3 \mu }{16 \mu ( 2 \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_c \, x_0 \, \mbox{sh} \mu x_0 )}, $$
+где $ \mu = \sqrt{-\gamma} $. Исходя из полученных результатов, были выведены следующие теоремы.
+\newtheorem{theorem}{Теорема} 
+\begin{theorem}
+Если в уравнении (19) $ \phi_0>0 $, а  $ d_0<0 $, то  $ \exists \varepsilon_0>0 \;\; \forall \varepsilon \in (0,\varepsilon_0] $, что в фазовом пространстве краевой задачи (1), (2) при определенных значениях параметров $ \gamma $ и $ x_0 $ нулевое состояние равновесия теряет свою устойчивость.
+\end{theorem}
+
+Отметим, что в случае $ x_0 = 0 $ параметр $ \alpha_d $, а также коэффициенты $ \phi_0 $ и $ d_0 $ перепишутся в виде
+
+\begin{equation}\label{ivanovsky-eq22}
+	\alpha_d = \sqrt{-\gamma} \; \mbox{sh} \sqrt{-\gamma}
+\end{equation}
+\begin{equation}\label{ivanovsky-eq23} 
+\phi_0 = \frac{ 2 \sqrt{-\gamma} }{ \sqrt{-\gamma} \mbox{ch} \sqrt{-\gamma} +\mbox{sh} \sqrt{-\gamma} },
+\end{equation}
+\begin{equation}\label{ivanovsky-eq24} 
+d_0 = \frac{ -3 \gamma \mbox{sh} 3 \sqrt{-\gamma} - 12 \mbox{sh} \sqrt{-\gamma} - 12 \sqrt{-\gamma} \mbox{ch} \sqrt{-\gamma} - a_d \sqrt{-\gamma} }{ 16 ( \sqrt{-\gamma} \mbox{ch} \sqrt{-\gamma} + \mbox{sh} \sqrt{-\gamma} ) } 
+\end{equation}
+
+\begin{theorem}
+Пусть $ \gamma < \gamma_l, $ где $ \gamma_l $ -- корень уравнения
+$$ -3 \gamma \sin 3 \sqrt{\gamma} - 12 \sin \sqrt{\gamma} - 12 \sqrt{\gamma} \cos \sqrt{\gamma} + \gamma \sin \sqrt{\gamma} = 0, $$
+а $ \varepsilon = \alpha - \alpha_d $. Тогда $ \exists \, \varepsilon_0 > 0: \, \forall \varepsilon \in (0, \varepsilon_0] $ краевая задача (1), (2) имеет 2 локально устойчивых пространственно-неоднородных состояний равновесия. 
+\end{theorem} 
+
+\begin{theorem}
+Пусть $ \gamma_l < \gamma < \gamma_{*}, $ где $ \gamma_{*} $ -- корень уравнения $ \sqrt{\gamma} = -\tg \sqrt{\gamma} $. Тогда при $ \alpha > \alpha_d $ нулевое решение краевой задачи (1), (2) жестко теряет устойчивость при достаточно малой разности $ \alpha_d - \alpha $, а к нулевому состоянию равновесия приближаются 2 неустойчивых состояния равновесия. 
+\end{theorem} 
+
+\subsection{Случай колебательной потери устойчивости}
+
+В случае колебательной потери устойчивости будем действовать аналогично. Для краевой задачи (1), (2) отыщем решения по степеням корня малого параметра $ \varepsilon $, используя нормальную форму (13). Считая, что $ \lambda = i \omega $, функция $ u_0 $ будет принимать вид
+\begin{equation}\label{ivanovsky-eq25}
+	u_0 = z(s) e^{i \omega t} v(x),
+\end{equation}
+Подстановка в уравнение (1) разложения (13) с учетом (14) приводит к системе последовательно разрешимых краевых задач следующего вида 
+\begin{equation}\label{ivanovsky-eq26}
+	v'' + \gamma v = 0
+\end{equation}
+\vspace{-0.7cm}
+\begin{equation}\label{ivanovsky-eq27}
+	v'(0) = 0, \quad v'(1) = \alpha_c\,v(x_0),
+\end{equation}
+
+\begin{equation}\label{ivanovsky-eq28}
+	\frac{\partial u_0}{\partial s} + \dot{u}_2 = u''_2 + \gamma u_2 - u_0^3
+\end{equation}
+\vspace{-0.7cm}
+\begin{equation}\label{ivanovsky-eq29}
+u_2'(0, t) = 0, \quad u_2'(1, t) = \alpha_c\,u_2(x_0, t) + u_0(x_0, t).
+\end{equation}
+Граничные условия (27) и (29) для каждой краевой задачи формируются путем подстановки формулы (13) с учетом (25) в краевые условия (2). Параметр $ \alpha_c $ вычисляется из уравнения (10).
+
+Решая краевую задачу (28), (29), можно получить уравнение вида
+\begin{equation}\label{ivanovsky-eq30}
+	z' = \phi_0 z + d_0 z |z|^2.
+\end{equation}
+
+\begin{thebibliography}{99}
+
+\bibitem{pr_first}
+Кащенко С.\,А. ``О бифуркациях при малых возмущениях в логистическом уравнении с запаздыванием'', \textit{Моделирование и анализ информационных систем}, \textbf{24}:2 (2017), с. 168 – 185.
+
+\bibitem{pr_second}
+Хэссар Б., Казаринов Н., Вэн И. ``Теория и приложения бифуркации рождения цикла'', \textit{М.: Мир}, 1985. - 280 с.
+
+\bibitem{pr_first}
+Измаилов А.\,Ф. ``К теореме Андронова–Хопфа о бифуркации рождения цикла'', \textit{Дифференц. уравнения}, \textbf{37}:5 (2001), с. 609 – 615.
+
+\end{thebibliography}
+
+\end{document}

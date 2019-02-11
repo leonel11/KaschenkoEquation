@@ -3,10 +3,10 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-x0 = 0.67
-g_min = 15.98863
-g_max = 15.98865
-h = 0.0000001
+x0 = 0.0
+g_min = 4.03
+g_max = 4.05
+h = 0.0001
 
 gammas= list(np.arange(g_min, g_max, h))
 
