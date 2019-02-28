@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 x0 = 0.0
 g_min = 4.03
-g_max = 4.05
+g_max = 4.11
 h = 0.0001
 
 gammas= list(np.arange(g_min, g_max, h))
@@ -59,7 +59,7 @@ for idx in range(len(gammas)):
     ds.append(d_func(gammas[idx], alphas[idx], x0))
 print(gammas[-1], phis[-1])
 plt.subplots_adjust(left=0.06, bottom=0.06, right=0.99, top=0.99)
-#plt.plot(gammas, phis, label='φ')
+plt.plot(gammas, phis, label='φ')
 plt.plot(gammas, ds, label='d', color = 'orange')
-plt.legend()
+#plt.legend()
 plt.show()

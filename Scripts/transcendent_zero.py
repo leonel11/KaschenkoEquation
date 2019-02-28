@@ -18,7 +18,7 @@ def sign_func(w):
 
 def alpha_cr(w):
     r = np.sqrt(np.sqrt(gamma * gamma + w * w))
-    t = np.arctan(-w / gamma) / 2.0
+    t = np.arctan(-w/gamma) / 2.0
     return r*np.cos(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) - r*np.sin(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
 
 
