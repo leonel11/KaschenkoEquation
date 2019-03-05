@@ -3,7 +3,7 @@ import sys
 import math
 
 
-EPS = 0.000000001
+EPS = 0.000001
 PI = math.pi
 
 
@@ -22,9 +22,9 @@ def alpha_func(y):
 def dichotonomy_root_search(left_border, right_border):
     y = (left_border + right_border) / 2.0
     f = sign_func(y)
-    if (f > EPS/2.0):
+    if (f > EPS):
         return dichotonomy_root_search(left_border, y)
-    elif (f < -EPS/2.0):
+    elif (f < -EPS):
         return dichotonomy_root_search(y, right_border)
     else:
         return y
@@ -33,7 +33,7 @@ def dichotonomy_root_search(left_border, right_border):
 if __name__ == '__main__':
     if (len(sys.argv) != 2):
         print('Error: wrong call of script!\n')
-        print('Right call: alpha_k.py k')
+        print('Right call: oscillating_origin_at_zero.py k')
         print('k - amount of alpha_k')
     else:
         k = int(sys.argv[1])

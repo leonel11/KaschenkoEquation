@@ -1,24 +1,29 @@
 import numpy as np
+import math
 
 
 EPS = 0.000001
-gamma = 0.1
-w_pred = 11.187
-w_start = 0.9*w_pred
-w_end = 1.1*w_pred
-#w_start = 11.47
-#w_end = 14.02
+gamma = 4.1
+w_pred = 1.86053
+w_start = 0.35*w_pred
+w_end = 1.65*w_pred
 
 
 def sign_func(w):
     r = np.sqrt(np.sqrt(gamma*gamma+w*w))
-    t = np.arctan(-w/gamma)/2.0
+    if gamma <= 0.0:
+        t = np.arctan(-w/gamma)/2.0
+    else:
+        t = (math.pi - np.arctan(w/gamma)) / 2.0
     return r*np.sin(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) + r*np.cos(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
 
 
 def alpha_cr(w):
     r = np.sqrt(np.sqrt(gamma * gamma + w * w))
-    t = np.arctan(-w/gamma) / 2.0
+    if gamma <= 0.0:
+        t = np.arctan(-w / gamma) / 2.0
+    else:
+        t = (math.pi - np.arctan(w / gamma)) / 2.0
     return r*np.cos(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) - r*np.sin(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
 
 

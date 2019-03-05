@@ -4,8 +4,8 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 x0 = 0.0
-g_min = 4.03
-g_max = 4.11
+g_min = 4.01
+g_max = 4.03
 h = 0.0001
 
 gammas= list(np.arange(g_min, g_max, h))
