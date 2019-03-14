@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
-x0 = 0.1
-g_min = -4.11
-g_max = 4.11
+x0 = 0.0
+g_min = -4.1
+g_max = 4.04
 h = 0.001
 
 gammas = list(np.arange(g_min, g_max, h))
@@ -43,8 +44,9 @@ def d_func(g, a, x0):
     return B/A
 
 
-plt.figure('Phi, d.  Xo = {:.2}, gamma [{:.3}, {:.3}]'.format(x0, g_min, g_max))
+plt.figure('divergent_phi0d0_x0={:.3},g[{:.3},{:.3}]'.format(x0, g_min, g_max))
 plt.rcParams.update({'font.size': 13})
+plt.rcParams['savefig.directory'] = '../Tracer/Results'
 plt.xlabel('$\gamma$')
 plt.grid(True)
 alphas = []
