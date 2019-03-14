@@ -1,14 +1,13 @@
-import cmath
 import numpy as np
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-x0 = 0.0
-g_min = 4.01
-g_max = 4.03
-h = 0.0001
 
-gammas= list(np.arange(g_min, g_max, h))
+x0 = 0.1
+g_min = -4.11
+g_max = 4.11
+h = 0.001
+
+gammas = list(np.arange(g_min, g_max, h))
 
 
 def alpha_u(g, x0):
@@ -45,9 +44,8 @@ def d_func(g, a, x0):
 
 
 plt.figure('Phi, d.  Xo = {:.2}, gamma [{:.3}, {:.3}]'.format(x0, g_min, g_max))
-mpl.rc('font', size=13)
-plt.xlabel('gamma')
-plt.ylabel('Re')
+plt.rcParams.update({'font.size': 13})
+plt.xlabel('$\gamma$')
 plt.grid(True)
 alphas = []
 phis = []
@@ -57,9 +55,12 @@ for g in gammas:
 for idx in range(len(gammas)):
     phis.append(phi_func(gammas[idx], alphas[idx], x0))
     ds.append(d_func(gammas[idx], alphas[idx], x0))
-print(gammas[-1], phis[-1])
-plt.subplots_adjust(left=0.06, bottom=0.06, right=0.99, top=0.99)
-plt.plot(gammas, phis, label='φ')
-plt.plot(gammas, ds, label='d', color = 'orange')
-#plt.legend()
+for idx in range(len(gammas)-1, 0, -1):
+    if ds[idx]*ds[idx-1] < 0.0:
+        print('gamma_l = {:.6}'.format(gammas[idx]))
+        break
+plt.subplots_adjust(left=0.1, bottom=0.1, right=0.98, top=0.98)
+plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
+plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
+plt.legend()
 plt.show()

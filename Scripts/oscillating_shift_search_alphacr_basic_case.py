@@ -3,11 +3,10 @@ import math
 
 
 EPS = 0.000001
-X_0 = 0.33
-gamma = 0.1
-w_pred = 16.156
-w_start = 0.6*w_pred
-w_end = 1.4*w_pred
+gamma = 4.1
+w_pred = 1.86053
+w_start = 0.35*w_pred
+w_end = 1.65*w_pred
 
 
 def sign_func(w):
@@ -16,9 +15,7 @@ def sign_func(w):
         t = np.arctan(-w/gamma)/2.0
     else:
         t = (math.pi - np.arctan(w/gamma)) / 2.0
-    hi = r*np.cos(t)
-    teta = r*np.sin(t)
-    return (teta*np.sinh(hi)*np.cos(teta)+hi*np.cosh(hi)*np.sin(teta))/(hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - np.tanh(hi*X_0)*np.tan(teta*X_0)
+    return r*np.sin(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) + r*np.cos(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
 
 
 def alpha_cr(w):
@@ -27,9 +24,7 @@ def alpha_cr(w):
         t = np.arctan(-w / gamma) / 2.0
     else:
         t = (math.pi - np.arctan(w / gamma)) / 2.0
-    hi = r*np.cos(t)
-    teta = r*np.sin(t)
-    return (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta))/(np.cosh(hi*X_0)*np.cos(teta*X_0))
+    return r*np.cos(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) - r*np.sin(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
 
 
 def dichotonomy_root_search(w_left, w_right):
