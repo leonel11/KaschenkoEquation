@@ -4,10 +4,10 @@ import math
 
 
 EPS = 0.000001
-x0_begin = 0.0
-x0_end = 1.0
-count_origins = 101
-w_prev = 11.187
+x0_begin = 0.86
+x0_end = 0.89
+count_origins = 4
+w_prev = 656.999
 
 
 def sign_func(y, x0):
@@ -47,9 +47,9 @@ xs = np.linspace(x0_begin, x0_end, count_origins)
 print('x0;w;a')
 for x0 in xs[1:]:
     y_prev = np.sqrt(w_prev/2.0)
-    y_left, y_right = 0.96*y_prev, 1.04*y_prev
+    y_left, y_right = 0.98*y_prev, 1.1*y_prev
     y = dichotonomy_root_search(y_left, y_right, x0)
     w = 2.0*y*y
     a = get_alpha_cr(y, x0)
-    print('{:.7};{:.7};{:.7}'.format(x0,w,a))
+    print('{:.7};{:.7};{:.7};{:.7}'.format(x0,y,w,a))
     w_prev = w

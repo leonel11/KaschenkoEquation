@@ -1,11 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 
 
-x0 = 0.0
+x0 = 0.78
 g_min = -4.1
-g_max = 4.04
+g_max = 4.1
 h = 0.001
 
 gammas = list(np.arange(g_min, g_max, h))
@@ -63,6 +62,6 @@ for idx in range(len(gammas)-1, 0, -1):
         break
 plt.subplots_adjust(left=0.1, bottom=0.1, right=0.98, top=0.98)
 plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
-plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
+#plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
 plt.legend()
 plt.show()
