@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.78
-g_min = -4.1
-g_max = 4.1
+x0 = 0.75
+g_min = 3.0
+g_max = 4.308
 h = 0.001
 
 gammas = list(np.arange(g_min, g_max, h))
@@ -43,14 +43,12 @@ def d_func(g, a, x0):
     return B/A
 
 
-plt.figure('divergent_phi0d0_x0={:.3},g[{:.3},{:.3}]'.format(x0, g_min, g_max))
+plt.figure('divergent_phi0d0_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max))
 plt.rcParams.update({'font.size': 13})
 plt.rcParams['savefig.directory'] = '../Tracer/Results'
 plt.xlabel('$\gamma$')
 plt.grid(True)
-alphas = []
-phis = []
-ds = []
+alphas, phis, ds, amps = [], [], [], []
 for g in gammas:
     alphas.append(alpha_u(g, x0))
 for idx in range(len(gammas)):
@@ -60,8 +58,10 @@ for idx in range(len(gammas)-1, 0, -1):
     if ds[idx]*ds[idx-1] < 0.0:
         print('gamma_l = {:.6}'.format(gammas[idx]))
         break
-plt.subplots_adjust(left=0.1, bottom=0.1, right=0.98, top=0.98)
-plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
-#plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
+plt.subplots_adjust(left=0.12, bottom=0.1, right=0.98, top=0.98)
+#plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
+plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
+#x1,x2,y1,y2 = plt.axis()
+#plt.axis((x1,4.902,y1,y2))
 plt.legend()
 plt.show()

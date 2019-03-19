@@ -3,11 +3,11 @@ import math
 
 
 EPS = 0.000001
-X_0 = 0.25
-gamma_start = 0.0
-gamma_end = -4.2
-h = -0.1
-w_pred = 16.156
+X_0 = 0.83
+gamma_start = 3.5
+gamma_end = 3.555
+h = 0.001
+w_pred = 379.178
 
 
 def sign_func(w):
@@ -58,7 +58,7 @@ def output_data(out_data):
     dict_keys = list(sorted(out_data.keys(), reverse=True))
     for gamma in dict_keys:
         w, alpha_c = out_data[gamma][0], out_data[gamma][1]
-        print('{:.3};{:.6};{:.6}'.format(gamma, w, alpha_c))
+        print('{:.5};{:.6};{:.6}'.format(gamma, w, alpha_c))
 
 
 gamma = gamma_start + h

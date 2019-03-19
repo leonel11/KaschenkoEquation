@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import os
 
 
-x0 = 0.25
-x_ticks = np.arange(-4, 5, 1)
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.25 (u13)'
-CSV_FILE = 'x0=0.25_analytical.csv'
+x0 = 0.83
+x_ticks = np.arange(-4, 6, 1)
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.83'
+CSV_FILE = 'x0=0.83_analytical.csv'
 
 
 def phi_o(g, a, w, x0):
@@ -34,19 +34,20 @@ def d_o(g, a, w, x0):
 
 
 def calc_coefs_normal_form(gs, ws, alphs):
-    phis, ds = [], []
+    phis, ds, amps = [], [], []
     for idx in range(len(gammas)):
         g = gs[idx]
         w = ws[idx]
         a = alphs[idx]
         phis.append(phi_o(g, a, w, x0))
         ds.append(d_o(g, a, w, x0))
-    return phis, ds
+        amps.append(np.sqrt(abs(phis[-1]/ds[-1])))
+    return phis, ds, amps
 
 
-def visualize_dependencies(gs, phis, ds):
+def visualize_dependencies(gs, phis, ds, amps):
     plt.rcParams.update({'font.size': 13})
-    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.98, top=0.98)
+    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.94)
     plt.xlabel('$\gamma$')
     plt.xticks(x_ticks)
     plt.grid()
@@ -55,15 +56,23 @@ def visualize_dependencies(gs, phis, ds):
     plt.savefig(os.path.join(DATA_PATH, 'oscillating_phi0.png'))
     plt.clf()
     plt.xticks(x_ticks)
+    plt.xlabel('$\gamma$')
     plt.grid()
     plt.plot(gs, ds, label='$d_0$', color='darkorange', linewidth=2)
     plt.legend()
     plt.savefig(os.path.join(DATA_PATH, 'oscillating_d0.png'))
+    plt.clf()
+    plt.xticks(x_ticks)
+    plt.xlabel('$\gamma$')
+    plt.grid()
+    plt.plot(gs, amps, label='$A_c$', color='crimson', linewidth=2)
+    plt.legend()
+    plt.savefig(os.path.join(DATA_PATH, 'oscillating_amplutude.png'))
 
 
 df = pd.read_csv(os.path.join(DATA_PATH, CSV_FILE), sep=';')
 gammas = list(df['gamma'])
 omegas = list(df['w'])
 alphas = list(df['alpha_c'])
-phis, ds = calc_coefs_normal_form(gammas, omegas, alphas)
-visualize_dependencies(gammas, phis, ds)
+phis, ds, amps = calc_coefs_normal_form(gammas, omegas, alphas)
+visualize_dependencies(gammas, phis, ds, amps)
