@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import os
 
 
-x0 = 0.83
+x0 = 0.33
 x_ticks = np.arange(-4, 6, 1)
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.83'
-CSV_FILE = 'x0=0.83_analytical.csv'
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.33'
+CSV_FILE = 'x0=0.33_analytical.csv'
 
 
 def phi_o(g, a, w, x0):
@@ -59,6 +59,8 @@ def visualize_dependencies(gs, phis, ds, amps):
     plt.xlabel('$\gamma$')
     plt.grid()
     plt.plot(gs, ds, label='$d_0$', color='darkorange', linewidth=2)
+    #x1,x2,y1,y2 = plt.axis()
+    #plt.axis((3.0,4.94,-42.0,0.5))
     plt.legend()
     plt.savefig(os.path.join(DATA_PATH, 'oscillating_d0.png'))
     plt.clf()
