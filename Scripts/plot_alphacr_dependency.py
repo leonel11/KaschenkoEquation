@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import os
 
 
-x0 = 0.83
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.83'
-CSV_FILE = 'x0=0.83_analytical.csv'
+x0 = 0.42
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.42'
+CSV_FILE = 'x0=0.42_analytical.csv'
 
 
 def get_alpha_u(g, x0):
@@ -28,8 +28,8 @@ def visualise_alphas(gs, aus, acs):
     plt.legend(loc='lower right')
     #plt.legend()
     plt.scatter(gs[0], acs[0], color='black', s=8, zorder=3)
-    x1,x2,y1,y2 = plt.axis()
-    plt.axis((x1,x2,-255.0, y2))
+    #x1,x2,y1,y2 = plt.axis()
+    #plt.axis((x1,x2,-490.0, y2))
     #print(aus[0])
     #plt.show()
     plt.savefig(os.path.join(DATA_PATH, 'alphas.png'))

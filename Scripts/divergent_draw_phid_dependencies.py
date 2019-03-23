@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.75
-g_min = 3.0
-g_max = 4.308
+x0 = 0.42
+g_min = 5.74
+g_max = 8.286
 h = 0.001
 
 gammas = list(np.arange(g_min, g_max, h))
@@ -58,8 +58,8 @@ for idx in range(len(gammas)-1, 0, -1):
     if ds[idx]*ds[idx-1] < 0.0:
         print('gamma_l = {:.6}'.format(gammas[idx]))
         break
-plt.subplots_adjust(left=0.12, bottom=0.1, right=0.98, top=0.98)
-#plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
+plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
+plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
 plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
 #x1,x2,y1,y2 = plt.axis()
 #plt.axis((x1,4.902,y1,y2))
