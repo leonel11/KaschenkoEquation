@@ -25,8 +25,84 @@
 
 \begin{document}
 
-$$ \phi_0 = \frac{2\mu\mbox{ch}\mu x_0}{\mu\mbox{ch}\mu + \mbox{sh}\mu - \alpha x_0\mbox{sh}\mu x_0} $$
+\begin{equation}
+	\dot u = u'' + \gamma u - u^3,	
+\end{equation}
+\begin{equation}
+	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t),
+\end{equation}
+$ \alpha, \gamma \in \mathbb{R}, \; x_0 \in [0, 1). $
 
-$$ d_0 = c^2\frac{3\mu\mbox{sh}3\mu + 24\mu\mbox{sh}\mu - \alpha\mbox{ch}3\mu x_0 - 12\alpha\mu x_0 \mbox{sh}\mu x_0}{16\mu(\mu\mbox{ch}\mu + \mbox{sh}\mu - \alpha x_0\mbox{sh}\mu x_0)} $$
+\begin{equation}
+	\dot u = u'' + \gamma u,	
+\end{equation}
+\begin{equation}	
+	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t).
+\end{equation}
+$ u(x, t) = e^{\lambda t} \, v(x). $
+
+\begin{equation}
+	v'' + (\gamma - \lambda)v = 0,	
+\end{equation}
+\begin{equation}	
+	v'(0) \, = 0, \qquad v'(1) \, = \alpha\,v(x_0).
+\end{equation}
+$ \mu = \sqrt{-\gamma + \lambda}, \; v(x) = c \, \mbox{ch}  \mu x, \; c \in \mathbb{R}. $
+
+$$ \mu \, \mbox{sh} \mu \, = \, \alpha \mbox{ch} \mu x_0 , $$
+\begin{equation}
+	\alpha_{cr} = \frac{\mu \, \mbox{sh} \mu}{\mbox{ch} \mu x_0}.
+\end{equation}
+
+\begin{equation} 
+	\dot{u}_j =  n^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \quad j = \overline{1, n}. 
+\end{equation}
+\begin{gather}	
+	u_0 = u_1, \quad u_{n+1} = u_n + \frac{\alpha_c}{n}\:u_1.
+\end{gather}
+
+\begin{equation}
+	u = \sqrt{\varepsilon}u_0 + \varepsilon u_1 + \varepsilon^{\frac{3}{2}} u_2 + O(\varepsilon^2).
+\end{equation}
+
+\begin{equation}
+	v'' + \gamma v = 0,
+\end{equation}
+\begin{equation}
+	v'(0) = 0, \quad v'(1) = \alpha_{cr}\,v(x_0).
+\end{equation}
+
+\begin{equation}
+	\frac{\partial u_0}{\partial s} + \dot{u}_2 = u''_2 + \gamma u_2 - u_0^3,
+\end{equation}
+\begin{equation}
+u_2'(0, t) = 0, \quad u_2'(1, t) = \alpha_{cr}\,u_2(x_0, t) + u_0(x_0, t).
+\end{equation}
+$ s = \varepsilon t. $
+
+\newpage
+
+$ \lambda = 0: \mu = \sqrt{-\gamma}, \; \alpha_{cr} = \alpha_d, \; \varepsilon=\alpha-\alpha_d. $
+
+\begin{equation}
+	u_0 = \rho(s) \mbox{ch} \mu x.
+\end{equation}
+\begin{equation}
+	\rho' = \phi \rho + d \rho^3,
+\end{equation}
+$$ \phi = \frac{ 2 \mu \mbox{ch} \mu x_0 }{ \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_d x_0 \mbox{sh} \mu x_0 }, $$
+$$ d = \frac{ -3\gamma \mbox{sh} 3\mu - 12 \mbox{sh} \mu - 12 \mu \mbox{ch} \mu - \alpha_d \mu \mbox{ch} 3\mu x_0 + 12 \alpha_d x_0 \mbox{sh} \mu x_0 }{ 16( \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_d x_0 \mbox{sh} \mu x_0 ) }. $$
+
+$ \lambda = i \omega: \mu = \sqrt{-\gamma + i \omega}, \; \alpha_{cr} = \alpha_c, \; \varepsilon=\alpha_c-\alpha. $
+
+\begin{equation}
+	u_0 = z(s) e^{i \omega t} \mbox{ch} \mu x + \overline{z(s)} e^{-i \omega t} \overline{\mbox{ch} \mu x}.
+\end{equation}
+\begin{equation}
+	z' = \phi z + d z |z|^2.
+\end{equation}
+$$ \phi = \frac{ 2 \mu \mbox{ch} \mu x_0 }{ \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_c x_0 \mbox{sh} \mu x_0 }, $$
+$$ d = \frac{ 3 \mu ( G(\mu + 2\,\mbox{Re}\mu) + G(\mu + 2i\,\mbox{Im}\mu) + 2G(\overline{\mu}) ) }{ 2 ( \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_c x_0 \mbox{sh} \mu x_0 ) }, $$
+$$ G(y) = \frac{ \alpha_c - y\,\mbox{sh} y }{ y^2 + \gamma - i\omega }. $$
 
 \end{document}
