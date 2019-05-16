@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.42
-g_min = 5.74
-g_max = 8.286
+x0 = 0.00
+g_min = -3.0
+g_max = 3.1
 h = 0.001
 
 gammas = list(np.arange(g_min, g_max, h))
@@ -47,6 +47,7 @@ plt.figure('divergent_phi0d0_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max))
 plt.rcParams.update({'font.size': 13})
 plt.rcParams['savefig.directory'] = '../Tracer/Results'
 plt.xlabel('$\gamma$')
+#plt.ylabel(r'$d_0$', rotation='horizontal')
 plt.grid(True)
 alphas, phis, ds, amps = [], [], [], []
 for g in gammas:
@@ -59,8 +60,9 @@ for idx in range(len(gammas)-1, 0, -1):
         print('gamma_l = {:.6}'.format(gammas[idx]))
         break
 plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
-plt.plot(gammas, phis, label='$\phi_0$', color='darkcyan', linewidth=2)
-plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2)
+plt.plot(gammas, phis, label=r'$\varphi_0$', color='darkcyan', linewidth=2)
+plt.axhline(y=0.0, linewidth=2, color='grey', zorder=2)
+plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2, zorder=3)
 #x1,x2,y1,y2 = plt.axis()
 #plt.axis((x1,4.902,y1,y2))
 plt.legend()
