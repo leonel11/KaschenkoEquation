@@ -1,0 +1,182 @@
+\documentclass[fullscreen=true, unicode, bookmarks=false]{beamer}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[export]{adjustbox}
+\usepackage{textgreek}
+\newtheorem{rustheorem}{Утверждение }
+\sloppy
+
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{Madrid}
+
+\usecolortheme{whale}
+
+\usefonttheme{professionalfonts} % default family is serif
+
+\setbeamertemplate{footline}{\hspace*{.5cm}\scriptsize{\insertshorttitle
+\hspace*{50pt} \hfill\hspace*{.5cm}}\vspace{5pt}} 
+
+\setbeamercolor{bibliography entry author}{fg=black}
+
+\title[]{ {\huge Бифуркационные особенности одной нелинейной краевой задачи с интегральным отклонением в краевом условии } } 
+\date{ }  
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame} 
+
+\begin{frame}
+\frametitle{ Краевая задача с интегральным отклонением в краевом условии }
+ 
+\begin{equation}
+	\dot u = u'' + \gamma u - u^3,	
+\end{equation}
+
+\begin{equation}
+	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha \int\limits_{0}^{1} u(t, y) dy,
+\end{equation}
+
+\bigskip
+
+$$ \alpha, \gamma \in \mathbb{R}, \qquad t \geqslant 0, \qquad x \in [0,1]. $$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Линеаризованная краевая задача }
+ 
+\begin{equation}
+	\dot u = u'' + \gamma u,	
+\end{equation}
+
+\begin{equation}	
+	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha_{cr}\int\limits_{0}^{1} u(t, y) dy.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Задача на собственные значения }
+ 
+$$ u(x, t) = e^{\lambda t} \, v(x). $$
+
+\bigskip
+ 
+\begin{equation}
+	v'' + (\gamma - \lambda)v = 0,	
+\end{equation}
+
+\begin{equation}	
+	v'(0) \, = 0, \qquad v'(1) \, = \alpha_{cr}\int\limits_{0}^{1} v(y) dy.
+\end{equation}
+
+\bigskip
+
+$$ \mu = \sqrt{-\gamma + \lambda}, $$
+
+$$ v(x) = c \ch  \mu x, \quad c \in \mathbb{R}. $$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Потеря устойчивости нулевого состояния равновесия }
+ 
+\begin{equation}
+	\alpha_{cr} = \mu^2 = -\gamma + \lambda,
+\end{equation}
+
+\bigskip
+
+\begin{itemize}
+
+\item { $ \lambda = 0: \; \mu = \sqrt{-\gamma}, $ 
+}
+
+\begin{equation}
+	\alpha_u = -\gamma.
+\end{equation}
+
+\end{itemize}	
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Локальный анализ краевой задачи }
+
+\begin{equation}
+	u = \sqrt{\varepsilon}u_0 + \varepsilon u_1 + \varepsilon^{\frac{3}{2}} u_2 + O(\varepsilon^2),
+\end{equation}
+
+\bigskip
+
+$$ \varepsilon = \alpha - \alpha_u, $$
+
+$$ \varepsilon \ll 1, \quad s = \varepsilon t. $$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Случай дивергентной потери устойчивости }
+
+\begin{equation}
+	\dot u_0 = u_0'' + \gamma u_0,
+\end{equation}
+\begin{equation}
+	u_0'(0, t) \, = 0, \qquad u_0'(1, t) = \alpha_u\int\limits_{0}^{1} u_0(s, y) dy,
+\end{equation}
+
+$$ u_0 = \rho(s) \ch \sqrt{-\gamma} x. $$
+
+\bigskip
+
+\begin{equation}
+	\dot u_2 + \frac{\partial u_0}{\partial s} = u_2'' + \gamma u_2 - u_0^3,
+\end{equation}
+\begin{equation}
+	u_2'(0, t) \, = 0, \qquad u_2'(1, t) = \alpha_u\int\limits_{0}^{1} u_2(t, y) dy \, + \, \int\limits_{0}^{1} u_0(s, y) dy,
+\end{equation}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Случай дивергентной потери устойчивости }
+
+$$ u_2 = e^{\lambda t}v_2(x), \quad \lambda = 0, $$
+
+\medskip
+
+\begin{equation}
+	v_2'' + \gamma v_2 - \rho' \ch \sqrt{-\gamma} x - \frac{3\rho^3\ch\sqrt{-\gamma}x}{4} - \frac{\rho^3\ch3\sqrt{-\gamma}x}{4} = 0,
+\end{equation}
+\begin{equation}
+	v_2'(0) \, = 0, \quad v_2'(1) = \alpha_u\int\limits_{0}^{1} v_2(y) dy + \frac{z\sh\sqrt{-\gamma}}{\sqrt{-\gamma}}.
+\end{equation}
+
+\medskip
+
+$$ v_2 = c\,\ch \sqrt{-\gamma} x + - \frac{z^3}{32}\ch3\sqrt{-\gamma}x + \frac{3z^3+4z'}{8\sqrt{-\gamma}}x\sh\sqrt{-\gamma}x $$
+$$ c \in \mathbb{R}. $$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{ Случай дивергентной потери устойчивости }
+
+\begin{equation}
+	\rho' = \phi_0 \rho + d_0 \rho^3,
+\end{equation}
+
+\bigskip
+
+$$ \phi_0 = 1 , $$
+$$ d_0 = -\frac{5\gamma\sh3\sqrt{-\gamma}}{48\sh\sqrt{-\gamma}} - \frac{3}{4}, $$
+
+\end{frame}
+
+\end{document}
