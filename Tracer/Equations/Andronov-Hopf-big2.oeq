@@ -160,7 +160,7 @@ Eq45=v46'=N*N*(v45-2*v46+v47)+g*v46-v46*v46*v46
 Eq46=v47'=N*N*(v46-2*v47+v48)+g*v47-v47*v47*v47
 Eq47=v48'=N*N*(v47-2*v48+v49)+g*v48-v48*v48*v48
 Eq48=v49'=N*N*(v48-2*v49+v50)+g*v49-v49*v49*v49
-Eq49=v50'=N*N*(v49-v50+a*v21/N)+g*v50-v50*v50*v50
+Eq49=v50'=N*N*(v49-v50+a/(N*N)*(v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28+v29+v30+v31+v32+v33+v34+v35+v36+v37+v38+v39+v40+v41+v42+v43+v44+v45+v46+v47+v48+v49+v50))+g*v50-v50*v50*v50
 VarEquationsQuantity=50
 VarEq0=v1'=N*N*(-v1+v2)+g*v1
 VarEq1=v2'=N*N*(v1-2*v2+v3)+g*v2
@@ -211,13 +211,13 @@ VarEq45=v46'=N*N*(v45-2*v46+v47)+g*v46
 VarEq46=v47'=N*N*(v46-2*v47+v48)+g*v47
 VarEq47=v48'=N*N*(v47-2*v48+v49)+g*v48
 VarEq48=v49'=N*N*(v48-2*v49+v50)+g*v49
-VarEq49=v50'=N*N*(v49-v50+a*v21/N)+g*v50
+VarEq49=v50'=N*N*(v49-v50+a/(N*N)*(v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28+v29+v30+v31+v32+v33+v34+v35+v36+v37+v38+v39+v40+v41+v42+v43+v44+v45+v46+v47+v48+v49+v50))+g*v50
 ParamListerCount=1
 ParamSet0Quantity=3
 ParamSet0Name=Untitled
 ParamSet0Parameter0=N=50
-ParamSet0Parameter1=g=5.75
-ParamSet0Parameter2=a=-2.0
+ParamSet0Parameter1=g=2.0
+ParamSet0Parameter2=a=-1.99
 DelaysQuantity=3
 Delay0=d=1
 Delay1=d=1
