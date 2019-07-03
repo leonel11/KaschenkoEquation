@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.00
-g_min = -3.0
-g_max = 3.1
+x0 = 0.42
+g_min = 5.7
+g_max = 5.8
 h = 0.001
 
 gammas = list(np.arange(g_min, g_max, h))
@@ -28,6 +28,7 @@ def phi_func(g, a, x0):
         mu = np.sqrt(g)
         A = mu*np.cos(mu) + np.sin(mu) - a*x0*np.sin(mu*x0)
         B = 2*mu*np.cos(mu*x0)
+    print('{:.5}   {:.5}   {:.5}'.format(g, B, A))
     return B/A
 
 
@@ -52,12 +53,13 @@ plt.grid(True)
 alphas, phis, ds, amps = [], [], [], []
 for g in gammas:
     alphas.append(alpha_u(g, x0))
+print('gamma - phi')
 for idx in range(len(gammas)):
     phis.append(phi_func(gammas[idx], alphas[idx], x0))
     ds.append(d_func(gammas[idx], alphas[idx], x0))
 for idx in range(len(gammas)-1, 0, -1):
     if ds[idx]*ds[idx-1] < 0.0:
-        print('gamma_l = {:.6}'.format(gammas[idx]))
+        print('gamma_l = {:.6}'.format(gammas[idx-1]))
         break
 plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
 plt.plot(gammas, phis, label=r'$\varphi_0$', color='darkcyan', linewidth=2)
