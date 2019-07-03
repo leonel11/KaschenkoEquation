@@ -101,8 +101,8 @@ Teta=150
 Gamma=180
 Scale=250
 AxisLength=2
-ppx=763
-ppy=338
+ppx=856
+ppy=322
 xbase=0
 ybase=0
 d1xmas=1
@@ -160,7 +160,7 @@ Eq45=v46'=N*N*(v45-2*v46+v47)+g*v46-v46*v46*v46
 Eq46=v47'=N*N*(v46-2*v47+v48)+g*v47-v47*v47*v47
 Eq47=v48'=N*N*(v47-2*v48+v49)+g*v48-v48*v48*v48
 Eq48=v49'=N*N*(v48-2*v49+v50)+g*v49-v49*v49*v49
-Eq49=v50'=N*N*(v49-v50+a*v21/N)+g*v50-v50*v50*v50
+Eq49=v50'=N*N*(v49-v50+a*v25/N)+g*v50-v50*v50*v50
 VarEquationsQuantity=50
 VarEq0=v1'=N*N*(-v1+v2)+g*v1
 VarEq1=v2'=N*N*(v1-2*v2+v3)+g*v2
@@ -211,13 +211,13 @@ VarEq45=v46'=N*N*(v45-2*v46+v47)+g*v46
 VarEq46=v47'=N*N*(v46-2*v47+v48)+g*v47
 VarEq47=v48'=N*N*(v47-2*v48+v49)+g*v48
 VarEq48=v49'=N*N*(v48-2*v49+v50)+g*v49
-VarEq49=v50'=N*N*(v49-v50+a*v21/N)+g*v50
+VarEq49=v50'=N*N*(v49-v50+a*v25/N)+g*v50
 ParamListerCount=1
 ParamSet0Quantity=3
 ParamSet0Name=Untitled
 ParamSet0Parameter0=N=50
-ParamSet0Parameter1=g=5.75
-ParamSet0Parameter2=a=-2.0
+ParamSet0Parameter1=g=7.9
+ParamSet0Parameter2=a=-32.72
 DelaysQuantity=3
 Delay0=d=1
 Delay1=d=1
