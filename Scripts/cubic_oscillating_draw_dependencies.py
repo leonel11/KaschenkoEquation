@@ -5,12 +5,12 @@ import os
 
 
 beta = 1.0
-x0 = 0.91
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.91'
-CSV_FILE = 'x0=0.91_analytical.csv'
+x0 = 0.45
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Variations/Cubic Boundary Condition/x0=0.45'
+CSV_FILE = 'x0=0.45_analytical_after_tangent.csv'
+AFTER_TANGENT = True
 
 
-#gammas_ticks = np.arange(-4, 6, 1)
 plt.rcParams.update({'font.size': 13})
 plt.rcParams['savefig.directory'] = '../Tracer/Variations/Cubic Boundary Condition'
 
@@ -30,6 +30,8 @@ def phi0_d0_A(g, w, a, x0):
     phi = -2.0*mu*np.cosh(mu*x0) / (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
     d = 1.5*beta*mu*(np.cosh(kappa*x0) + np.cosh(nu*x0) + 2.0*np.cosh(mu_conj*x0)) / \
         (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
+    if AFTER_TANGENT:
+        phi = -phi
     A = np.sqrt(abs(phi.real/d.real))
     return phi.real, d.real, A
 
@@ -48,23 +50,25 @@ def prepare_plot():
     #plt.xticks(gammas_ticks)
     plt.xlabel('$\gamma$')
     plt.grid(True)
-    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
+    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.95)
     plt.axhline(y=0.0, linewidth=2, color='grey', zorder=2)
 
 
 def draw_phid_dependencies(gammas, phis, ds):
-    plt.figure('oscillating_phi0d0_x0={:.5},beta={:.5}'.format(x0, beta))
+    suffix_name = '_after_tangent' if AFTER_TANGENT else ''
+    plt.figure('oscillating_phi0d0{}_x0={:.5},beta={:.5}'.format(suffix_name, x0, beta))
     prepare_plot()
     plt.plot(gammas, phis, label=r'$\varphi_0$', color='darkcyan', linewidth=2)
-    #plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2, zorder=3)
-    # x1,x2,y1,y2 = plt.axis()
-    # plt.axis((x1,4.902,y1,y2))
+    plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2, zorder=3)
+    #x1,x2,y1,y2 = plt.axis()
+    #plt.axis((x1,x2,y1,0.4))
     plt.legend()
     plt.show()
 
 
 def draw_amplitude_dependency(gammas, amps):
-    plt.figure('oscillating_A_x0={:.5},beta={:.5}'.format(x0, beta))
+    suffix_name = '_after_tangent' if AFTER_TANGENT else ''
+    plt.figure('oscillating_A{}_x0={:.5},beta={:.5}'.format(suffix_name, x0, beta))
     prepare_plot()
     plt.plot(gammas, amps, label='$A_u$', color='crimson', linewidth=2)
     plt.legend()

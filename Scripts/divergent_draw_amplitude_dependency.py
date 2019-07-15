@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.75
-g_min = -4.1
-g_max = 4.308
+x0 = 0.49
+g_min = 6.21
+g_max = 7.78
 h = 0.001
 
 
@@ -53,11 +53,11 @@ for g in gammas:
 plt.figure('divergent_amplitude_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max))
 plt.rcParams.update({'font.size': 13})
 plt.rcParams['savefig.directory'] = '../Tracer/Results'
-plt.subplots_adjust(left=0.1, bottom=0.11, right=0.98, top=0.98)
+plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
 plt.xlabel('$\gamma$')
+plt.ylabel('$A_u$', rotation='horizontal', position=(0.0, 0.55))
 plt.grid()
-plt.plot(gammas, amps, label='$A_u$', color='crimson', linewidth=2)
-plt.legend()
+plt.plot(gammas, amps, color='crimson', linewidth=2)
 #x1,x2,y1,y2 = plt.axis()
 #plt.axis((x1,4.902,y1,y2))
 plt.show()

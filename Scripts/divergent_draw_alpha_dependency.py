@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.42
-g_min = 5.6
-g_max = 5.9
-n_points = 301
+x0 = 0.45
+g_min = 5.0
+g_max = 8.0
+n_points = 3001
 
 
 def get_alpha_u(g, x0):
@@ -14,7 +14,6 @@ def get_alpha_u(g, x0):
         return mu*np.sinh(mu)/np.cosh(mu*x0)
     else:
         mu = np.sqrt(g)
-        print('{:.5}   {:.5}   {:.5}'.format(g, -mu * np.sin(mu), np.cos(mu * x0)))
         return -mu*np.sin(mu)/np.cos(mu*x0)
 
 

@@ -99,10 +99,10 @@ Name=Andronov-Hopf
 Phi=150
 Teta=150
 Gamma=180
-Scale=250
+Scale=150
 AxisLength=2
-ppx=856
-ppy=322
+ppx=700
+ppy=391
 xbase=0
 ybase=0
 d1xmas=1
@@ -216,8 +216,8 @@ ParamListerCount=1
 ParamSet0Quantity=3
 ParamSet0Name=Untitled
 ParamSet0Parameter0=N=50
-ParamSet0Parameter1=g=7.9
-ParamSet0Parameter2=a=-32.72
+ParamSet0Parameter1=g=11.0
+ParamSet0Parameter2=a=-3.5
 DelaysQuantity=3
 Delay0=d=1
 Delay1=d=1

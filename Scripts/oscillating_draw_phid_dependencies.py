@@ -4,17 +4,18 @@ import matplotlib.pyplot as plt
 import os
 
 
-x0 = 0.33
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.33'
-CSV_FILE = 'x0=0.33_analytical.csv'
-
-gammas_ticks = np.arange(-4, 6, 1)
+x0 = 0.45
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.45'
+CSV_FILE = 'x0=0.45_analytical_after_tangent.csv'
+AFTER_TANGENT = True
 
 
 def phi_o(g, a, w, x0):
     i = 1.0j
     mu = np.sqrt(-g + i*w)
     phi = -(2.0*mu*np.cosh(mu*x0))/(mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
+    if AFTER_TANGENT:
+        phi = -phi
     return phi.real
 
 
@@ -45,30 +46,28 @@ def calc_coefs_normal_form(gs, ws, alphs):
 
 
 def visualize_dependencies(gs, phis, ds, amps):
+    suffix_name = '_after_tangent' if AFTER_TANGENT else ''
     plt.rcParams.update({'font.size': 13})
-    plt.subplots_adjust(left=0.12, bottom=0.11, right=0.98, top=0.94)
-    plt.xticks(gammas_ticks)
+    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.94)
     plt.xlabel('$\gamma$')
-    plt.ylabel(r'$\varphi_0$', rotation='horizontal', position=(0.0,0.55))
+    plt.ylabel(r'$\varphi_0$', rotation='horizontal', position=(0.0, 0.55))
     plt.grid()
     plt.plot(gs, phis, color='darkcyan', linewidth=2)
-    plt.savefig(os.path.join(DATA_PATH, 'oscillating_phi0_x0={:.5}.png'.format(x0)))
+    plt.savefig(os.path.join(DATA_PATH, 'oscillating_phi0{}_x0={:.5}.png'.format(suffix_name, x0)))
     plt.clf()
-    plt.xticks(gammas_ticks)
+    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.94)
     plt.xlabel('$\gamma$')
-    plt.ylabel('$d_0$', rotation='horizontal', position=(0.0,0.55))
+    plt.ylabel('$d_0$', rotation='horizontal', position=(0.0, 0.55))
     plt.grid()
     plt.plot(gs, ds, color='darkorange', linewidth=2)
-    #x1,x2,y1,y2 = plt.axis()
-    #plt.axis((3.0,4.94,-42.0,0.5))
-    plt.savefig(os.path.join(DATA_PATH, 'oscillating_d0_x0={:.5}.png'.format(x0)))
+    plt.savefig(os.path.join(DATA_PATH, 'oscillating_d0{}_x0={:.5}.png'.format(suffix_name, x0)))
     plt.clf()
-    plt.xticks(gammas_ticks)
+    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.94)
     plt.xlabel('$\gamma$')
-    plt.ylabel('$A_c$', rotation='horizontal', position=(0.0,0.55))
+    plt.ylabel('$A_c$', rotation='horizontal', position=(0.0, 0.55))
     plt.grid()
     plt.plot(gs, amps, color='crimson', linewidth=2)
-    plt.savefig(os.path.join(DATA_PATH, 'oscillating_amplutude_x0={:.5}.png'.format(x0)))
+    plt.savefig(os.path.join(DATA_PATH, 'oscillating_amplutude{}_x0={:.5}.png'.format(suffix_name, x0)))
 
 
 df = pd.read_csv(os.path.join(DATA_PATH, CSV_FILE), sep=';')
