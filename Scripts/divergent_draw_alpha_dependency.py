@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.45
-g_min = 5.0
-g_max = 8.0
-n_points = 3001
+x0 = 0.39
+g_min = 6.5
+g_max = 7.1
+n_points = 7
 
 
 def get_alpha_u(g, x0):
@@ -42,4 +42,6 @@ def visualise_alphas(gs, aus):
 
 gammas = np.linspace(g_min, g_max, n_points)
 alpha_u = [get_alpha_u(g, x0) for g in gammas]
+for idx in range(len(gammas)):
+    print('{:.6}, {:.6}'.format(gammas[idx], alpha_u[idx]))
 visualise_alphas(gammas, alpha_u)
