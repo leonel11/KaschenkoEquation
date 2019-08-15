@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 
 
 EPS = 0.000001
-X_0 = 0.45
-gamma = 10.606
-w_start = 12.5
-w_end = 13.5
+X_0 = 0.39
+gamma = 6.4
+w_start = 0.001
+w_end = 16.001
 n_points = 100000
 
 
@@ -34,11 +34,13 @@ def alpha_cr(w):
     return (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta))/(np.cosh(hi*X_0)*np.cos(teta*X_0))
 
 
-def get_w_star(ws, ys):
+def get_w_a_star(ws, ys):
+    res = {}
     for idx in range(1,len(ws)):
         if ys[idx-1]*ys[idx] < 0:
-            return (ws[idx-1]+ws[idx])/2.0
-    return None
+            w_star = (ws[idx-1]+ws[idx])/2.0
+            res[str(w_star)] = alpha_cr(w_star)
+    return res
 
 
 def draw_sign_function(ws, ys):
@@ -46,15 +48,13 @@ def draw_sign_function(ws, ys):
     plt.figure('Xo={:.5},gamma={:.5}'.format(X_0, gamma))
     plt.xlabel('$\omega$')
     plt.grid(True)
-    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.94)
+    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
     plt.axhline(y=0.0, linewidth=2, color='gray', zorder=2)
     plt.plot(ws, ys, color='k', linewidth=2)
-    w_star = get_w_star(ws, ys) #ws[ys.index(min(list(map(abs, ys))))]
-    if w_star != None:
-        a = alpha_cr(w_star)
-        plt.title(r'$\omega$ = {:.6}, $\alpha_c$ = {:.6}'.format(w_star, a))
-        plt.scatter(w_star, 0.0, color='black', s=16, zorder=4)
-        print('{:.6};{:.6};{:.6}'.format(gamma, w_star, a))
+    w_a = get_w_a_star(ws, ys)
+    print('w_star\talpha_cr')
+    for w, a in w_a.items():
+        print('{:.6} {:.6}'.format(float(w), a))
     #x1,x2,y1,y2 = plt.axis()
     #plt.axis((x1,x2,-50.0,50.0))
     plt.show()
