@@ -2,10 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-x0 = 0.39
-g_min = 6.5
-g_max = 7.1
-n_points = 7
+x0 = 0.49
+g_min = 7.79
+g_max = 7.8
+n_points = 10000
 
 
 def get_alpha_u(g, x0):
@@ -20,6 +20,11 @@ def get_alpha_u(g, x0):
 def get_gamma_local_min(gammas, alphas):
     return gammas[alphas.index(min(alphas))]
 
+
+def get_alpha_min(alphas):
+    return alphas[alphas.index(min(alphas))]
+
+
 def visualise_alphas(gs, aus):
     plt.rcParams.update({'font.size': 13})
     plt.rcParams['savefig.directory'] = '../Tracer/Results/Dynamics of alpha_u'
@@ -32,9 +37,11 @@ def visualise_alphas(gs, aus):
     #plt.axhline(y=0.0, linewidth=2, color='grey', zorder=2)
     #plt.axvline(x=0.0, linewidth=2, color='grey', zorder=2)
     g_loc = get_gamma_local_min(gammas, alpha_u)
+    a_loc = get_alpha_min(alpha_u)
     if g_loc != gs[-1]:
         plt.axvline(x=g_loc, linewidth=2, color='grey', linestyle='--', zorder=2)
-        print('g_loc = = {:.5}'.format(g_loc))
+        print('g_loc = {:.6}'.format(g_loc))
+        print('a_loc = {:.6}'.format(a_loc))
     #x1,x2,y1,y2 = plt.axis()
     #plt.axis((x1,x2,-50.0,50.0))
     plt.show()

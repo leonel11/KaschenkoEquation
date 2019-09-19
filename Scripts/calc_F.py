@@ -19,10 +19,10 @@ def F_derder(a, g, l, x0):
     return first+second+third
 
 
-a = -6.217
-g = 5.091
-l = -6.363j
-x0 = 0.35
+x0 = 0.49
+g = 14.738
+l = 8.05513j
+a = -9.08828
 f = F(a, g, l, x0)
 fd = F_der(a, g, l, x0)
 #fdd = F_derder(a, g, l, x0)
