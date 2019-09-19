@@ -25,84 +25,187 @@
 
 \begin{document}
 
-\begin{equation}
-	\dot u = u'' + \gamma u - u^3,	
-\end{equation}
-\begin{equation}
-	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t),
-\end{equation}
-$ \alpha, \gamma \in \mathbb{R}, \; x_0 \in [0, 1). $
+$$ \dot u = u'' + \gamma u - u^3, $$
+$$ u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t), $$
 
-\begin{equation}
-	\dot u = u'' + \gamma u,	
-\end{equation}
-\begin{equation}	
-	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t).
-\end{equation}
+$ u = u(x, t), \; t \geqslant 0, \; x \in [0, 1], \; \alpha, \gamma \in \mathbb{R}, \; x_0 \in [0, 1). $
+
+$$ \dot u = u'' + \gamma u,	$$
+$$ u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t). $$
+
 $ u(x, t) = e^{\lambda t} \, v(x). $
 
-\begin{equation}
-	v'' + (\gamma - \lambda)v = 0,	
-\end{equation}
-\begin{equation}	
-	v'(0) \, = 0, \qquad v'(1) \, = \alpha\,v(x_0).
-\end{equation}
+$$ v'' + (\gamma - \lambda)v = 0, $$	
+$$ v'(0) \, = 0, \qquad v'(1) \, = \alpha\,v(x_0). $$
+
 $ \mu = \sqrt{-\gamma + \lambda}, \; v(x) = c \, \mbox{ch}  \mu x, \; c \in \mathbb{R}. $
 
 $$ \mu \, \mbox{sh} \mu \, = \, \alpha \mbox{ch} \mu x_0 , $$
-\begin{equation}
-	\alpha_{cr} = \frac{\mu \, \mbox{sh} \mu}{\mbox{ch} \mu x_0}.
-\end{equation}
 
-\begin{equation} 
-	\dot{u}_j =  n^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \quad j = \overline{1, n}. 
-\end{equation}
-\begin{gather}	
-	u_0 = u_1, \quad u_{n+1} = u_n + \frac{\alpha_c}{n}\:u_1.
-\end{gather}
+$ \lambda = 0: \; \mu = \sqrt{-\gamma}, $
 
-\begin{equation}
-	u = \sqrt{\varepsilon}u_0 + \varepsilon u_1 + \varepsilon^{\frac{3}{2}} u_2 + O(\varepsilon^2).
-\end{equation}
+$$ \alpha_u = \frac{ \sqrt{-\gamma} \, \sh \sqrt{-\gamma} }{ \ch \sqrt{-\gamma} x_0 }. $$
 
-\begin{equation}
-	v'' + \gamma v = 0,
-\end{equation}
-\begin{equation}
-	v'(0) = 0, \quad v'(1) = \alpha_{cr}\,v(x_0).
-\end{equation}
+$ \lambda = i \omega: \; \mu = \sqrt{-\gamma + i \omega}, $ 
 
-\begin{equation}
-	\frac{\partial u_0}{\partial s} + \dot{u}_2 = u''_2 + \gamma u_2 - u_0^3,
-\end{equation}
-\begin{equation}
-u_2'(0, t) = 0, \quad u_2'(1, t) = \alpha_{cr}\,u_2(x_0, t) + u_0(x_0, t).
-\end{equation}
-$ s = \varepsilon t. $
+$$ \alpha_c = \frac{ \sqrt{-\gamma + i \omega} \, \sh \sqrt{-\gamma + i \omega} }{ \ch \sqrt{-\gamma + i \omega} x_0 }. $$
 
-\newpage
+$ \gamma = 0, \, x_0 = 0: $ 
+$$
+ \begin{cases}
+   \tg \, y + \th \, y = 0, 
+   \\
+   \alpha_c = y(\sh y \cos y - \ch y \sin y),
+ \end{cases}
+$$
+$$ y = \sqrt{ \frac{\omega}{2} }. $$
 
-$ \lambda = 0: \mu = \sqrt{-\gamma}, \; \alpha_{cr} = \alpha_d, \; \varepsilon=\alpha-\alpha_d. $
+$ \gamma = 0, \, x_0 \neq 0: $ 
+$$
+ \begin{cases}
+   \dfrac{\sh y \cos y + \ch y \sin y}{\sh y \cos y - \ch y \sin y} - \tg y x_0 \th y x_0 = 0, 
+   \vspace{0.1cm}
+   \\ 
+   \alpha_c = \dfrac{y \sh y \cos y - y \ch y \sin y}{\ch y x_0 \cos y x_0}.
+ \end{cases}
+$$
 
-\begin{equation}
-	u_0 = \rho(s) \mbox{ch} \mu x.
-\end{equation}
-\begin{equation}
-	\rho' = \phi \rho + d \rho^3,
-\end{equation}
+$ \gamma \neq 0, \, x_0 \neq 0. $ 
+
+$$ \dot{u}_j =  n^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j, \quad j = \overline{1, n}. $$
+$$ u_0 = u_1, \quad u_{n+1} = u_n + \frac{\alpha_c}{n}\:u_1. $$
+
+$$ u = \sqrt{\varepsilon}u_0 + \varepsilon u_1 + \varepsilon^{\frac{3}{2}} u_2 + O(\varepsilon^2), $$
+
+$ \varepsilon = | \alpha - \alpha_{cr} |, \; \varepsilon \ll 1, \; s = \varepsilon t. $
+
+$ \lambda = 0: \mu = \sqrt{-\gamma}, \; \alpha_{cr} = \alpha_u, \; \varepsilon=\alpha-\alpha_d. $
+
+$$	u_0 = u_0'' + \gamma u_0, $$
+$$	u_0'(0, t) \, = 0, \qquad u_0'(1, t) \, = \alpha_u u_0(x_0, t), $$
+
+$$ u_0 = \rho(s) \ch \sqrt{-\gamma} x. $$
+
+$$ \dot u_2 + \frac{\partial u_0}{\partial s} = u_2'' + \gamma u_2 - u_0^3, $$
+$$ u_2'(0, t) \, = 0, \qquad u_2'(1, t) \, = \alpha_u u_2(x_0, t) + u_0(x_0, t). $$
+
+$ u_2 = e^{\lambda t}v_2(x), \; \lambda = 0. $
+
+$$	v_2'' + \gamma v_2 - \rho^3 \ch^3 \sqrt{-\gamma} x - \rho' \ch \sqrt{-\gamma} x = 0, $$
+$$	v_2'(0) \, = 0, \qquad v_2'(1) \, = \alpha_u v_2(x_0) + \rho(s) \ch \sqrt{-\gamma} x_0. $$
+$$ v_2(x) = c \, \ch \sqrt{-\gamma} x - \frac{\rho^3}{32} \ch 3\sqrt{-\gamma} x + \frac{3\rho^3 + 4\rho'}{8\sqrt{-\gamma}} x \, \sh \sqrt{-\gamma} x. $$
+
+$$	\rho' = \phi \rho + d \rho^3, $$
 $$ \phi = \frac{ 2 \mu \mbox{ch} \mu x_0 }{ \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_d x_0 \mbox{sh} \mu x_0 }, $$
 $$ d = \frac{ -3\gamma \mbox{sh} 3\mu - 12 \mbox{sh} \mu - 12 \mu \mbox{ch} \mu - \alpha_d \mu \mbox{ch} 3\mu x_0 + 12 \alpha_d x_0 \mbox{sh} \mu x_0 }{ 16( \mbox{sh} \mu + \mu \mbox{ch} \mu - \alpha_d x_0 \mbox{sh} \mu x_0 ) }. $$
 
+$$ u = \pm \sqrt{ \varepsilon } A_u \, \ch \sqrt{-\gamma} x + O(\varepsilon), $$
+$$ A_u = \sqrt{\left|\dfrac{\phi_0}{d_0}\right|}. $$
+
 $ \lambda = i \omega: \mu = \sqrt{-\gamma + i \omega}, \; \alpha_{cr} = \alpha_c, \; \varepsilon=\alpha_c-\alpha. $
 
-\begin{equation}
-	u_0 = z(s) e^{i \omega t} \mbox{ch} \mu x + \overline{z(s)} e^{-i \omega t} \overline{\mbox{ch} \mu x}.
-\end{equation}
-\begin{equation}
-	z' = \phi z + d z |z|^2.
-\end{equation}
-$$ \phi = \frac{ 2 \mu \mbox{ch} \mu x_0 }{ \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_c x_0 \mbox{sh} \mu x_0 }, $$
-$$ d = \frac{ 3 \mu ( G(\mu + 2\,\mbox{Re}\mu) + G(\mu + 2i\,\mbox{Im}\mu) + 2G(\overline{\mu}) ) }{ 2 ( \mu \mbox{ch} \mu +\mbox{sh} \mu - \alpha_c x_0 \mbox{sh} \mu x_0 ) }, $$
-$$ G(y) = \frac{ \alpha_c - y\,\mbox{sh} y }{ y^2 + \gamma - i\omega }. $$
+$$	u_0 = u_0'' + \gamma u_0, $$
+$$	u_0'(0, t) \, = 0, \qquad u_0'(1, t) \, = \alpha_c u_0(x_0, t). $$
+
+$$ u_0 = z(s) e^{i \omega t} \ch \mu x + \overline{z(s)} e^{-i \omega t} \overline{\ch \mu x}. $$
+
+$$	\dot u_2 + \frac{\partial u_0}{\partial s} = u_2'' + \gamma u_2 - u_0^3, $$
+$$	u_2'(0, t) \, = 0, \qquad u_2'(1, t) \, = \alpha_c u_2(x_0, t) + u_0(x_0, t). $$
+
+$ u_2 = e^{i \omega t} v_2(x). $
+
+$$	v_2'' + (\gamma - i \omega) v_2 - z' w(x) - 3z|z|^2 w|w|^2 = 0, $$
+$$	v_2'(0) \, = 0, \qquad v_2'(1) \, = \alpha_u v_2(x_0) + z(s) w(x_0), $$
+$$ w(x) = \ch \sqrt{-\gamma + i \omega} \, x. $$
+
+$$	z' = \phi z + d z |z|^2. $$
+$$ \phi_0 = \operatorname{Re} \left( \frac{ 2 \mu \ch \mu x_0 }{ \mu \ch \mu +\sh \mu - \alpha_c x_0 \sh \mu x_0 } \right), $$
+$$ d_0 = \operatorname{Re} \left( \frac{ 3 \mu ( G(\mu + 2\,\mbox{Re}\mu) + G(\mu + 2i\,\mbox{Im}\mu) + 2G(\overline{\mu}) ) }{ 2 ( \mu \ch \mu +\sh \mu - \alpha_c x_0 \sh \mu x_0 ) } \right), $$
+$$ G(y) = \frac{ \alpha_c - y\,\sh y }{ y^2 + \gamma - i\omega }. $$
+
+$$ u = \pm \sqrt{ \varepsilon } A_c \, \ch \sqrt{-\gamma +i \omega} \, x + O(\varepsilon), $$
+$$ A_c = \sqrt{-\dfrac{\phi_0}{d_0}}. $$
+
+\newpage
+
+$$ \dot u = u'' + \gamma u, $$
+$$ u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t) + \beta u^3(x_0, t), $$
+
+$ u = u(x, t), \; t \geqslant 0, \; x \in [0, 1], \; \alpha, \gamma \in \mathbb{R}, \; \beta \in \mathbb{R}\setminus\{0\}, \; x_0 \in [0, 1). $
+
+$ \lambda = 0: \mu = \sqrt{-\gamma}, \; \alpha_{cr} = \alpha_u, \; \varepsilon=\alpha-\alpha_d. $
+
+$$	\dot u_2 + \frac{\partial u_0}{\partial s} = u_2'' + \gamma u_2, $$
+$$	u_2'(0, t) \, = 0, \qquad u_2'(1, t) \, = \alpha_u u_2(x_0, t) + u_0(x_0, t) + \beta u_0^3(x_0, t). $$
+
+$ u_2 = e^{\lambda t}v_2(x), \; \lambda = 0. $
+
+$$	v_2'' + \gamma v_2 - \rho' \ch \sqrt{-\gamma} x = 0, $$
+$$	v_2'(0) \, = 0, \quad v_2'(1) \, = \alpha_u v_2(x_0) + \rho \ch \sqrt{-\gamma} x_0 + \beta \rho^3\ch^3 \sqrt{-\gamma} x_0. $$
+$$ v_2(x) = c\,\ch \sqrt{-\gamma} x + \frac{\rho'}{2\sqrt{-\gamma}}\sh\sqrt{-\gamma}x + \frac{\rho'x}{2} \ch\sqrt{-\gamma}x. $$
+
+$$ \phi_0 = Q \ch \sqrt{-\gamma} x_0 , \quad d_0 = \beta Q \ch^3 \sqrt{-\gamma} x_0, $$
+$$ Q = \frac{2\sqrt{-\gamma}}{\sqrt{-\gamma}\ch\sqrt{-\gamma} + \sh\sqrt{-\gamma} - \alpha_u x_0 \sqrt{-\gamma} x_0}. $$
+
+$ \lambda = i \omega: \mu = \sqrt{-\gamma + i \omega}, \; \alpha_{cr} = \alpha_c, \; \varepsilon=\alpha_c-\alpha. $
+
+$$	\dot u_2 + \frac{\partial u_0}{\partial s} = u_2'' + \gamma u_2, $$
+$$	u_2'(0, t) \, = 0, \qquad u_2'(1, t) \, = \alpha_c u_2(x_0, t) - u_0(x_0, t) + \beta u_0^3(x_0, t). $$
+
+$ u_2 = e^{i \omega t} v_2(x). $
+
+$$	v_2'' + (\gamma - i \omega) v_2 - z' w(x) = 0, $$
+$$	v_2'(0) \, = 0, \qquad v_2'(1) \, = \alpha_u v_2(x_0) - z w(x_0) + 3\beta z|z|^2 w|w|^2. $$
+
+$$ \phi_0 = -2 \operatorname{Re} (Q\ch \mu x_0), $$
+$$ d_0 = 1.5 \beta \operatorname{Re} (Q ( \ch(\mu + 2\,\mbox{Re}\mu)x_0 + \ch(\mu + 2i\,\mbox{Im}\mu)x_0 + 2\ch\overline{\mu}x_0 )). $$
+
+$$ Q = \frac{\mu}{\mu \ch \mu + \sh \mu - \alpha_c x_0 \sh \mu x_0}. $$
+
+\newpage
+
+$$	\dot u = u'' + \gamma u - u^3,	$$
+$$	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha \int\limits_{0}^{1} u(y, t) dy, $$
+
+$ u = u(x, t), \; t \geqslant 0, \; x \in [0, 1], \; \alpha, \gamma \in \mathbb{R}. $
+
+$$	\dot u = u'' + \gamma u, $$
+$$	u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\int\limits_{0}^{1} u(y, t) dy. $$
+
+$ u(x, t) = e^{\lambda t} \, v(x). $
+
+$$ v'' + (\gamma - \lambda)v = 0, $$	
+$$ v'(0) \, = 0, \qquad v'(1)  = \alpha\int\limits_{0}^{1} v(y) dy. $$
+
+$ \mu = \sqrt{-\gamma + \lambda}, \; v(x) = c \, \mbox{ch}  \mu x, \; c \in \mathbb{R}. $
+
+$$	\alpha = \mu^2 = -\gamma + \lambda. $$
+
+$ \lambda = 0: \; \mu = \sqrt{-\gamma}, $ 
+
+$$	\alpha_u = -\gamma. $$
+
+$$ \dot{u}_j =  n^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j, \quad j = \overline{1, n}. $$
+$$ u_0 = u_1, \quad u_{n+1} = u_n + \frac{\alpha}{n^2} \sum_{k=1}^{n} \:u_k. $$
+
+$ \varepsilon = \alpha-\alpha_u. $
+
+$$	\dot u_0 = u_0'' + \gamma u_0, $$
+$$	u_0'(0, t) \, = 0, \qquad u_0'(1, t) = \alpha_u\int\limits_{0}^{1} u_0(y, s) dy, $$
+
+$$ u_0 = \rho(s) \ch \sqrt{-\gamma} x. $$
+
+$$	\dot u_2 + \frac{\partial u_0}{\partial s} = u_2'' + \gamma u_2 - u_0^3, $$
+$$	u_2'(0, t) \, = 0, \qquad u_2'(1, t) = \alpha_u\int\limits_{0}^{1} u_2(y, t) dy \, + \, \int\limits_{0}^{1} u_0(y, s) dy. $$
+
+$ u_2 = e^{\lambda t}v_2(x), \; \lambda = 0. $
+
+$$	v_2'' + \gamma v_2 - \rho' \ch \sqrt{-\gamma} x - \frac{3\rho^3\ch\sqrt{-\gamma}x}{4} - \frac{\rho^3\ch3\sqrt{-\gamma}x}{4} = 0, $$
+$$	v_2'(0) \, = 0, \quad v_2'(1) = \alpha_u\int\limits_{0}^{1} v_2(y) dy + \frac{\rho\sh\sqrt{-\gamma}}{\sqrt{-\gamma}}. $$
+
+$$ v_2(x) = c\,\ch \sqrt{-\gamma} x + - \frac{\rho^3}{32}\ch3\sqrt{-\gamma}x + \frac{3\rho^3+4\rho'}{8\sqrt{-\gamma}}x\sh\sqrt{-\gamma}x. $$
+
+$$	\rho' = \rho + d_0 \rho^3, $$
+$$ d_0 = -\frac{5\gamma\sh3\sqrt{-\gamma}}{48\sh\sqrt{-\gamma}} - \frac{3}{4}. $$
 
 \end{document}
