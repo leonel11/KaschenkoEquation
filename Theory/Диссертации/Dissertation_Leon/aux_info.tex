@@ -1,0 +1,57 @@
+\documentclass[14pt]{extarticle}
+\usepackage[T2A]{fontenc} 
+\usepackage[cp1251]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{mathtext}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{lscape}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage[left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+\parindent=1.25cm
+\pagestyle{plain}
+\onehalfspacing
+
+\renewcommand\normalsize{\fontsize{14}{16.8pt}\selectfont}
+
+\renewcommand{\thesection}{\thechapter\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}.} 
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.}
+
+\begin{document}
+
+Расчет координат конечной точки отображения \eqref{phi_z} идет следующим образом: вычисления начинаются из точки $ (y_1(-0, z_1, z_2), y_2(-0, z_1, z_2))^T, $ координаты которой представляют собой начальные условия системы \eqref{y_system}. Начальным моментом времени считается величина $ t = -0 $. Далее, итерационно, с шагом $ h $, при помощи метода Рунге-Кутты подсчитывались координаты следующей точки отображения \eqref{phi_z}. Этот метод позволяет достаточно точно численно посчитать решения системы обыкновенных дифференциальных уравнений. Он имеет четвертый	 порядок точности, т.е. ошибка на каждом интервале подсчета будет иметь порядок $ O(h^5) $. Существуют также и другие способы численного расчета, однако метод Рунге-Кутты является самым удобным с точки зрения соотношения скорости вычислений и их точности. Координаты следующей точки отображения \eqref{phi_z}, согласно методу Рунге-Кутты, подсчитываются по итерационной формуле:
+
+$$ y_j(t+h) = y_j(t) + \frac{h}{6}\:(k_1 +2k_2 + 2k_3 + k_4), \quad j = \overline{1, m-1}\;,$$
+где $ y_j(t+h), y_j(t)$ --- координаты точек, полученных на текущей и предыдущей итерациях, $ h $ --- величина шага сетки по $ t $ для метода Рунге-Кутты, а коэффициенты $ k_1, k_2, k_3, k_4 $ рассчитываются по следующим формулам:
+
+$$
+\begin{array}{l}
+k_1 = d ( \exp(y_{j+1}) + \exp(-y_j) - \exp(y_j) - \exp(-y_{j-1}) ) ,\\
+k_2 = d ( \exp(y_{j+1} + \frac{h}{2}k_1) + \exp(-y_j + \frac{h}{2}k_1) - \exp(y_j + \frac{h}{2}k_1) - \exp(-y_{j-1} + \frac{h}{2}k_1) ) ,\\
+k_3 = d ( \exp(y_{j+1} + \frac{h}{2}k_2) + \exp(-y_j + \frac{h}{2}k_2) - \exp(y_j + \frac{h}{2}k_2) - \exp(-y_{j-1} + \frac{h}{2}k_2) ) ,\\
+k_4 = d ( \exp(y_{j+1} + hk_3) + \exp(-y_j + hk_3) - \exp(y_j + hk_3) - \exp(-y_{j-1} + hk_3) ).\\
+\end{array}
+$$
+Подсчет координат с помощью метода Рунге-Кутты проводился для достаточно малой величины шага $(h = 0.001, \: 0.0001, \: 0.00001)$. Вычисления такого рода будут продолжаться до тех пор, пока не будет получено конечное состояние в значении времени $ T_0 $. Однако в точках переключения $ 0, 1, \alpha, \alpha+1 $ релаксационной системе придавался импульс. Координаты точки в этом случае подсчитывались по формулам:
+
+$$ y_j(+0) = \frac{\alpha -1}{\alpha - \beta - 1}y_j(-0), $$
+$$ y_j(1+0) = y_j(1-0) - \frac{\alpha}{\alpha - 1}y_j(+0), $$
+$$ y_j(\alpha + 0) = (1 + \beta)y_j(\alpha - 0), $$ 
+$$ y_j(\alpha + 1 + 0) = y_j(\alpha + 1 - 0) - \frac{\alpha}{1 + \beta}y_j(\alpha + 0), $$
+$$ j = \overline{1,m-1}, \quad y_0 = y_m = 0. $$
+
+Далее происходила проверка начальной и конечной точек отображения \eqref{phi_z} на эквивалентность. Если соответствующие координаты отличались друг от друга не более, чем на величину параметра eps, считалось, что последнее рассчитанное состояние отображения \eqref{phi_z} является устойчивым. В противном случае, конечная точка $ (y_1(T_0, z_1, z_2), y_2(T_0, z_1, z_2))^T $ считалась начальной и для нее осуществлялась описанная ранее последовательность операций.
+
+\end{document}

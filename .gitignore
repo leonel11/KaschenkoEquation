@@ -18,6 +18,9 @@
 *.png
 *.pts
 *.dvi
+*.bbl
+*.blg
+*Dissertation_Leon.pdf
 
 #Folders
 */.idea
