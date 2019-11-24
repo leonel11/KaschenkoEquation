@@ -3,11 +3,11 @@ import math
 import matplotlib.pyplot as plt
 
 
-EPS = 0.000001
-X_0 = 0.39
-gamma = 6.4
-w_start = 0.001
-w_end = 16.001
+EPS = 0.0000001
+X_0 = 0.49
+gamma = 14.738425799
+w_start = 7.92
+w_end = 7.94
 n_points = 100000
 
 
@@ -54,7 +54,7 @@ def draw_sign_function(ws, ys):
     w_a = get_w_a_star(ws, ys)
     print('w_star\talpha_cr')
     for w, a in w_a.items():
-        print('{:.6} {:.6}'.format(float(w), a))
+        print('{:.8} {:.8}'.format(float(w), a))
     #x1,x2,y1,y2 = plt.axis()
     #plt.axis((x1,x2,-50.0,50.0))
     plt.show()

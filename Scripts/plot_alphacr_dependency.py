@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import os
 
 
-x0 = 0.45
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.45'
-CSV_FILE = 'x0=0.45_analytical.csv'
+x0 = 0.41
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.41'
+CSV_FILE = 'x0=0.41_analytical.csv'
 AFTER_TANGENT = True
-AFTER_TANGENT_FILE = 'x0=0.45_analytical_after_tangent.csv'
+AFTER_TANGENT_FILE = 'x0=0.41_analytical_after_tangent.csv'
 
 
 def get_alpha_u(g, x0):
@@ -46,7 +46,7 @@ alpha_c = list(df['alpha_c'])
 if AFTER_TANGENT:
     df_f = pd.read_csv(os.path.join(DATA_PATH, AFTER_TANGENT_FILE), sep=';')
     gammas_f = list(df_f['gamma'])
-    alphas_f = list(df_f['alpha_c'])
+    alphas_f = list(df_f['alpha_f'])
 else:
     gammas_f, alphas_f = [], []
 alpha_u = [get_alpha_u(g, x0) for g in gammas]

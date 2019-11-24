@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import os
 
 
-x0 = 0.45
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.45'
-CSV_FILE = 'x0=0.45_analytical_after_tangent.csv'
-AFTER_TANGENT = True
+x0 = 0.41
+DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/x0=0.41'
+CSV_FILE = 'x0=0.41_analytical.csv'
+AFTER_TANGENT = False
 
 
 def phi_o(g, a, w, x0):
@@ -71,6 +71,10 @@ def visualize_dependencies(gs, phis, ds, amps):
 
 
 df = pd.read_csv(os.path.join(DATA_PATH, CSV_FILE), sep=';')
-gammas, omegas, alphas = list(df['gamma']), list(df['w']), list(df['alpha_c'])
+gammas, omegas = list(df['gamma']), list(df['w'])
+if AFTER_TANGENT:
+    alphas = list(df['alpha_f'])
+else:
+    alphas = list(df['alpha_c'])
 phis, ds, amps = calc_coefs_normal_form(gammas, omegas, alphas)
 visualize_dependencies(gammas, phis, ds, amps)
