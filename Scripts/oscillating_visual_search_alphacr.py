@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 
 
 EPS = 0.0000001
-X_0 = 0.49
-gamma = 14.738425799
-w_start = 7.92
-w_end = 7.94
+X_0 = 0.33
+gamma = 8.0
+w_start = 0.1
+w_end = 1000.0
 n_points = 100000
 
 
@@ -45,18 +45,18 @@ def get_w_a_star(ws, ys):
 
 def draw_sign_function(ws, ys):
     plt.rcParams.update({'font.size': 13})
-    plt.figure('Xo={:.5},gamma={:.5}'.format(X_0, gamma))
+    plt.figure('Xo={:.8},gamma={:.8}'.format(X_0, gamma))
     plt.xlabel('$\omega$')
     plt.grid(True)
     plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
     plt.axhline(y=0.0, linewidth=2, color='gray', zorder=2)
     plt.plot(ws, ys, color='k', linewidth=2)
     w_a = get_w_a_star(ws, ys)
-    print('w_star\talpha_cr')
+    print('gamma\tw_star\talpha_cr')
     for w, a in w_a.items():
-        print('{:.8} {:.8}'.format(float(w), a))
+        print('{} {:.8} {:.8}'.format(gamma, float(w), a))
     #x1,x2,y1,y2 = plt.axis()
-    #plt.axis((x1,x2,-50.0,50.0))
+    #plt.axis((x1,x2,-5.0,5.0))
     plt.show()
 
 
