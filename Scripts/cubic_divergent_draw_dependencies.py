@@ -1,25 +1,21 @@
+'''
+Script for building and visualization dependencies of Lyapunov exponents
+(PHI and D values) and Amplitude of oscillations, when zero solution loses
+its stability in the DIVERGENT way for LINEAR BOUNDARY-VALUE PROBLEM
+WITH CUBIC DEVIATION in boundary conditions
+'''
+
 import numpy as np
-import matplotlib.pyplot as plt
+import drawer
+import utils
 
 
-beta = -0.5
-x0 = 0.91
-g_min = -4.0
-g_max = 2.7
-h = 0.001
+beta = 0.5
+x0 = 0.49
+g_min = -4.1
+g_max = 7.7
 
-
-plt.rcParams.update({'font.size': 13})
-plt.rcParams['savefig.directory'] = '../Tracer/Variations/Cubic Boundary Condition'
-
-
-def alpha_u(g, x0):
-    if g <= 0:
-        mu = np.sqrt(-g)
-        return mu*np.sinh(mu)/np.cosh(mu*x0)
-    else:
-        mu = np.sqrt(g)
-        return -mu*np.sin(mu)/np.cos(mu*x0)
+SAVE_DIRECTORY = '../Tracer/Variations/Cubic Boundary Condition' + f'/x0={x0:.2f}'
 
 
 def Q(g, a, x0):
@@ -31,59 +27,69 @@ def Q(g, a, x0):
         return 2.0*mu / (mu*np.cos(mu) + np.sin(mu) - a*x0*np.sin(mu*x0))
 
 
-def phi_d_A(g, a, x0):
+def get_phi(g, a, x0):
     if g <= 0:
         mu = np.sqrt(-g)
-        phi = Q(g, a, x0)*np.cosh(mu*x0)
-        d = Q(g, a, x0)*beta*np.cosh(mu*x0)*np.cosh(mu*x0)*np.cosh(mu*x0)
-        A = np.sqrt(abs(1.0/(beta*np.cosh(mu*x0)**2)))
+        return Q(g, a, x0)*np.cosh(mu*x0)
     else:
         mu = np.sqrt(g)
-        phi = Q(g, a, x0)*np.cos(mu*x0)
-        d = Q(g, a, x0)*beta*np.cos(mu*x0)*np.cos(mu*x0)*np.cos(mu*x0)
-        A = np.sqrt(abs(1.0/(beta*np.cos(mu*x0)**2)))
-    return phi, d, A
+        return Q(g, a, x0)*np.cos(mu*x0)
 
 
-def calc_Lyapunov_exps(gammas):
+def get_d(g, a, x0):
+    if g <= 0:
+        mu = np.sqrt(-g)
+        return Q(g, a, x0)*beta*np.cosh(mu*x0)*np.cosh(mu*x0)*np.cosh(mu*x0)
+    else:
+        mu = np.sqrt(g)
+        return Q(g, a, x0)*beta*np.cos(mu*x0)*np.cos(mu*x0)*np.cos(mu*x0)
+
+
+def get_Lyapunov_exps(gammas):
+    '''
+    Calculate and return lists of Lyapunov exponents
+    :param gammas: list of gamma values
+    :return: list of phi values, list of d values, list of amplitude values
+    '''
     alphas, phis, ds, amps = [], [], [], []
     for g in gammas:
-        alphas.append(alpha_u(g, x0))
-    for idx in range(len(gammas)):
-        phi, d, A = phi_d_A(gammas[idx], alphas[idx], x0)
-        phis.append(phi)
-        ds.append(d)
-        amps.append(A)
+        alphas.append(utils.get_alpha_u(g, x0))
+    for g, a in zip(gammas, alphas):
+        phi0, d0 = get_phi(g, a, x0), get_d(g, a, x0)
+        phis.append(phi0)
+        ds.append(d0)
+        amps.append(utils.get_amplitude(phi0, d0))
     return phis, ds, amps
 
 
-def prepare_plot():
-    plt.xlabel('$\gamma$')
-    plt.grid(True)
-    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.98)
-    plt.axhline(y=0.0, linewidth=2, color='grey', zorder=2)
+def draw_dependencies(gammas, phis, ds, amps):
+    '''
+    Draw 2 graphics: phi(gamma), d(gamma) dependencies and amplitude(gamma)
+    dependency
+    :param gammas: list of gamma values
+    :param phis: list of phis values
+    :param ds: list of d values
+    :param amps: list of amplitude values
+    '''
+    # draw phi, d dependencies
+    phid_figure_name = 'divergent_phid_x0={:.5},g[{:.5},{:.5}],beta={:.5}'.format(x0, g_min, g_max, beta)
+    drawer_phid = drawer.Drawer(x_label=r'$\gamma$',
+                                figure_name=phid_figure_name,
+                                save_dir=SAVE_DIRECTORY)
+    drawer_phid.drawAxis(show_Ox=True)
+    drawer_phid.drawTwoCurves(gammas, phis, ds, curve1_lbl=r'$\varphi_0$',
+                              curve2_lbl=r'$d_0$', curve1_color='darkcyan',
+                              curve2_color='darkorange')
+    # draw amplitude dependency
+    amp_figure_name = 'divergent_A_x0={:.5},beta={:.5}'.format(x0, beta)
+    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_u$',
+                               figure_name=amp_figure_name,
+                               save_dir=SAVE_DIRECTORY)
+    drawer_amp.drawAxis(show_Ox=True)
+    drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 
 
-def draw_phid_dependencies(gammas, phis, ds):
-    plt.figure('divergent_phi0d0_x0={:.5},g[{:.5},{:.5}],beta={:.5}'.format(x0, g_min, g_max, beta))
-    prepare_plot()
-    plt.plot(gammas, phis, label=r'$\varphi_0$', color='darkcyan', linewidth=2)
-    plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2, zorder=3)
-    # x1,x2,y1,y2 = plt.axis()
-    # plt.axis((x1,4.902,y1,y2))
-    plt.legend()
-    plt.show()
-
-
-def draw_amplitude_dependency(gammas, amps):
-    plt.figure('divergent_A_x0={:.5},beta={:.5}'.format(x0, beta))
-    prepare_plot()
-    plt.plot(gammas, amps, label='$A_u$', color='crimson', linewidth=2)
-    plt.legend()
-    plt.show()
-
-
-gammas = list(np.arange(g_min, g_max, h))
-phis, ds, amps = calc_Lyapunov_exps(gammas)
-draw_phid_dependencies(gammas, phis, ds)
-draw_amplitude_dependency(gammas, amps)
+if __name__ == '__main__':
+    gammas = list(np.arange(g_min, g_max, utils.H))
+    phis, ds, amps = get_Lyapunov_exps(gammas)
+    draw_dependencies(gammas, phis, ds, amps)

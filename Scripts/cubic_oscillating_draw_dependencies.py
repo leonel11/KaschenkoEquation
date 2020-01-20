@@ -1,81 +1,103 @@
+'''
+Script for building and visualization dependencies of Lyapunov exponents
+(PHI and D values) and Amplitude of oscillations, when zero solution loses
+its stability in the OSCILLATING way for LINEAR BOUNDARY-VALUE PROBLEM
+WITH CUBIC DEVIATION in boundary conditions
+'''
+
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import os
+import drawer
+import utils
 
 
 beta = 1.0
 x0 = 0.45
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Variations/Cubic Boundary Condition/x0=0.45'
-CSV_FILE = 'x0=0.45_analytical_after_tangent.csv'
-AFTER_TANGENT = True
+AFTER_TANGENT = False
+
+SKIP_VALUES = 6 if AFTER_TANGENT else 1 # for more handsome visualization
+SUFFIX_NAME = '_after_tangent' if AFTER_TANGENT else ''
+SAVE_DIRECTORY = '../Tracer/Variations/Cubic Boundary Condition' + f'/x0={x0:.2f}'
+CSV_FILE = f'x0={x0:.2f}' + '_analytical' + SUFFIX_NAME + '.csv'
 
 
-plt.rcParams.update({'font.size': 13})
-plt.rcParams['savefig.directory'] = '../Tracer/Variations/Cubic Boundary Condition'
+def read_params():
+    '''
+    Read params for calculating of Lyapunov exponents
+    :return list of gamma values, list of omega values, list of alpha values
+    '''
+    df = pd.read_csv(os.path.join(SAVE_DIRECTORY, CSV_FILE), sep=';')
+    gammas, omegas = list(df['gamma']), list(df['w'])
+    if AFTER_TANGENT:
+        alphas = list(df['alpha_f'])
+    else:
+        alphas = list(df['alpha_c'])
+    return gammas[:-SKIP_VALUES], omegas[:-SKIP_VALUES], alphas[:-SKIP_VALUES]
 
 
-def read_csv_params():
-    df = pd.read_csv(os.path.join(DATA_PATH, CSV_FILE), sep=';')
-    gammas, omegas, alphas = list(df['gamma']), list(df['w']), list(df['alpha_c'])
-    return gammas[:-1], omegas[:-1], alphas[:-1]
-
-
-def phi0_d0_A(g, w, a, x0):
-    i = 1.0j
-    mu = np.sqrt(-g+i*w)
-    mu_conj = np.conj(mu)
-    nu = mu + 2*i*mu.imag
-    kappa = mu + 2*mu.real
-    phi = -2.0*mu*np.cosh(mu*x0) / (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
-    d = 1.5*beta*mu*(np.cosh(kappa*x0) + np.cosh(nu*x0) + 2.0*np.cosh(mu_conj*x0)) / \
-        (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
+def get_phi(g, w, a, x0):
+    mu = np.sqrt(-g + w*1.0j)
+    phi = -2.0*mu*np.cosh(mu*x0) / \
+          (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
     if AFTER_TANGENT:
         phi = -phi
-    A = np.sqrt(abs(phi.real/d.real))
-    return phi.real, d.real, A
+    return phi.real
 
 
-def calc_Lyapunov_exps(gs, ws, alphas):
+def get_d(g, w, a, x0):
+    mu = np.sqrt(-g + w*1.0j)
+    mu_conj = np.conj(mu)
+    nu = mu + 2.0*1.0j*mu.imag
+    kappa = mu + 2.0*mu.real
+    d = 1.5*beta*mu*(np.cosh(kappa*x0) + np.cosh(nu*x0) + 2.0*np.cosh(mu_conj*x0)) / \
+        (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
+    return d.real
+
+
+def get_Lyapunov_exps(gs, ws, alphas):
+    '''
+    Calculate and return lists of Lyapunov exponents
+    :param gammas: list of gamma values
+    :param ws: list of omega values
+    :param alphas: list of alpha values
+    :return: list of phi values, list of d values, list of amplitude values
+    '''
     phis, ds, amps = [], [], []
-    for idx in range(len(gammas)):
-        phi0, d0, A = phi0_d0_A(gs[idx], ws[idx], alphas[idx], x0)
+    for g, w, a in zip(gs, ws, alphas):
+        phi0, d0 = get_phi(g, w, a, x0), get_d(g, w, a, x0)
         phis.append(phi0)
         ds.append(d0)
-        amps.append(A)
+        amps.append(utils.get_amplitude(phi0, d0))
     return phis, ds, amps
 
 
-def prepare_plot():
-    #plt.xticks(gammas_ticks)
-    plt.xlabel('$\gamma$')
-    plt.grid(True)
-    plt.subplots_adjust(left=0.11, bottom=0.11, right=0.98, top=0.95)
-    plt.axhline(y=0.0, linewidth=2, color='grey', zorder=2)
+def draw_dependencies(gammas, phis, ds, amps):
+    '''
+    Draw 2 graphics: phi(gamma), d(gamma) dependencies and amplitude(gamma) dependency
+    :param gammas: list of gamma values
+    :param phis: list of phis values
+    :param ds: list of d values
+    :param amps: list of amplitude values
+    '''
+    # draw phi, d dependencies
+    phid_figure_name = 'oscillating_phi0d0{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
+    drawer_phid = drawer.Drawer(x_label=r'$\gamma$',
+                                figure_name=phid_figure_name,
+                                save_dir=SAVE_DIRECTORY)
+    drawer_phid.drawAxis(show_Ox=True)
+    drawer_phid.drawTwoCurves(gammas, phis, ds, r'$\varphi_0$', r'$d_0$',
+                              'darkcyan', 'darkorange')
+    # draw amplitude dependency
+    amp_figure_name = 'oscillating_A{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
+    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_c$',
+                               figure_name=amp_figure_name,
+                               save_dir=SAVE_DIRECTORY)
+    drawer_amp.drawAxis(show_Ox=True)
+    drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 
 
-def draw_phid_dependencies(gammas, phis, ds):
-    suffix_name = '_after_tangent' if AFTER_TANGENT else ''
-    plt.figure('oscillating_phi0d0{}_x0={:.5},beta={:.5}'.format(suffix_name, x0, beta))
-    prepare_plot()
-    plt.plot(gammas, phis, label=r'$\varphi_0$', color='darkcyan', linewidth=2)
-    plt.plot(gammas, ds, label='$d_0$', color='darkorange', linewidth=2, zorder=3)
-    #x1,x2,y1,y2 = plt.axis()
-    #plt.axis((x1,x2,y1,0.4))
-    plt.legend()
-    plt.show()
-
-
-def draw_amplitude_dependency(gammas, amps):
-    suffix_name = '_after_tangent' if AFTER_TANGENT else ''
-    plt.figure('oscillating_A{}_x0={:.5},beta={:.5}'.format(suffix_name, x0, beta))
-    prepare_plot()
-    plt.plot(gammas, amps, label='$A_u$', color='crimson', linewidth=2)
-    plt.legend()
-    plt.show()
-
-
-gammas, omegas, alphas = read_csv_params()
-phis, ds, amps = calc_Lyapunov_exps(gammas, omegas, alphas)
-draw_phid_dependencies(gammas, phis, ds)
-draw_amplitude_dependency(gammas, amps)
+if __name__ == '__main__':
+    gammas, omegas, alphas = read_params()
+    phis, ds, amps = get_Lyapunov_exps(gammas, omegas, alphas)
+    draw_dependencies(gammas, phis, ds, amps)

@@ -1,20 +1,36 @@
+'''
+Script for visualization alpha_c values (critical values of alpha, when
+zero solution of LINEARIZED BOUNDARY-VALUE PROBLEM loses its stability
+in OSCILLATING way) for different x0 values, from 0 to certain value of x0 -
+x0_max
+'''
+
 import pandas as pd
-import matplotlib.pyplot as plt
-import os
+import drawer
 
 
-DATA_PATH = 'C:/_Repositories/KaschenkoEquation/Tracer/Results/Origins'
-CSV_FILE = 'origins_analytical.csv'
-high_border = 0.88
+x0_max = 0.86
+
+SAVE_DIRECTORY = '../Tracer/Results/Origins'
+CSV_FILE = SAVE_DIRECTORY + '/origins_analytical.csv'
+PICT_NAME = SAVE_DIRECTORY + f'/origins__x0_max={x0_max:.2f}' + '.png'
 
 
-df = pd.read_csv(os.path.join(DATA_PATH, CSV_FILE), sep=';')
-gammas = list(df[df['x0'] < high_border]['x0'])
-alphas = list(df[df['x0'] < high_border]['alpha'])
-plt.rcParams.update({'font.size': 13})
-plt.subplots_adjust(left=0.1, bottom=0.12, right=0.98, top=0.98)
-plt.xlabel('$x_0$')
-plt.grid()
-plt.plot(gammas, alphas, label=r'$\alpha_c$', color='darkmagenta', linewidth=2)
-plt.legend()
-plt.savefig(os.path.join(DATA_PATH, 'origins.png'))
+def read_params():
+    '''
+    Read params for visualization
+    :return origins (list of gamma values, list of alpha_c (oscillating case) values)
+    '''
+    df = pd.read_csv(CSV_FILE, sep=';')
+    gammas = list(df[df['x0'] <= x0_max]['x0'])
+    alphas = list(df[df['x0'] <= x0_max]['alpha'])
+    return gammas, alphas
+
+
+if __name__ == '__main__':
+    gammas, alphas = read_params()
+    # draw origin dependency
+    drawer_w = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\omega$',
+                             save_dir=SAVE_DIRECTORY)
+    drawer_w.drawCurve(gammas, alphas, curve_color='darkmagenta',
+                       save_name=PICT_NAME)

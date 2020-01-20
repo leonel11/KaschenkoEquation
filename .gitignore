@@ -20,9 +20,13 @@
 *.dvi
 *.bbl
 *.blg
+*.pyc
 *Dissertation_Leon.pdf
+*$*
+*(busy)
 
 #Folders
 */.idea
+*ipynb_checkpoints
 */venv
 */src/__pycache__
