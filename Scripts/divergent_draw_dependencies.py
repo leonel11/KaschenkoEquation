@@ -10,9 +10,9 @@ import drawer
 import utils
 
 
-x0 = 0.5
-g_min = 5.0
-g_max = 16.0
+x0 = 0.09
+g_min = 4.04
+g_max = 4.14
 
 SAVE_DIRECTORY = '../Tracer/Results' + f'/x0={x0:.2f}'
 
@@ -33,13 +33,11 @@ def get_d(g, a, x0):
     if g <= 0:
         mu = np.sqrt(-g)
         A = 16*(mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
-        B = -3*mu*mu*np.sinh(3*mu) - 12*np.sinh(mu) - 12*mu*np.cosh(mu) - \
-            a*mu*np.cosh(3*mu*x0) + 12*a*x0*np.sinh(mu*x0)
+        B = -3*mu*mu*np.sinh(3*mu) - 12*np.sinh(mu) - 12*mu*np.cosh(mu) - a*mu*np.cosh(3*mu*x0) + 12*a*x0*np.sinh(mu*x0)
     else:
         mu = np.sqrt(g)
         A = 16*(mu*np.cos(mu) + np.sin(mu) - a*x0*np.sin(mu*x0))
-        B = 3*mu*mu*np.sin(3*mu) - 12*np.sin(mu) - 12*mu*np.cos(mu) - \
-            a*mu*np.cos(3*mu*x0) + 12*a*x0*np.sin(mu*x0)
+        B = 3*mu*mu*np.sin(3*mu) - 12*np.sin(mu) - 12*mu*np.cos(mu) - a*mu*np.cos(3*mu*x0) + 12*a*x0*np.sin(mu*x0)
     return B/A
 
 
@@ -70,18 +68,19 @@ def draw_dependencies(gammas, phis, ds, amps):
     '''
     # draw phi, d dependencies
     phid_figure_name = 'divergent_phi0d0_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max)
-    drawer_phid = drawer.Drawer(x_label=r'$\gamma$',
-                                figure_name=phid_figure_name,
-                                save_dir=SAVE_DIRECTORY)
+    drawer_phid = drawer.Drawer(x_label=r'$\gamma$', figure_name=phid_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_phid.drawAxis(show_Ox=True)
-    drawer_phid.drawTwoCurves(gammas, phis, ds, curve1_lbl=r'$\varphi_0$',
-                              curve2_lbl=r'$d_0$', curve1_color='darkcyan',
-                              curve2_color='darkorange')
+    drawer_phid.drawTwoCurves(gammas, phis, ds, curve1_lbl=r'$\varphi_0$', curve2_lbl=r'$d_0$',
+                              curve1_color='darkcyan', curve2_color='darkorange')
+    # draw d dependency
+    d_pict = 'divergent_d0_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max)
+    drawer_d = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$d_0$', figure_name=d_pict, save_dir=SAVE_DIRECTORY)
+    drawer_d.drawAxis(show_Ox=True)
+    drawer_d.drawCurve(gammas, ds, curve_color='darkorange')
     # draw amplitude dependency
-    amp_figure_name = 'divergent_amplitude_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max)
+    amp_figure_name = 'divergent_Au_x0={:.5},g[{:.5},{:.5}]'.format(x0, g_min, g_max)
     drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_u$',
-                               figure_name=amp_figure_name,
-                               save_dir=SAVE_DIRECTORY)
+                               figure_name=amp_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
     drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 

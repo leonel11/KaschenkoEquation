@@ -10,8 +10,8 @@ import drawer
 import utils
 
 
-g_min = -4.0
-g_max = 120.0
+g_min = -0.85
+g_max = 18.45
 h = 0.001
 
 SAVE_DIRECTORY = '../Tracer/Variations/Integral Boundary Condition'
@@ -33,15 +33,13 @@ def draw_dependencies(gammas, ds, amps):
     '''
     # draw d dependency
     d_figure_name = 'integral_divergent_d0_g[{:.5},{:.5}]'.format(g_min, g_max)
-    drawer_d = drawer.Drawer(x_label=r'$\gamma$', y_label='d',
-                             figure_name=d_figure_name, save_dir=SAVE_DIRECTORY)
+    drawer_d = drawer.Drawer(x_label=r'$\gamma$', y_label='d', figure_name=d_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_d.drawAxis(show_Ox=True)
     drawer_d.drawCurve(gammas, ds, curve_color='darkorange')
     # draw amplitude dependency
-    amp_figure_name = 'divergent_A_g[{:.5},{:.5}]'.format(g_min, g_max)
+    amp_figure_name = 'integral_Au_g[{:.5},{:.5}]'.format(g_min, g_max)
     drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_u$',
-                               figure_name=amp_figure_name,
-                               save_dir=SAVE_DIRECTORY)
+                               figure_name=amp_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
     drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 

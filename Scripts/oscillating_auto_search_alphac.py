@@ -10,10 +10,10 @@ import math
 import utils
 
 
-x0 = 0.67
-gamma_start = 28.37
-gamma_end = 28.407
-w_pred = 28.747
+x0 = 0.91
+gamma_start = 394.9
+gamma_end = 800.0
+w_pred = 374.107
 
 
 def get_sign_func_val(w):
@@ -31,8 +31,7 @@ def get_sign_func_val(w):
     hi = r*np.cos(t)
     teta = r*np.sin(t)
     return (teta*np.sinh(hi)*np.cos(teta)+hi*np.cosh(hi)*np.sin(teta)) / \
-           (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - \
-           np.tanh(hi*x0)*np.tan(teta*x0)
+           (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - np.tanh(hi*x0)*np.tan(teta*x0)
 
 
 def output_data(out_data):
@@ -43,18 +42,17 @@ def output_data(out_data):
     dict_keys = list(sorted(out_data.keys(), reverse=True))
     for gamma in dict_keys:
         w, alpha_c = out_data[gamma][0], out_data[gamma][1]
-        print('{:.5};{:.5};{:.5}'.format(gamma, w, alpha_c))
+        print('{:.6};{:.6};{:.6}'.format(gamma, w, alpha_c))
 
 
 if __name__ == '__main__':
     gamma = gamma_start + utils.H
     out_data = {}
     while abs(gamma) <= abs(gamma_end):
-        w_start = 0.99*w_pred
-        w_end = 1.01*w_pred
+        w_start = 0.9*w_pred
+        w_end = 1.1*w_pred
         try:
-            w_pred = utils.dichotonomy_root_search(w_start, w_end,
-                                                   get_sign_func_val)
+            w_pred = utils.dichotonomy_root_search(w_start, w_end, get_sign_func_val)
         except:
             output_data(out_data)
             exit(1)

@@ -8,7 +8,7 @@ import drawer
 
 
 EPS = 1e-6
-H = 1e-3
+H = 1e-5 #1e-3
 MAX = 1e6
 PI = math.pi
 
@@ -155,19 +155,22 @@ def dichotonomy_root_search(left_border, right_border, func, **kwargs):
 
 
 # variables only for inner usage
-_x0 = 0.67
-_g_min = 0.0
-_g_max = 28.0
-_points = 10001
+_x0 = 0.45
+_g_min = 6.8
+_g_max = 6.9
+_points = 11
 
 # only for inner usage
 if __name__ == '__main__':
     _gammas = np.linspace(_g_min, _g_max, _points)
     _alphas_u = [get_alpha_u(g, _x0) for g in _gammas]
+    print('\tgamma\talpha')
+    for idx in range(len(_gammas)):
+        print('{:>9.6} {:>9.6}'.format(_gammas[idx], _alphas_u[idx]))
     _g_loc = get_gamma_local_min(_gammas, _alphas_u)
     _a_loc = get_alpha_min(_alphas_u)
     if _g_loc != _gammas[-1]:
-        print('a_loc_min = {:.12}'.format(_a_loc))
+        print('\na_loc_min = {:.12}'.format(_a_loc))
         print('g_loc = {:.12}'.format(_g_loc))
     drawer_alphau = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\alpha_u$')
     drawer_alphau.drawCurve(_gammas, _alphas_u, curve_color='b')

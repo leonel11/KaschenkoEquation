@@ -12,11 +12,11 @@ import drawer
 import utils
 
 
-beta = 1.0
-x0 = 0.45
-AFTER_TANGENT = False
+beta = -1.0
+x0 = 0.49
+AFTER_TANGENT = True
 
-SKIP_VALUES = 6 if AFTER_TANGENT else 1 # for more handsome visualization
+SKIP_VALUES = 9 # for more handsome visualization
 SUFFIX_NAME = '_after_tangent' if AFTER_TANGENT else ''
 SAVE_DIRECTORY = '../Tracer/Variations/Cubic Boundary Condition' + f'/x0={x0:.2f}'
 CSV_FILE = f'x0={x0:.2f}' + '_analytical' + SUFFIX_NAME + '.csv'
@@ -33,13 +33,15 @@ def read_params():
         alphas = list(df['alpha_f'])
     else:
         alphas = list(df['alpha_c'])
-    return gammas[:-SKIP_VALUES], omegas[:-SKIP_VALUES], alphas[:-SKIP_VALUES]
+    if AFTER_TANGENT:
+        return gammas[:-SKIP_VALUES], omegas[:-SKIP_VALUES], alphas[:-SKIP_VALUES]
+    else:
+        return gammas[SKIP_VALUES:], omegas[SKIP_VALUES:], alphas[SKIP_VALUES:]
 
 
 def get_phi(g, w, a, x0):
     mu = np.sqrt(-g + w*1.0j)
-    phi = -2.0*mu*np.cosh(mu*x0) / \
-          (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
+    phi = -2.0*mu*np.cosh(mu*x0) / (mu*np.cosh(mu) + np.sinh(mu) - a*x0*np.sinh(mu*x0))
     if AFTER_TANGENT:
         phi = -phi
     return phi.real
@@ -81,18 +83,14 @@ def draw_dependencies(gammas, phis, ds, amps):
     :param amps: list of amplitude values
     '''
     # draw phi, d dependencies
-    phid_figure_name = 'oscillating_phi0d0{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
-    drawer_phid = drawer.Drawer(x_label=r'$\gamma$',
-                                figure_name=phid_figure_name,
-                                save_dir=SAVE_DIRECTORY)
+    phid_figure_name = 'cubic_oscillating_phi0d0{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
+    drawer_phid = drawer.Drawer(x_label=r'$\gamma$', figure_name=phid_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_phid.drawAxis(show_Ox=True)
-    drawer_phid.drawTwoCurves(gammas, phis, ds, r'$\varphi_0$', r'$d_0$',
-                              'darkcyan', 'darkorange')
+    drawer_phid.drawTwoCurves(gammas, phis, ds, r'$\varphi_0$', r'$d_0$', 'darkcyan', 'darkorange')
     # draw amplitude dependency
-    amp_figure_name = 'oscillating_A{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
+    amp_figure_name = 'cubic_oscillating_A{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
     drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_c$',
-                               figure_name=amp_figure_name,
-                               save_dir=SAVE_DIRECTORY)
+                               figure_name=amp_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
     drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 

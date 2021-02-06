@@ -34,8 +34,7 @@ def get_sign_func_val(w, x0):
     hi = r*np.cos(t)
     teta = r*np.sin(t)
     return (teta*np.sinh(hi)*np.cos(teta)+hi*np.cosh(hi)*np.sin(teta)) / \
-           (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - \
-           np.tanh(hi*x0)*np.tan(teta*x0)
+           (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - np.tanh(hi*x0)*np.tan(teta*x0)
 
 
 if __name__ == '__main__':

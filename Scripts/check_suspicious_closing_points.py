@@ -31,8 +31,7 @@ def F_der(a, g, l, x0):
         return (np.sin(mu) + mu*np.cos(mu) - a*x0*np.sin(mu*x0)) / (2.0*mu)
     else:
         mu = cmath.sqrt(-g+l)
-        return (cmath.sinh(mu) + mu*cmath.cosh(mu) - a*x0*cmath.sinh(mu*x0)) / \
-               (2.0*mu)
+        return (cmath.sinh(mu) + mu*cmath.cosh(mu) - a*x0*cmath.sinh(mu*x0)) / (2.0*mu)
 
 
 def F_derder(a, g, l, x0):
@@ -41,14 +40,12 @@ def F_derder(a, g, l, x0):
         mu = np.sqrt(g)
         first = 0.25*(np.cos(mu)/(mu*mu) + np.sin(mu)/(mu*mu*mu))
         second = np.sin(mu)/(4.0*mu)
-        third = -((a*x0)/4.0) * ((x0*np.cos(mu*x0))/(mu*mu) +
-                                 (np.sin(mu*x0))/(mu*mu* mu))
+        third = -((a*x0)/4.0) * ((x0*np.cos(mu*x0))/(mu*mu) + (np.sin(mu*x0))/(mu*mu* mu))
     else:
         mu = cmath.sqrt(-g + l)
         first = 0.25*(cmath.cosh(mu)/(mu*mu) - cmath.sinh(mu)/(mu*mu*mu))
         second = cmath.sinh(mu)/(4.0*mu)
-        third = -((a*x0)/4.0)*((x0*cmath.cosh(mu*x0))/(mu*mu) -
-                               (cmath.sinh(mu*x0))/(mu*mu*mu))
+        third = -((a*x0)/4.0)*((x0*cmath.cosh(mu*x0))/(mu*mu) - (cmath.sinh(mu*x0))/(mu*mu*mu))
     return first+second+third
 
 

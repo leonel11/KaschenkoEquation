@@ -9,8 +9,8 @@ import os
 import drawer
 
 
-x0 = 0.41
-AFTER_TANGENT = True
+x0 = 0.75
+AFTER_TANGENT = False
 
 SUFFIX_NAME = '_after_tangent' if AFTER_TANGENT else ''
 DATA_PATH = '../Tracer/Results' + f'/x0={x0:.2f}'
@@ -39,6 +39,5 @@ def read_params():
 if __name__ == '__main__':
     gs, ws = read_params()
     # draw omega dependency
-    drawer_w = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\omega$',
-                             save_dir=SAVE_DIRECTORY)
+    drawer_w = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\omega$', save_dir=SAVE_DIRECTORY)
     drawer_w.drawCurve(gs, ws, curve_color='g', save_name=PICT_NAME)

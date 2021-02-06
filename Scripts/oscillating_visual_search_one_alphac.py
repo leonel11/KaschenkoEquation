@@ -12,10 +12,10 @@ import drawer
 import utils
 
 
-x0 = 0.67
-gamma = 15.98864
-w_start = 75.4
-w_end = 75.6
+x0 = 0.77
+gamma = 59.30471849
+w_start = 0.01
+w_end = 1.0
 n_points = 100000
 
 
@@ -33,9 +33,8 @@ def get_sign_func_val(w):
         t = (math.pi - np.arctan(w/gamma)) / 2.0
     hi = r*np.cos(t)
     teta = r*np.sin(t)
-    return (teta*np.sinh(hi)*np.cos(teta)+hi*np.cosh(hi)*np.sin(teta))/\
-           (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - \
-           np.tanh(hi*x0)*np.tan(teta*x0)
+    return (teta*np.sinh(hi)*np.cos(teta)+hi*np.cosh(hi)*np.sin(teta)) / \
+           (hi*np.sinh(hi)*np.cos(teta)-teta*np.cosh(hi)*np.sin(teta)) - np.tanh(hi*x0)*np.tan(teta*x0)
 
 
 def get_dict_roots(ws, ys):
@@ -60,9 +59,9 @@ if __name__ == '__main__':
     ys = [get_sign_func_val(w) for w in ws]
     # find roots
     star = get_dict_roots(ws, ys)
-    print('w_star\talpha_c')
+    print('gamma;w_star;alpha_c')
     for w, a in star.items():
-        print('{:.9} {:.9}'.format(gamma, float(w), a))
+        print('{:.9};{:.9};{:.9}'.format(gamma, float(w), a))
     # draw function
     dr = drawer.Drawer(x_label=r'$\omega$')
     dr.drawAxis(show_Ox=True)

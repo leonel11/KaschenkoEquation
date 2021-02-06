@@ -1,0 +1,171 @@
+\documentclass[12pt]{extarticle}
+\usepackage[T2A]{fontenc} 
+\usepackage[cp1251]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{mathtext}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{lscape}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+\parindent=1.25cm
+\pagestyle{plain}
+\onehalfspacing
+
+\newtheorem{thm}{Теорема}
+\newtheorem{lm}{Лемма}
+
+\begin{document}
+
+\section*{Постановка задачи}
+
+Рассмотрим систему обыкновенных дифференциальных уравнений с диффузионным взаимодействием и дополнительной интегральной внутренней связью
+\begin{equation}\label{original_system}
+\dot{u}_j =  N^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \qquad j = \overline{1, N}, 
+\end{equation}
+\begin{equation}\label{original_conditions}
+u_0 = u_1, \; u_{N+1} = u_N + \dfrac{\alpha}{N^2} \sum_{k=1}^{n} \:u_k, \qquad 1 \leqslant k < N,
+\end{equation}
+где $ u_j = u_j(t) $ гладкие функции при $ t \geqslant 0 $, а параметры $ \alpha, \gamma $ -- действительные числа. Такие системы часто изучаются как модели связанных осцилляторов (см. например \cite{GKR_khaos}, \cite{GKR_relax}), в которых взаимодействие происходит не только между соседними элементами, но и с каким-нибудь внутренними элементами цепочки.
+
+Система \eqref{original_system}, \eqref{original_conditions} очевидным образом имеет однородное нулевое решение $ u_j(t) \equiv 0 $. Представляет интерес вопрос устойчивости этого решения при переходе через мнимую ось нулевого собственного числа. Задача исследования состояла в изучении характера потери устойчивости нулевого решения системы \eqref{original_system}, \eqref{original_conditions}, т.е. в поиске критических значений параметров и асимптотических формул для режимов, ответвляющихся от нулевого состояния равновесия.
+
+\section{Спектральные свойства линеаризованной системы}
+
+Рассмотрим линеаризованную в нуле систему дифференциальных уравнений \eqref{original_system}, \eqref{original_conditions}:
+\begin{equation}\label{linearized_system}
+\dot{u}_j =  N^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j, \qquad j = \overline{1, N}, 
+\end{equation}
+\begin{equation}\label{linearized_conditions}
+u_0 = u_1, \; u_{N+1} = u_N + \dfrac{\alpha}{N^2} \sum_{k=1}^{n} \:u_k, \qquad 1 \leqslant k < N.
+\end{equation}
+Для определения условий устойчивости нулевого решения выполним замену
+\begin{equation}\label{euler_replace}
+u_j(t) = e^{\lambda t}\ch \delta x_j 
+\end{equation}
+где $ x_j = -\dfrac{1}{2N} + \dfrac{j}{N} $, $ \lambda $ –- собственное значение матрицы линеаризованной системы, а коэффициент $ \delta $ определяет собственный вектор соответствующего собственного числа матрицы системы \eqref{linearized_system} с условиями \eqref{linearized_conditions}. При подстановке замены \eqref{euler_replace} можно получить формулы для коэффициента $\delta$ и параметра $\alpha$
+$$ \delta = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma+\lambda}}{2N}, $$
+\begin{equation}\label{alpha_cr}
+    \alpha = \dfrac{\sqrt{-\gamma+\lambda} \sh \delta}{\ch \delta x_k},
+\end{equation}
+где $ x_k = \dfrac{1}{N} \left( k - \dfrac{1}{2} \right) $.
+
+Для изучения потери устойчивости нулевого решения определим при каких критических значениях параметра $ \alpha $ нулевое собственное значение переходит через мнимую ось. Подстановка $ \lambda=0 $ в выражение \eqref{alpha_cr} приводит к зависимости
+\begin{equation}\label{alpha_u}
+    \alpha_u = \frac{ \sqrt{-\gamma} \, \sh \delta_u }{ \ch\delta_u x_k },
+\end{equation}
+где $ \delta_u = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma}}{2N} $. Исходя из полученной формулы, справедлива следующая лемма.
+\begin{lm}
+Для линеаризованной в нуле системы дифференциальных уравнений \eqref{original_system}, \eqref{original_conditions} нулевое состояние равновесия теряет свою устойчивость для значений, параметров $\alpha$ и $\gamma$, связанных формулой \eqref{alpha_u}.
+\end{lm}
+
+Для системы \eqref{linearized_system}, \eqref{linearized_conditions} изучим динамику поведения критической зависимости $\alpha_u(\gamma)$. В нашем случае количество уравнений считалось $N=50$. Отметим, что увеличение $N$ слабо сказывается на поведении функции $\alpha_u(\gamma)$. Как видно из рис. 1, график $\alpha_u(\gamma)$ близок к линейной функции $\alpha=-\gamma$. Построенная критическая зависимость позволяет получить области значений параметров, определяющих устойчивость нулевого решения. Так область $ S $ соответствует случаю устойчивого нулевого решения, $ U $ -- случаю появления двух симметричных состояний равновесия. Отметим, что все результаты локальны и получены в некоторой окрестности нулевого состояния равновесия и достаточно малой окрестности критических кривых.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.61]{alpha_u.png}
+\caption{Схематическая визуализация критической завивимости $\alpha_u$}
+\label{u_j_interaction}
+\end{figure}
+
+\section{Локальный анализ поведения системы в окрестности нулевого решения}
+
+Методами малых возмущений (см. \cite{Glyzin}, \cite{Guckenheimer}) построим режим, ответвляющийся от нулевого состояния равновесия системы \eqref{original_system}, \eqref{original_conditions} для нулевого собственного значения $\lambda$ матрицы соответствующей линеаризованной системы. Для этого введем в рассмотрение малый параметр $\varepsilon$, который косвенно характеризует собой отклонение от нуля. В нашем случае он обозначает переход из области $S$ в область $U$ по параметру $\alpha$ для фиксированного значения $\gamma$ и принимает вид
+\begin{equation}\label{eps_alpha_u}
+\varepsilon = \alpha - \alpha_u,
+\end{equation}
+где $\alpha_u$ вычисляется по формуле \eqref{alpha_u}.
+
+Воспользуемся нормальной формой, которая получается в результате разложения нулевого решения системы \eqref{original_system}, \eqref{original_conditions} по степеням малого параметра
+\begin{equation}\label{norm_form}
+	u_j = \sqrt{\varepsilon}u_{j,0} + \varepsilon u_{j,1} + \varepsilon^{\frac{3}{2}} u_{j,2} + O(\varepsilon^2), \qquad j = \overline{1, N}.
+\end{equation}
+Здесь функции $u_j=u_j(s)$ зависят от медленного времени $s=\varepsilon t$, а $u_{j,0}=\rho(s)\ch \delta_u x_j $, где $ \delta_u = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma}}{2N},\, x_j = -\dfrac{1}{2N} + \dfrac{j}{N} $. Подстановка в цепочку дифференциальных уравнений \eqref{original_system}, \eqref{original_conditions} разложения \eqref{norm_form} с учетом \eqref{eps_alpha_u} приводит к последовательно разрешимым системам для векторов $u_{j,0},\, u_{j,1}$ и $u_{j,2}$:
+$$ \dot u_{j,0} = N^2(u_{j+1,0} - 2u_{j,0} + u_{j-1,0}) + \gamma u_{j,0}, \quad j = \overline{1, N}, $$
+$$ u_{0,0} = u_{1,0}, \quad u_{N+1,0} = u_{N,0} + \dfrac{\alpha_u}{N}u_{k,0}, \qquad 1 \le k < N, $$
+$$ \dot u_{j,1} = N^2(u_{j+1,1} - 2u_{j,1} + u_{j-1,1}) + \gamma u_{j,1}, $$
+$$ u_{0,0} = u_{1,1}, \quad u_{N+1,1} = u_{N,1} + \dfrac{\alpha_u}{N}u_{k,1}, $$
+\begin{equation}\label{u2_system_u}
+	\dot u_{j,2} + \frac{\partial u_{j,0}}{\partial s} = N^2(u_{j+1,2} - 2u_{j,2} + u_{j-1,2}) + \gamma u_{j,2} - u_{j,0}^3,
+\end{equation}
+\begin{equation}\label{u2_conditions_u}
+	u_{0,2} = u_{1,2}, \quad u_{N+1,2} = u_{N,2} + \dfrac{\alpha_u}{N}u_{k,2} + u_{k,0}.
+\end{equation}
+Учитывая, что уравнение \eqref{original_system} содержит кубическое вычитаемое, и, тем самым, для функций $u_{j,1}$ система получается однородной, примем их значения нулевыми. Из условий разрешимости системы \eqref{u2_system_u}, \eqref{u2_conditions_u}, можно получить укороченное уравнение на величину $\rho$
+\begin{equation}\label{rho_equation}
+	\rho' = \rho + d_0 \rho^3,
+\end{equation}
+где коэффициент $ d_0 $ вычисляется по формуле:
+\begin{equation}\label{d0_u}
+d_0 = \dfrac{5 \delta_u^2 \sh 3\delta_u}{48 \sh \delta_u} - \dfrac{3}{4}.
+\end{equation}
+
+Согласно численным результатам, для значений параметра $ \gamma \geqslant 0 $ удавалось выделить и промежутки, где значение $ d_0 $ оказывалось отрицательным, и где эта величина была положительной. Это говорит о том, что для $ \gamma \geqslant 0 $ имело место быть как дивергентная потеря устойчивости, в случае $ d_0 < 0 $, так и грубая, в случае $ d_0 > 0 $. В том случае, если значение параметра $\gamma $ было отрицательным, величина $d_0$ всегда оказывалось положительной, т.е. происходила только грубая потеря устойчивости нулевого решения. График функции $d_0(\gamma)$ показан на рис. 2.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.61]{integral_divergent_d0.png}
+\caption{График функции $d_0(\gamma)$}
+\label{u_j_interaction}
+\end{figure}
+
+При условии, что $d_0<0$ уравнение \eqref{rho_equation} имеет ненулевое состояние равновесия $\phi_*=\sqrt{-\frac{1}{d_0}}$, причем $\rho$ стремится к этому состоянию равновесия при $s \rightarrow +\infty$. Подставляя в нормальную форму \eqref{norm_form} полученное значение $\rho$ получаем асимптотическое приближение для двух пространственно неоднородных устойчивых состояний равновесия исходной системы \eqref{original_system}, \eqref{original_conditions} (см. также \cite{Glyzin}, \cite{Mardsen}):
+\begin{equation}\label{u_j_div}
+u_j = \pm \sqrt{-\varepsilon \frac{\phi_0}{d_0}} \ch \delta_u x_j + O(\varepsilon).
+\end{equation}
+
+При условии, что $d_0>0$ происходит обратная бифуркация типа <<вилка>>. В этом случае уравнение \eqref{rho_equation} имеет ненулевое состояние равновесия $\rho=\rho_*$, где $\phi_*=d_0^{-\frac{1}{2}}$. При подстановке полученного значения $\rho$ в нормальную форму \eqref{norm_form}, получаем асимптотическое приближение \eqref{u_j_div} для двух пространственно неоднородных неустойчивых состояний равновесия, стягивающиеся к нулевому решению системы \eqref{original_system}, \eqref{original_conditions} при $\varepsilon \rightarrow 0$ и отбирающие у него устойчивость (см. также \cite{Kuznetsov}, \cite{Hassard}).
+
+\section*{Выводы}
+
+Для цепочки дифференциальных уравнений с диффузионным взаимодействием и дополнительной интегральной внутренней связью были выявлены критические зависимости параметров, при которых происходят бифуркации нулевого состояния равновесия. Для значений параметров, близких к критическим, была построена нормальная форма и на ее основе были определены условия появления двух пространственно неоднородных устойчивых состояний равновесия.
+
+Полученные результаты могут быть использованы при решении задач численного моделирования некоторых биофизических процессов (см. например \cite{Gourley}, \cite{Britton}). Вызывает также интерес распространение этих результатов и на другие задачи с дополнительной внутренней связью (см. например \cite{Kashchenko}).
+
+\begin{thebibliography}{9}
+
+\bibitem{GKR_khaos} %
+Глызин С. Д., Колесов А. Ю., Розов Н. Х. Диффузионный хаос и его инвариантные числовые характеристики. -- ТМФ, 2020, т. 203 (1), с. 10–-25.
+
+\bibitem{GKR_relax} %
+Глызин С. Д., Колесов А. Ю., Розов Н. Х. Релаксационные колебания и диффузионный хаос в реакции Белоусова. -- Журнал вычислительной математики и математической физики, 2011, т. 51 (8), с. 1400--1418.
+
+\bibitem{Glyzin} %
+Глызин С. Д. Локальные методы анализа динамических систем. –- Ярославль: ЯрГУ им. П.Г Демидова, 2006 -- 91 с.
+
+\bibitem{Guckenheimer} %
+Гукенхеймер Дж., Холмс Ф. Нелинейные колебания, динамические системы и бифуркации векторных полей. –- М.: Институт компьютерных исследований, 2002 -- 560 с.
+
+\bibitem{Kashchenko} %
+Кащенко С. А. О бифуркациях при малых возмущениях в логистическом уравнении с запаздыванием. -- Моделирование и анализ информационных систем, 2017, т. 24 (2), с. 168--185.
+
+\bibitem{Kuznetsov} %
+Кузнецов А. П., Савин А. В., Седова Ю. В., Тюрюкина Л. В. Бифуркации отображений. -- Саратов: ООО ИЦ <<Наука>>, 2012 -- 196 с.
+
+\bibitem{Mardsen} %
+Марсден Дж. Е., Мак-Кракен Д. Бифуркация рождения цикла и ее приложения -- М.: Мир, 1980 –- 368 с.
+
+\bibitem{Hassard} %
+Хэссард Б., Казаринов Н., Вэн И. Теория и приложения бифуркации рождения цикла -- М.: Мир, 1985 –- 280 с.
+
+\bibitem{Britton} %
+Britton N. F. Reaction-diffusion equations and their applications to biology. -- New York: Academic Press, 1986. –- 277 p.
+
+\bibitem{Gourley} %
+Gourley S. A., So J. W.-H., Wu J. H. Nonlocality of Reaction-Diffusion Equations Induced by Delay: Biological Modeling and Nonlinear Dynamics -- Journal of Mathematical Sciences, 2004, vol. 4 (4), pp. 5119–5153.
+
+\end{thebibliography}
+
+
+\end{document}

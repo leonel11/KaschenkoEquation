@@ -1,0 +1,191 @@
+\documentclass[12pt]{extarticle} 
+\usepackage[T2A]{fontenc} 
+\usepackage[cp1251]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{mathtext}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{lscape}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage{indentfirst}
+\usepackage{enumerate}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage[left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+\parindent=1cm
+\pagestyle{plain}
+\onehalfspacing
+
+\newtheorem{thm}{Теорема}
+
+\begin{document}
+
+Рассмотрим систему дифференциальных уравнений с диффузионным взаимодействием между соседними элементами и дополнительной внутренней связью
+
+\begin{equation}\label{system1}
+\dot{u}_j =  N^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \qquad j = \overline{1, N}, 
+\end{equation}
+\begin{equation}\label{system2}
+u_0 = u_1, \; u_{N+1} = u_N + \dfrac{\alpha}{N}u_k, \qquad 1 \leqslant k < N.
+\end{equation}
+где $ u_j = u_j(t) $ --- гладкие функции при $ t \geqslant 0 $, величина $ N \gg 1 $, а параметры $ \alpha, \beta, \gamma $ --- действительные числа. Индекс $ k \in \mathbb{N} $ позволяет определить дополнительную внутреннюю связь между элементами $ u_N $ и $ u_k $. 
+
+Изучим поведение нулевого состояния равновесия системы \eqref{system1}, \eqref{system2} вблизи критических значений $\alpha=\alpha_u$ для различных значений $\gamma$ при $k=1$. Величина $\alpha_u$ рассчитывается по формуле
+\begin{equation}\label{alpha_div}
+    \alpha_u = \frac{ \sqrt{-\gamma} \, \sh \delta_u }{ \ch\delta_u x_k },
+\end{equation}
+где $ \delta_u = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma}}{2N} $, а $ x_k = \dfrac{1}{N} \left( k - \dfrac{1}{2} \right) $. Схематическая визуализация критических значений $\alpha$ и $\gamma$, а также график функции $\alpha_u(\gamma)$ показаны на рис. 1. Кривая $ \alpha_u $, соответствующая случаю дивергентной потери устойчивости нулевого состояния равновесия, показана синим цветом, а кривая $ \alpha_c $, соответствующая случаю колебательной потери устойчивости нулевого решения, показана красным цветом. Кривые $\alpha_u$ и $\alpha_c$ пересекаются в точке $B$ с координатами $(\gamma_*, \alpha_*)$, где $ \gamma_* > 0 $ и $ \alpha_* < 0 $. Так, в случае $k=1 \; (x_0 = 0)$ значение $\gamma_* \approx 4.116$, а $\alpha_* \approx -1.82$.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.4]{x0=0,00.png} &
+\includegraphics[scale=0.45]{alpha_u__x0=0,00.png} \\
+\ а) визуализация критических значений $\alpha$ и $\gamma$ & б) график функции $\alpha_u(\gamma)$ \\
+\end{tabular}
+\caption{Схематическая визуализация критических зависимостей в случае $k=1 \; (x_0=0)$}
+\end{figure}
+
+\noindent Кривые $\alpha_u$ и $\alpha_c$ в данном случае являются важнейшими элементами построения областей значений параметров $(\alpha, \gamma)$, определяющих устойчивость нулевого состояния равновесия системы \eqref{system1}, \eqref{system2}. Так область $S$ соответствует случаю устойчивого нулевого решения, $U$ -- случаю появления двух симметричных состояний равновесия, а в области $C$ наблюдается наличие цикла вблизи неустойчивого нулевого решения. Отметим, что все результаты локальны и получены в некоторой окрестности нулевого состояния равновесия и достаточно малой окрестности критических кривых.
+
+С помощью предельного перехода $N \rightarrow \infty$, систему дифференциальных уравнений \eqref{system1}, \eqref{system2} можно свести к непрерывной краевой задаче
+
+\begin{equation}\label{problem1}
+\dot{u} = u'' + \gamma u - u^3,
+\end{equation}
+\begin{equation}\label{problem2}
+u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t).
+\end{equation}
+Здесь функция $ u(x, t)$ является гладкой при $t\ge 0$ и $x\in[0,1]$, а величина $ x_0 \in [0, 1) $ вместо индекса $k$, определяет отклонение во втором краевом условии.  В нашем случае, поскольку величина $k=1$, значение $x_0 = 0$.
+
+С помощью вспомогательной функции $v(x, t)$ сведем задачу \eqref{problem1}, \eqref{problem2} к следующей системе с краевыми условиями:
+
+\begin{equation}\label{vsystem1}
+ \begin{cases}
+   u' = v
+   \\
+   v' = -\gamma u + u^3
+ \end{cases},
+\end{equation}
+\begin{equation}\label{vsystem2}
+u(0) \, = a, \quad v(0) \, = 0,
+\end{equation}
+где $ a $ --- действительное число. По значению $a$ в точке $0$ будем находить значение нечетной скалярной функции 
+
+\begin{equation}\label{fa_func}
+F(a) = v_*(1) - \alpha u_*(x_0),
+\end{equation}
+где $(u_*(x), v_*(x))^T$ -- решение задачи Коши вида \eqref{vsystem1}, \eqref{vsystem2}. Отметим, что корни $a_*$ уравнения
+
+\begin{equation}\label{f_equation}
+F(a) = 0
+\end{equation} 
+соответствуют состояниям равновесия системы \eqref{problem1}, \eqref{problem2}. Другими словами, для того, чтобы исследовать устойчивость нулевого решения краевой задачи \eqref{problem1}, \eqref{problem2}, а также фазовые перестройки, проходящие в его малой окрестности, достаточно изучить поведение функции $F(a)$.
+
+Локальный анализ поведения системы \eqref{system1}, \eqref{system2} в окрестности нулевого решения для $k=1 \; (x_0=0)$ и $\widetilde{\gamma} \approx 4.039$ позволил численно доказать следующие теоремы.
+
+\begin{thm}
+Пусть $\varepsilon=\alpha-\alpha_u$. Тогда для любого $\gamma < \widetilde{\gamma}$ существует $\varepsilon_0$ такое, что для $\varepsilon \in (0,\varepsilon_0]$ система \eqref{system1}, \eqref{system2} имеет в окрестности нуля два пространственно неоднородных устойчивых режима.
+\end{thm}
+\begin{thm}
+Пусть $\varepsilon=\alpha-\alpha_u$. Тогда для любого $ \widetilde{\gamma} < \gamma < \gamma_* $ существует $\varepsilon_0$ такое, что для $\varepsilon \in (0,\varepsilon_0]$ система \eqref{system1}, \eqref{system2} имеет в окрестности нуля два пространственно неоднородных неустойчивых режима.
+\end{thm}
+
+При изменении параметра $\alpha$ вблизи критических значений $\alpha_u$, для любого $\gamma$ такого, что $\gamma < \widetilde{\gamma}$ наблюдается один и тот же сценарий поведения функции $F(a)$. Для определенности возьмем $ \gamma = -2.0 $ и начнем менять параметр $\alpha$ вблизи критического значения $\alpha_u$. Численный анализ поведения функции $F(a)$ позволяет получить следующую последовательность фазовых перестроек для нулевого состояния равновесия для системы \eqref{problem1}, \eqref{problem2}:
+
+\begin{enumerate}
+\item При $\alpha < \alpha_u$, $\alpha_u \approx 2.737$, где  уравнение \eqref{f_equation} имеет единственный нулевой корень. Другими словами, нулевое состояние равновесия краевой задачи \eqref{problem1}, \eqref{problem2} будет устойчивым. График функции $F(a)$ для данного случая при $a>0$ изображен на рис. 2. 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{Fa_gamma=-2,0_alpha=2,5.png}
+\caption{График функции $ F(a) $ для $ \alpha=2.5 $ и $\gamma=-2.0$}
+\end{figure}
+
+\item При переходе через критическое значение $\alpha_u$, для всех $\alpha > \alpha_u$ уравнение \eqref{f_equation} имеет пару симметричных относительно нуля корней $a_0>0$ и $\overline{a_0}<0$. Это означает, что от нулевого состояния равновесия краевой задачи \eqref{problem1}, \eqref{problem2}, ответвляется пара устойчивых симметричных состояний равновесия, в результате чего нуль теряет свою устойчивость. Графики функций $F(a)$ для $\alpha = 2.9$ при $a>0$ и $u(x)$ для $a_0>0$ показаны на рис. 3. 
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{Fa_gamma=-2,0_alpha=2,9.png} &
+\includegraphics[scale=0.45]{u(x)_gamma=-2,0_alpha=2,9_a=0,2096.png} \\
+\ а) график функции $ F(a) $ & б) график функции $u(x)$ для $a^*\approx 0.21$ \\
+\end{tabular}
+\caption{Графики функций $F(a)$ и $u(x)$ для $ \alpha=2.9 $ и $\gamma=-2.0$}
+\end{figure}
+
+\end{enumerate}
+
+Полученный сценарий поведения функции $F(a)$ верен для любых $\gamma < \widetilde{\gamma}$ и $\alpha > \alpha_c$. Отличия от рассмотренного случая состоят лишь в числовых значениях параметра $\alpha_u$.
+
+\newpage
+
+При изменении параметра $\alpha$ вблизи критических значений $\alpha_u$, для любого $\gamma$ такого, что $\widetilde{\gamma} < \gamma < \gamma_*$ наблюдается один и тот же сценарий поведения функции $F(a)$. Для определенности возьмем $ \gamma = -4.1 $ и начнем менять параметр $\alpha$ вблизи критического значения $\alpha_u$. Численный анализ поведения функции $F(a)$ позволяет получить следующую последовательность фазовых перестроек для нулевого состояния равновесия для системы \eqref{problem1}, \eqref{problem2}:
+
+\begin{enumerate}
+\item При $\alpha<\alpha_1$, где $\alpha_1 \approx -1.823$, уравнение \eqref{f_equation} имеет единственный нулевой корень. Другими словами, нулевое состояние равновесия краевой задачи \eqref{problem1}, \eqref{problem2} будет устойчивым. График функции $F(a)$ для данного случая при $a>0$ изображен на рис. 4а.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{Fa_gamma=4,1_alpha=-1,83.png} &
+\includegraphics[scale=0.45]{Fa_gamma=4,1_alpha=-1,823.png} \\
+\ а) $ \alpha<\alpha_1 $ & б) $ \alpha = \alpha_1 $ \\
+\end{tabular}
+\caption{График функции $F(a)$ для различных значений $\alpha$}
+\end{figure}
+
+\item При значении $\alpha = \alpha_1$ функция $F(a)$ будет касаться оси абсцисс в точках $a_0>0$ и $\overline{a_0}<0$, симметричных относительно нуля. График функции $F(a)$ для данного случая при $a>0$ изображен на рис. 4б.
+
+\item В малой окрестности критического значения $\alpha_u \approx -1.82$, при $\alpha_1<\alpha<\alpha_2$, где $\alpha_2 \approx -1.81$, уравнение \eqref{f_equation} будет иметь две пары симметричных относительно нуля корней $a_{02}>a_{01}>0$ и $\overline{a_{02}}<\overline{a_{01}}<0$. Это означает, что в окрестности устойчивого нулевого состояния равновесия краевой задачи \eqref{problem1}, \eqref{problem2} рождается пара неустойчивых и пара устойчивых симметричных состояний равновесия, соответствующих парам корней $a_{01}$, $\overline{a_{01}}$ и $a_{02}$, $\overline{a_{02}}$. Отметим, что с ростом значения $\alpha$, значения $a_{01}$ и $\overline{a_{01}}$ будут приближаться к нулю, а $a_{02}$ и $\overline{a_{02}}$ --- отдаляться от него. График функции $F(a)$ для $\alpha=-1.821$ при $a>0$ показан на рис. 5. Графики функции $u(x)$ для $a_{02}>a_{01}>0$ показаны на рис. 6.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.5]{Fa_gamma=4,1_alpha=-1,821.png}
+\caption{График функции $ F(a) $ для $ \gamma=4.1 $ и $\alpha=-1.821$}
+\end{figure}
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{u(x)_gamma=4,1_alpha=-1,821_a=0,275.png} &
+\includegraphics[scale=0.45]{u(x)_gamma=4,1_alpha=-1,821_a=1,006.png} \\
+\ а) $ \alpha^*_1 \approx 0.275 $ & б) $ \alpha^*_2 \approx 1.006 $ \\
+\end{tabular}
+\caption{График функций $u(x)$}
+\end{figure}
+
+\item При $\alpha = \alpha_2$ корни уравнения \eqref{f_equation} $a_{01}$ и $\overline{a_{01}}$ сливаются с нулем. Другими словами, пара неустойчивых симметричных состояний равновесия сливается с нулевым решением краевой задачи \eqref{problem1}, \eqref{problem2}, тем самым отбирая у него устойчивость.
+
+\item При $\alpha > \alpha_2$ уравнение \eqref{f_equation} имеет пару симметричных относительно нуля корней $a_{02}>0$ и $\overline{a_{02}}<0$. Это означает в окрестности неустойчивого нулевого решения краевой задачи \eqref{problem1}, \eqref{problem2} имеется пара устойчивых состояний равновесия. Графики функций $F(a)$ для $\alpha = -1.81$ и $u(x)$ для $a_{02}>0$ показаны на рис. 7.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{Fa_gamma=4,1_alpha=-1,81.png} &
+\includegraphics[scale=0.45]{u(x)_gamma=4,1_alpha=-1,81_a=1,161.png} \\
+\ а) график функции $ F(a) $ & б) график функции $u(x)$ для $a^*\approx 1.161$ \\
+\end{tabular}
+\caption{Графики функций $F(a)$ и $u(x)$ для $ \alpha=-1.81 $ и $\gamma=4.1$}
+\end{figure}
+
+\end{enumerate}
+
+Полученный сценарий поведения функции $F(a)$ верен для любых $\widetilde{\gamma} < \gamma < \gamma_*$ и $\alpha > \alpha_c$. Отличия от рассмотренного случая состоят лишь в числовых значениях параметра $\alpha_u$. Начиная со значения $\gamma > \gamma_*$ фазовые перестройки будут происходить с неустойчивым нулевым состоянием равновесия краевой задачи \eqref{problem1}, \eqref{problem2}.
+
+Вместе с приведенным выше анализом фазовых перестроек, численно можно доказать следующие теоремы.
+
+\begin{thm}
+Пусть $\gamma < \widetilde{\gamma}$. Тогда на плоскости параметров $(\alpha, \gamma)$, при переходе через кривую $\alpha_u(\gamma)$ от нулевого решения краевой задачи \eqref{problem1}, \eqref{problem2} ответвляются два устойчивых симметричных состояния равновесия.
+\end{thm}
+\begin{thm}
+Пусть $\widetilde{\gamma} < \gamma < \gamma_*$. Тогда на плоскости параметров $(\alpha, \gamma)$, при переходе через кривую $\alpha_u(\gamma)$ нулевое решение краевой задачи \eqref{problem1}, \eqref{problem2} грубо теряет свою устойчивость: к нулевому состоянию равновесия равномерно подходит пара неустойчивых состояний равновесия и отбирает у него устойчивость.
+\end{thm}
+
+\end{document}

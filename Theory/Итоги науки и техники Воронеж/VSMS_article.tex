@@ -1,0 +1,525 @@
+\documentclass{ITOGI2017}
+
+ \currentyear{2020}
+ \currentvolume{999}
+
+
+\usepackage[russian]{babel}
+\usepackage[cp1251]{inputenc}
+
+\usepackage{graphicx}
+\usepackage{caption}
+
+\newtheorem{thm}{Теорема}[section]
+\newtheorem{lm}{Лемма}[section]
+
+\begin{document}
+
+\title[]{Устойчивые колебательные решения в цепочках \\
+с диффузионным взаимодействием \\
+и дополнительной внутренней связью}
+
+\author[Ивановский Леонид Игоревич]{Л. И. Ивановский}
+\address{Ярославский государственный университет им. П.Г. Демидова}
+\email{leon19unknown@gmail.com}
+\thanks{Работа выполнена при финансовой поддержке РФФИ (проект \No\ 18-29-10055).}
+
+\keywords{цепочка дифференциальных уравнений, нулевое состояние равновесия, потеря устойчивости, бифуркации}
+
+\subjclass{00X00, 11Y11}
+
+\UDC{000.00.00, 111.11}
+
+\begin{abstract}
+Работа посвящена динамике цепочки дифференциальных уравнений с диффузионным взаимодействием и дополнительной линейной внутренней связью. Актуальность исследований такой системы обусловлена тем, что незначительное изменение коэффициента дополнительной связи позволяет получить сложные сценарии поведения устойчивых состояний равновесия. Для рассматриваемой системы были найдены критические зависимости, при которых нулевое состояние равновесия теряет свою устойчивость с появлением двух пространственно неоднородных состояний в одном случае и цикла в другом. При значениях параметров близких к критическим были получены асимптотические формулы для режимов, ответвляющихся от нулевого решения.
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+
+\section{Постановка задачи}
+
+Рассмотрим систему обыкновенных дифференциальных уравнений с диффузионным взаимодействием
+\begin{equation}\label{original_system}
+\dot{u}_j =  N^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \qquad j = \overline{1, N}, 
+\end{equation}
+которую дополним следующими условиями на границах:
+\begin{equation}\label{original_conditions}
+u_0 = u_1, \; u_{N+1} = u_N + \dfrac{\alpha}{N}u_k, \qquad 1 \leqslant k < N.
+\end{equation}
+дающими дополнительную линейную внутреннюю связь. Такие системы часто изучаются как модели связанных осцилляторов (см. например \cite{GKR_khaos}, \cite{GKR_relax}), в которых взаимодействие происходит не только между соседними элементами, но и с каким-нибудь внутренним элементом цепочки. Для системы \eqref{original_system}, \eqref{original_conditions} $ u_j = u_j(t) $ гладкие функции при $ t \geqslant 0 $, параметры $ \alpha, \gamma $ -- действительные числа, а индекс $ k \in \mathbb{N} $ определяет дополнительную внутреннюю связь между элементами $ u_N $  и $ u_k $. На рис. 1 дана иллюстрация взаимодействия функций $ u_j $.
+\newpage
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.57]{1_u_j}
+\caption{Схематическая визуализация взаимодействия между собой функций $ u_j $}
+\label{u_j_interaction}
+\end{figure}
+
+Система \eqref{original_system}, \eqref{original_conditions} очевидным образом имеет однородное нулевое решение $ u_j(t) \equiv 0 $. Представляет интерес вопрос устойчивости этого решения и режимов, ответвляющихся от него при критических значениях параметров. Можно выделить два способа потери устойчивости нулевого состояния равновесия системы \eqref{original_system}, \eqref{original_conditions}. В первом случае через мнимую ось переходит нулевое собственное число, а во втором – пара комплексных собственных чисел. 
+
+Предельный переход $N \rightarrow \infty$ для системы \eqref{original_system}, \eqref{original_conditions} позволяет перейти от точечных функций $u_j(t)$ к непрерывной гладкой функции $ u(x, t)$ при $ t \geqslant 0 $ и $ x \in [0,1] $, моделирующей краевую задачу
+
+\begin{equation}\label{boundary_problem}
+\dot{u} = u'' + \gamma u - u^3,
+\end{equation}
+с условиями на границах вида
+\begin{equation}\label{boundary_conditions}
+u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t).
+\end{equation}
+Величина $ x_0 \in [0, 1) $ определяет линейное отклонение во втором краевом условии. При достаточно большом количестве уравнений $ N $ поведение режимов краевой задачи \eqref{boundary_problem}, \eqref{boundary_conditions} совпадает с поведением состояний равновесия цепочки уравнений \eqref{original_system}, \eqref{original_conditions}.
+
+Краевая задача \eqref{boundary_problem}, \eqref{boundary_conditions}, как и соответствующая ей система \eqref{original_system}, \eqref{original_conditions}, имеет однородное нулевое решение $ u(t, x) \equiv 0 $. В отличие от приведенной ранее цепочки уравнений, нельзя утверждать, что функция $u$ и $\dot{u}$, результат применения оператора уравнения \eqref{boundary_problem} с условиями \eqref{boundary_conditions}, принадлежат одному функциональному пространству. В связи с этим, задача исследования состояла в изучении характера потери устойчивости нулевого решения системы \eqref{original_system}, \eqref{original_conditions}, т.е. в поиске критических значений параметров и асимптотических формул для режимов, ответвляющихся от нулевого состояния равновесия.
+
+\section{Спектральные свойства линеаризованной системы}
+
+\subsection{Построение характеристического уравнения}
+
+Рассмотрим линеаризованную в нуле систему дифференциальных уравнений \eqref{original_system}, \eqref{original_conditions}:
+\begin{equation}\label{linearized_system}
+\dot{u}_j =  N^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j - u_j^3, \qquad j = \overline{1, N}, 
+\end{equation}
+\begin{equation}\label{linearized_conditions}
+u_0 = u_1, \; u_{N+1} = u_N + \dfrac{\alpha}{N}u_k, \qquad 1 \leqslant k < N.
+\end{equation}
+Для определения условий устойчивости нулевого решения выполним замену
+\begin{equation}\label{euler_replace}
+u_j(t) = e^{\lambda t}\ch \delta x_j 
+\end{equation}
+где $ x_j = -\dfrac{1}{2N} + \dfrac{j}{N} $, $ \lambda $ –- собственное значение матрицы линеаризованной системы, а коэффициент $ \delta $ определяет собственный вектор соответствующего собственного числа матрицы системы \eqref{linearized_system} с условиями \eqref{linearized_conditions}.
+При подстановке замены \eqref{euler_replace} в первое уравнение, для $ j=1 $
+$$ \lambda \ch \dfrac{\delta}{2N} = (-N^2 + \gamma) \ch \dfrac{\delta}{2N} + N^2 \ch \dfrac{3\delta}{2N} $$
+и решении этого уравнения, можно вывести следующую формулу для коэффициента $ \delta $:
+$$ \delta = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma+\lambda}}{2N}. $$
+Такой же результат можно получить и для всех уравнений системы \eqref{linearized_system}, \eqref{linearized_conditions} кроме последнего. При подстановке замены \eqref{euler_replace} в последнее уравнение, для $ j=N $
+$$
+(\lambda-\gamma)  \ch \dfrac{\delta}{N} \left( N-\dfrac{1}{2} \right) = N^2 \left( \ch \dfrac{\delta}{N} \left( N-\dfrac{3}{2} \right) - \ch \dfrac{\delta}{N} \left( N-\dfrac{1}{2} \right) \right) + \\ + \alpha N \ch \dfrac{\delta}{N} \left( k-\dfrac{1}{2} \right), $$
+можно получить выражение для параметра $ \alpha $:
+\begin{equation}\label{alpha_cr}
+    \alpha = \dfrac{\sqrt{-\gamma+\lambda} \sh \delta}{\ch \delta x_k},
+\end{equation}
+где $ x_k = \dfrac{1}{N} \left( k - \dfrac{1}{2} \right) $.
+
+Для изучения потери устойчивости нулевого решения определим при каких критических значениях параметра $ \alpha $ собственные значения выходят на мнимую ось. Рассмотрим случаи нулевого и чисто мнимого значения $ \lambda $. Подстановка $ \lambda=0 $ в выражение \eqref{alpha_cr} приводит к зависимости
+\begin{equation}\label{alpha_u}
+    \alpha_u = \frac{ \sqrt{-\gamma} \, \sh \delta_u }{ \ch\delta_u x_k },
+\end{equation}
+где $ \delta_u = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma}}{2N} $. Подстановка $ \lambda = i \omega $, где $ \omega \in \mathbb{R} $, позволяет перейти от выражения \eqref{alpha_cr} при фиксированном $ \gamma $ и $ x_k = \dfrac{1}{N} \left( k - \dfrac{1}{2} \right) $ к уравнению относительно $ \alpha_c $ и $ \omega $
+\begin{equation}\label{alpha_c}
+    \alpha_c = \frac{ \sqrt{-\gamma + i \omega} \, \sh \delta_c }{ \ch\delta_c x_k },
+\end{equation}
+где $ \delta_c = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma + i \omega}}{2N} $. Выделяя вещественную и мнимую части в выражении \eqref{alpha_c} и численно решая полученную систему, находим значения $ \omega $ и $ \alpha_c $ такие, чтобы $ \alpha_c $ было минимальным по модулю.
+Исходя из ранее полученных формул, справедлива следующая лемма.
+
+\begin{lm}
+Для линеаризованной в нуле системы дифференциальных уравнений \eqref{boundary_problem}, \eqref{boundary_conditions} нулевое состояние равновесия теряет свою устойчивость для значений, параметров $\alpha$ и $\gamma$, связанных формулами \eqref{alpha_u} или \eqref{alpha_c}.
+\end{lm}
+
+Отметим, что для линеаризованной краевой задачи \eqref{boundary_problem}, \eqref{boundary_conditions} 
+$$ \dot u = u'' + \gamma u, $$	
+$$ u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(0, t) $$
+при подстановке замены
+$$ u(x, t) = e^{\lambda t} \ch \sqrt{-\gamma + \lambda}\,x $$ 
+можно получить формулу для параметра $ \alpha $:
+\begin{equation}\label{alpha_lim}
+    \alpha = \frac{ \sqrt{-\gamma+\lambda} \, \sh \sqrt{-\gamma+\lambda} }{ \ch \sqrt{-\gamma+\lambda} x_0 }.
+\end{equation}
+Тогда подстановка $\lambda = 0$ и $\lambda = i \omega$, где $ \omega \in \mathbb{R} $, позволяет получить следующие критические зависимости:
+$$ \alpha_u = \frac{ \sqrt{-\gamma} \, \sh \sqrt{-\gamma} }{ \ch \sqrt{-\gamma} x_0 }, $$
+\begin{equation}\label{alpha_c_lim}
+    \alpha_c = \frac{ \sqrt{-\gamma + i \omega} \, \sh \sqrt{-\gamma + i \omega} }{ \ch \sqrt{-\gamma + i \omega} x_0 }.
+\end{equation}
+Для выражения \eqref{alpha_c_lim} значения $\omega$ и $\alpha_c$ таковы, что $\alpha_c$ минимально по модулю.
+
+\subsection{Нахождение чисто мнимого собственного числа}
+
+В случае чисто мнимого собственного значения $ \lambda = i \omega $, критические значения параметра $ \alpha_c $, рассчитываемые по формуле \eqref{alpha_c}, зависят от мнимой части $ \omega $, которая изначально неизвестна. Другими словами, для вычисления $ \alpha_c $, требуется предварительно определить конкретный вид собственных значений $ \lambda $.
+
+В связи с упрощенным видом формулы \eqref{alpha_c_lim} для критической зависимости $\alpha_c$, подсчет значений $\omega$ осуществлялся для линеаризованной краевой задачи \eqref{boundary_problem}, \eqref{boundary_conditions}. Расчет мнимых частей $ \omega \in \mathbb{R} $ осуществлялся численно, в три этапа:
+
+\begin{enumerate}
+\item Вычисление $ \omega=\omega_{0,0} $ для $ \gamma = 0 $ и $ x_0 = 0 $.
+\item Расчет значений функции $ \omega_0(x_0) $, величин $\omega$ для $ \gamma = 0 $ и $ x_0 \in [0, 1) $.
+\item Построение функции $ \omega(\gamma, x_0) $ для произвольных значений $ \gamma $ и $ x_0 $.
+\end{enumerate}
+Разберем каждый из этапов алгоритма более детально.
+
+Для фиксированных значений параметров $ \gamma = 0 $ и $ x_0 = 0 $, подстановка $\lambda = i \omega_{0,0}$ в выражение \eqref{alpha_c_lim} приводит к зависимости
+\begin{equation}\label{stage1}
+\sqrt{i\omega_{0,0}} \; \mbox{sh} \sqrt{i\omega_{0,0}} \, = \, \alpha_c
+\end{equation}
+Поочередно выделяя из \eqref{stage1} действительную и мнимую части, можно получить систему трансцендетных уравнений
+$$
+ \begin{cases}
+   \tg \, \sqrt{ \dfrac{\omega_{0,0}}{2} } + \th \, \sqrt{ \dfrac{\omega_{0,0}}{2} } = 0 
+   \\
+   \sqrt{ \dfrac{\omega_{0,0}}{2} } \left( \sh \sqrt{ \dfrac{\omega_{0,0}}{2} } \cos \sqrt{ \dfrac{\omega_{0,0}}{2} } - \ch \sqrt{ \dfrac{\omega_{0,0}}{2} } \sin \sqrt{ \dfrac{\omega_{0,0}}{2} } \right) = \alpha_c
+ \end{cases},
+$$
+однозначно определяющую параметр $ \alpha_c $ и значение $ \omega_{0,0} $ мнимой части собственного значения $ \lambda $, для $ \gamma = 0 $ и $ x_0 = 0 $.
+
+Величина $ \omega_{0,0} $ используется в качестве ординаты начальной точки для построения функции $\omega_0(x_0)$, зависимости мнимой части $ \omega $ от различных значений отклонения $ x_0 \in [0, 1) $ для $ \gamma=0 $. Подстановка $\lambda = i \omega_0$ в выражение \eqref{alpha_c_lim}  приводит к зависимости
+\begin{equation}\label{stage2}
+\alpha_c = \frac{\sqrt{i\omega} \; \mbox{sh} \sqrt{i\omega}}{\ch \sqrt{i\omega} x_0}.
+\end{equation}
+Поочередно выделяя из \eqref{stage2} действительную и мнимую части, можно получить систему трансцендетных уравнений
+$$
+ \begin{cases}
+   \dfrac{\sh y \cos y + \ch y \sin y}{\sh y \cos y - \ch y \sin y} - \tg y x_0 \th y x_0 = 0 \\ 
+   y \sh y \cos y - y \ch y \sin y - \alpha_c \ch y x_0 \cos y x_0 = 0
+ \end{cases},
+$$
+для которой $ y = \sqrt{ \dfrac{\omega_0}{2} } $. Численно решая данную систему методом дихотомии (см. \cite{Amosov}, \cite{Volkov}), с пошаговым смещением на величину $ \Delta x_0 \ll 1 $ в сторону увеличения параметра $ x_0 $, можно получить значения функции $ \omega_0(x_0) $, величины $\omega$ для $ \gamma = 0 $ и $ x_0 \in [0, 1) $.
+
+Процесс построения функции $ \omega(\gamma, x_0) $ для произвольных $ \gamma $ и $ x_0 $ схож с выполнением предыдущего этапа алгоритма. Осуществляя переход к полярной системе координат, выражение \eqref{alpha_c_lim} сводится к системе трансцендентных уравнений
+$$
+ \begin{cases}
+   \chi \sh \chi \cos \theta - \theta \ch \chi \sin \theta = \alpha_c \ch \chi x_0 \cos \theta x_0 \\ 
+    \theta \sh \chi \cos \theta + \chi \ch \chi \sin \theta = \alpha_c \sh \chi x_0 \sin \theta x_0
+ \end{cases},
+$$
+для которой коэффициенты $ \chi $ и $ \theta $ принимают вид 
+$$ \chi = \sqrt[4]{\gamma^2 + \omega^2} \cos \left( \dfrac{1}{2} \arctg \left( -\dfrac{\omega}{\gamma} \right) \right), $$
+$$ \theta = \sqrt[4]{\gamma^2 + \omega^2} \sin \left( \dfrac{1}{2} \arctg \left( -\dfrac{\omega}{\gamma} \right) \right). $$ 
+Разделив второе уравнение этой системы на первое, получаем выражение, не зависящее от $ \alpha_c $:
+$$
+\dfrac{\theta \sh \chi \cos \theta + \chi \ch \chi \sin \theta}{\chi \sh \chi \cos \theta - \theta \ch \chi \sin \theta} - \th \chi x_0 \tg \theta x_0 = 0.
+$$
+Численно решая его методом дихотомии (см. \cite{Amosov}, \cite{Volkov}) с пошаговым смещением на величину $ \Delta \gamma \ll 1 $ для фиксированного $ x_0 $, можно построить зависимость $ \omega(\gamma, x_0) $ для произвольно заданного $ x_0 \in [0, 1) $. График функции $ \omega(\gamma, x_0) $ для $ x_0=0.33 $, показан на рис. 2.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.52]{2_omegas}
+\caption{График функции $ \omega(\gamma) $ для $ x_0=0.33 $}
+\end{figure}
+
+\subsection{Численный анализ критических зависимостей}
+
+Для системы \eqref{linearized_system}, \eqref{linearized_conditions} изучим динамику поведения критических зависимостей $ \alpha_u(\gamma) $ и $ \alpha_c(\gamma) $ для различных значений $ k $, где $ k $ –- номер узла, с которым дополнительно связано последнее уравнение. В нашем случае количество уравнений считалось $ N=50 $. Отметим, что увеличение $ N $ слабо сказывается на поведении функций $ \alpha_u(\gamma) $ и $ \alpha_c(\gamma) $.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.52]{3a_scheme_k_0117} &
+\includegraphics[scale=0.51]{3b_scheme_k_1823} \\
+\ а) $ 1 \leqslant k \leqslant 17 $ & б) $ 18 \leqslant k \leqslant 23 $ \\
+\end{tabular}
+\caption{Схематическая визуализация критических зависимостей}
+\end{figure}
+
+На рис. 3а приведена схематическая визуализация критических зависимостей $ \alpha_u(\gamma) $ и $ \alpha_c(\gamma) $, рассчитываемых по формулам \eqref{alpha_u} и \eqref{alpha_c} соответственно, для индекса $ 1 \leqslant k \leqslant 17 $. Здесь кривая $ \alpha_u $ показана синим цветом, а кривая $ \alpha_c $ изображена красным цветом. Как показано на рис. 3а, кривые $\alpha_u$ и $\alpha_c$ пересекаются в точке $B$ с координатами $(\gamma_*, \alpha_*)$, где $ \gamma_* > 0 $ и $ \alpha_* < 0 $. Согласно численным результатам, с увеличением индекса $k$ значение $\alpha_*$ будет уменьшаться, а $\gamma_*$ –- увеличиваться.
+
+\noindent Начиная с индекса $ k=18 $, появляется дополнительная критическая зависимость $\alpha_f(\gamma)$, рассчитываемая по формуле \eqref{alpha_c}. На рис. 3б показана схематическая визуализация критических зависимостей $ \alpha_u(\gamma),\, \alpha_f(\gamma) $ и $ \alpha_c(\gamma) $, рассчитываемых по формулам \eqref{alpha_u} и \eqref{alpha_c} соответственно, для индекса $ 18 \leqslant k \leqslant 23 $. Здесь кривая $\alpha_f$ показана зеленым цветом. Она берет свое начало в точке $ F $, локального минимума функции $\alpha_u(\gamma)$ с координатами $ (\overline{\gamma}, \overline{\alpha}) $, где $ \overline{\alpha} < 0 $ и $ 0 < \overline{\gamma} < \gamma_* $ и сливается с кривой $\alpha_c$ в точке $B$. Согласно численным результатам, с увеличением индекса $k$ значение $\overline{\alpha}$  будет уменьшаться, а $\overline{\gamma}$ –- увеличиваться.
+
+Кривые $ \alpha_u, \; \alpha_c $ и $\alpha_f$ являются важнейшими элементами построения областей значений параметров $(\alpha, \gamma)$, определяющих устойчивость нулевого состояния равновесия. Так область $S$ соответствует случаю устойчивого нулевого решения, $U$ -- случаю появления двух симметричных состояний равновесия, а в области $C$ наблюдается наличие цикла вблизи неустойчивого нулевого решения. Отметим, что все результаты локальны и получены в некоторой окрестности нулевого состояния равновесия и достаточно малой окрестности критических кривых.
+
+Вертикальная асимптота $\gamma=l$, для функции $\alpha_u(\gamma)$, располагающаяся правее точки $B$ для $ 1 \leqslant k \leqslant 23 $, начиная с индекса $ k=24 $ будет пересекаться с кривой $\alpha_c$. Отметим, что для функции $\alpha_u(\gamma)$ и асимптоты $\gamma=l$, где $l>0$ и минимально по модулю, будут справедливы следующие предельные равенства:
+\begin{equation}\label{lim_alpha_up}
+\lim_{\gamma\to l-0} \alpha_u(\gamma) = +\infty, \qquad \lim_{\gamma\to l+0} \alpha_u(\gamma) = -\infty.
+\end{equation}
+Согласно численным результатам, с увеличением индекса $k$ значение $l$ будет приближаться к нулю справа. 
+
+Начиная с индекса $ k=25 $, помимо вертикальной асимптоты $\gamma=l$ кривую $\alpha_c$ будет также пересекать и ветвь гиперболической функции $\alpha_u(\gamma)$. Отметим, что для функции $\alpha_u(\gamma)$ и асимптоты $\gamma=l$ также будут справедливы предельные равенства \eqref{lim_alpha_up}. Критические зависимости $\alpha_u(\gamma)$, $\alpha_c(\gamma)$ и $ \alpha_f(\gamma) $ для значений индекса $ k=24 $ и $ k=25 $ схематично отображены на рис. 4.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.51]{4a_scheme_k_24} &
+\includegraphics[scale=0.51]{4b_scheme_k_25} \\
+\ а) $k=24$ & б) $k=25$ \\
+\end{tabular}
+\caption{Схематическая визуализация кривых $ \alpha_u,\, \alpha_f $ и $ \alpha_c $}
+\end{figure} 
+
+Схематическая визуализация критических зависимостей параметров $\alpha_u(\gamma)$, $\alpha_c(\gamma)$ для индекса $ 26 \leqslant k \leqslant 32 $ показана на рис. 5а. Здесь, как и для случая $ 1 \leqslant k \leqslant 17 $, кривая $\alpha_f$ отсутствует. Начиная с $k=26$ и вплоть до $k=50$, для функции $\alpha_u(\gamma)$ и асимптоты $\gamma=l$ будут справедливы следующие предельные равенства:
+\begin{equation}\label{lim_alpha_down}
+    \lim_{\gamma\to l-0} \alpha_u(\gamma) = -\infty, \qquad \lim_{\gamma\to l+0} \alpha_u(\gamma) = +\infty.
+\end{equation}
+Схематическая визуализация критических зависимостей параметров $\alpha_u(\gamma)$, $\alpha_c(\gamma)$ и $ \alpha_f(\gamma) $ для индекса $ 33 \leqslant k \leqslant 38 $ показана на рис. 5б. Отметим, что начиная с $k=33$ и вплоть до $k=50$ вновь наблюдается наличие кривой $\alpha_f(\gamma)$.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.52]{5a_scheme_k_2632} &
+\includegraphics[scale=0.51]{5b_scheme_k_3338} \\
+\ а) $ 26 \leqslant k \leqslant 32 $ & б) $ 33 \leqslant k \leqslant 38 $ \\
+\end{tabular}
+\caption{Схематическая визуализация критических зависимостей}
+\end{figure}
+
+Начиная с индекса $ k=39 $, кривая $\alpha_c$ будет пересекаться более, чем с одной вертикальной асимптотой для функции $\alpha_u(\gamma)$. Устойчивость нулевого состояния равновесия для выделенных областей, располагающихся левее ближайшей к нулю вертикальной асимптоты, определяется по аналогии с уже разобранными случаями. Отметим также, что для всех остальных выделенных областей, нулевое состояние равновесия оказывалось неустойчивым. Графики функций $\alpha_u(\gamma)$, $\alpha_c(\gamma)$ и $\alpha_f(\gamma)$  для значений индекса $k=40$ и $k=42$ показаны на рис. 6.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.51]{6a_alphas_079} &
+\includegraphics[scale=0.51]{6b_alphas_083} \\
+\ а) $k=40$ & б) $k=42$ \\
+\end{tabular}
+\caption{Графики функций $\alpha_u(\gamma)$ и $\alpha_c(\gamma)$}
+\end{figure}
+
+Кривая $\alpha_u$ определяет верхнюю границу области $S$, отделяющую ее от области $U$, для всех значений $\gamma < \Gamma_u$. Здесь $\Gamma_u$ вычисляется по формуле
+\begin{equation}\label{gamma_u}
+\Gamma_u = 
+ \begin{cases}
+   \gamma_*,&\text{$1 \leqslant k \leqslant 17$}\\
+   \overline{\gamma},&\text{$18 \leqslant k \leqslant 25$}\\
+   \widehat{\gamma},&\text{$26 \leqslant k \leqslant 50$}
+ \end{cases}.
+\end{equation}
+Величина $\widehat{\gamma}$ является абсциссой точки $D$ пересечения кривых $ \alpha_c $ и $ \alpha_u $ такая, что $ 0<\widehat{\gamma}<l $, где $ l>0 $ –- абсцисса точек вертикальной асимптоты $ \gamma=l$ для функции $ \alpha_u(\gamma)$ (см. рис. 5).
+
+Для некоторых значений индекса $k$ верхнюю границу области $S$ определяет также и кривая $\alpha_f$, для всех $\overline{\gamma} < \gamma < \Gamma_f$. Здесь $\Gamma_f$ вычисляется по формуле
+\begin{equation}\label{gamma_f}
+\Gamma_f = 
+ \begin{cases}
+   \gamma_*,&\text{$18 \leqslant k \leqslant 24$}\\
+   \gamma_1,&\text{$k = 25$}\\
+ \end{cases},
+\end{equation}
+где $\gamma_1$ -- абсцисса точки $P_1$ пересечения кривых $\alpha_u$ и $\alpha_f$ такая, что $l<\gamma_1<\gamma_*$ (см. рис. 4б). 
+
+Для случая $k=25$ кривая $\alpha_u$ определяет также и нижнюю границу области $S$, отделяющую ее от области $U$, для всех значений $\gamma_1 \geqslant \gamma \geqslant \gamma_2$, где $\gamma_2$ -- абсцисса точки $P_2$ пересечения кривых $\alpha_u$ и $\alpha_c$ такая, что  $l<\gamma_2<\gamma_*$ (см. рис. 4б). Следует отметить, что $\gamma_1$ и $\gamma_2$ являются корнями трансцендентного уравнения
+\begin{equation}\label{trascendent_equation}
+\frac{ \sqrt{-\gamma} \, \sh \delta_u }{ \ch\delta_u x_{25} } - \frac{ \sqrt{-\gamma + i \omega} \, \sh \delta_c }{ \ch\delta_c x_{25} } = 0,
+\end{equation}
+удовлетворяющими условию вида
+\begin{equation}\label{transcendent_condition}
+\gamma_* > \gamma_1 > \gamma_2 > l.
+\end{equation}
+Кривая $\alpha_c$ определяет нижнюю границу области $S$, отделяющую ее от области $C$, для всех значений $\gamma\leqslant\Gamma_c$. Здесь $\Gamma_c$ вычисляется по формуле
+\begin{equation}\label{gamma_c}
+\Gamma_c = 
+ \begin{cases}
+   \gamma_*,&\text{$1 \leqslant k \leqslant 24$}\\
+   \gamma_2,&\text{$k = 25$}\\
+   \widehat{\gamma},&\text{$26 \leqslant k \leqslant 50$}
+ \end{cases}.
+\end{equation}
+
+Исходя из описанных результатов, можно сформулировать две леммы.
+
+\begin{lm}
+Для всех значений $\gamma \leqslant \Gamma_u$, где $\Gamma_u$ определяется выражением \eqref{gamma_u} и $\gamma_1 \geqslant \gamma \geqslant \gamma_2$, где $\gamma_1,\, \gamma_2$ являются корнями трансцендентного уравнения \eqref{trascendent_equation}, удовлетворяющими условию \eqref{transcendent_condition}, критическая зависимость $\alpha_u(\gamma)$, рассчитываемая по формуле \eqref{alpha_u}, позволяет выделить область параметров $(\gamma,\, \alpha)$ с устойчивым нулевым решением системы \eqref{linearized_system}, \eqref{linearized_conditions} и области с двумя состояниями равновесия в малой окрестности неустойчивого нулевого решения.
+\end{lm}
+\begin{lm}
+Для всех значений $\overline{\gamma} \leqslant \gamma \leqslant \Gamma_f$, где $\Gamma_f$ определяется выражением \eqref{gamma_f}, и $\gamma \leqslant \Gamma_c$, где $ \Gamma_c $ определяется выражением \eqref{gamma_c}, критические зависимости $\alpha_f(\gamma)$ и $\alpha_c(\gamma)$, рассчитываемые по формуле \eqref{alpha_c}, позволяют выделить область параметров $(\gamma,\, \alpha)$ с устойчивым нулевым решением системы \eqref{linearized_system}, \eqref{linearized_conditions} и области, для которых наблюдается наличие цикла в малой окрестности неустойчивого нулевого решения.
+\end{lm}
+
+Леммы доказываются на основе приведенного выше численного анализа линеаризованной в нуле системы \eqref{original_system}, \eqref{original_conditions}.
+
+\section{Локальный анализ поведения системы в окрестности нулевого решения}
+
+Методами малых возмущений (см. \cite{Glyzin}, \cite{Guckenheimer}) построим режим, ответвляющийся от нулевого состояния равновесия системы \eqref{original_system}, \eqref{original_conditions}. Для этого введем в рассмотрение малый параметр $\varepsilon$, который косвенно характеризует собой отклонение от нуля.
+
+В случае нулевого собственного значения $\lambda$ матрицы линеаризованной системы \eqref{original_system}, \eqref{original_conditions}, малый параметр $\varepsilon$ обозначает переход из области $S$ в область $U$ по параметру $\alpha$ для фиксированного значения $\gamma$. Здесь параметр $\varepsilon$ принимает вид
+\begin{equation}\label{eps_alpha_u}
+\varepsilon = \alpha - \alpha_u,
+\end{equation}
+где $\alpha_u$ вычисляется по формуле \eqref{alpha_u}.
+
+Воспользуемся нормальной формой, которая получается в результате разложения нулевого решения системы \eqref{original_system}, \eqref{original_conditions} по степеням малого параметра
+\begin{equation}\label{norm_form}
+	u_j = \sqrt{\varepsilon}u_{j,0} + \varepsilon u_{j,1} + \varepsilon^{\frac{3}{2}} u_{j,2} + O(\varepsilon^2), \qquad j = \overline{1, N}.
+\end{equation}
+Здесь функции $u_j=u_j(s)$ зависят от медленного времени $s=\varepsilon t$, а $u_{j,0}=\rho(s)\ch \delta_u x_j $, где $ \delta_u = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma}}{2N},\, x_j = -\dfrac{1}{2N} + \dfrac{j}{N} $. Подстановка в цепочку дифференциальных уравнений \eqref{original_system}, \eqref{original_conditions} разложения \eqref{norm_form} с учетом \eqref{eps_alpha_u} приводит к последовательно разрешимым системам для векторов $u_{j,0},\, u_{j,1}$ и $u_{j,2}$:
+$$ \dot u_{j,0} = N^2(u_{j+1,0} - 2u_{j,0} + u_{j-1,0}) + \gamma u_{j,0}, \quad j = \overline{1, N}, $$
+$$ u_{0,0} = u_{1,0}, \quad u_{N+1,0} = u_{N,0} + \dfrac{\alpha_u}{N}u_{k,0}, \qquad 1 \le k < N, $$
+$$ \dot u_{j,1} = N^2(u_{j+1,1} - 2u_{j,1} + u_{j-1,1}) + \gamma u_{j,1}, $$
+$$ u_{0,0} = u_{1,1}, \quad u_{N+1,1} = u_{N,1} + \dfrac{\alpha_u}{N}u_{k,1}, $$
+\begin{equation}\label{u2_system_u}
+	\dot u_{j,2} + \frac{\partial u_{j,0}}{\partial s} = N^2(u_{j+1,2} - 2u_{j,2} + u_{j-1,2}) + \gamma u_{j,2} - u_{j,0}^3,
+\end{equation}
+\begin{equation}\label{u2_conditions_u}
+	u_{0,2} = u_{1,2}, \quad u_{N+1,2} = u_{N,2} + \dfrac{\alpha_u}{N}u_{k,2} + u_{k,0}.
+\end{equation}
+Учитывая, что уравнение \eqref{original_system} содержит кубическое вычитаемое, и, тем самым, для функций $u_{j,1}$ система получается однородной, примем их значения нулевыми. Из условий разрешимости системы \eqref{u2_system_u}, \eqref{u2_conditions_u}, можно получить укороченное уравнение на величину $\rho$
+\begin{equation}\label{rho_equation}
+	\rho' = \phi_0 \rho + d_0 \rho^3.
+\end{equation}
+Для уравнения \eqref{rho_equation} коэффициенты $ \phi_0,\, d_0 $ выглядят следующим образом:
+\begin{equation}\label{phi0_u}
+\phi_0 = \frac{ 2 \delta_u \ch \delta_u x_k }{ \delta_u \ch \delta_u +\sh \delta_u - \alpha_u x_k \sh \delta_u x_k },
+\end{equation}
+\begin{equation}\label{d0_u}
+d_0 = \frac{ 3\delta_u^2 \sh 3\delta_u - \alpha_u \delta_u \ch 3\delta_u x_k }{ 16( \delta_u \ch \delta_u +\sh \delta_u - \alpha_u x_k \sh \delta_u x_k ) } - \frac{3}{4}.
+\end{equation}
+
+Для коэффициентов $ \phi_0,\, d_0 $, при различных индексах $k$ были построены зависимости от параметра $\gamma$. Графики функций $ \phi_0(\gamma) $ и $ d_0(\gamma) $ для значений индекса $k=17$ и $k=32$ проиллюстрированы на рис. 7.
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.51]{7a_divergent_phi0d0_033} &
+\includegraphics[scale=0.51]{7b_divergent_phi0d0_063} \\
+\ а) $k=17$ & б) $k=32$ \\
+\end{tabular}
+\caption{Графики функций $ \phi_0(\gamma) $ и $ d_0(\gamma) $}
+\end{figure}
+
+Согласно численным результатам, для всех $ \gamma < \widetilde{\Gamma} $, где $ \widetilde{\Gamma} \leqslant \Gamma_u $, коэффициент $\phi_0$ оказывался положительным, а $d_0$ -- отрицательным. Другими словами, пара неустойчивых состояний равновесия сливалась с устойчивым нулевым решением системы \eqref{original_system}, \eqref{original_conditions} и в результате дивергентной потери устойчивости образовывалась пара устойчивых состояний равновесия в окрестности неустойчивого нулевого решения. Следует отметить, что $ \widetilde{\Gamma} $ вычисляется по формуле
+\begin{equation}\label{gamma_tilde}
+\widetilde{\Gamma} = 
+ \begin{cases}
+   \widetilde{\gamma},&\text{$1 \leqslant k \leqslant 25$}\\
+   \Gamma_u,&\text{$26 \leqslant k \leqslant 50$}\\
+ \end{cases},
+\end{equation}
+где $\widetilde{\gamma}>0$ является корнем трансцендентного уравнения
+$$ \frac{ 12\delta_u^2 \sh 3\delta_u - 4 \alpha_u \delta_u \ch 3\delta_u x_k }{ 48( \delta_u \ch \delta_u +\sh \delta_u - \alpha_u x_k \sh \delta_u x_k ) } = 0. $$ 
+В случае $ \widetilde{\Gamma} < \gamma < \Gamma_u $ для индекса $1 \leqslant k \leqslant 25$, оба коэффициента $\phi_0,\, d_0$ оказывались положительными, что говорит о грубой потере устойчивости нулевого решения системы \eqref{original_system}, \eqref{original_conditions}. График функции $ d_0(\gamma) $ для значений индекса $k=1$ показан на рис. 8.
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.51]{8_d0_000}
+\caption{График функции $ d_0(\gamma) $ для $k=1$}
+\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=0.51]{9_divergent_phi0d0_049}
+\caption{Графики функций $ \phi_0(\gamma) $ и $ d_0(\gamma) $ для $k=24$}
+\end{figure}
+
+В случае $k=25$, для всех $\gamma$ таких, что $\gamma_1 \geqslant \gamma \geqslant \gamma_2$, где $\gamma_1$ и $\gamma_2$ являются корнями трансцендентного уравнения \eqref{trascendent_equation}, удовлетворяющими условию \eqref{transcendent_condition}, малый параметр считался равным $\varepsilon=\alpha_u-\alpha$. Здесь коэффициент $\phi_0$ рассчитывается по формуле \eqref{phi0_u}, но имеет противоположный знак, а коэффициент $d_0$ считается по формуле \eqref{d0_u}. Для данного случая $\phi_0$ оказывался положительным, а $d_0$ –- отрицательным. Графики функций $ \phi_0(\gamma)$ и $d_0(\gamma) $ для индекса $ k=24 $ показаны на рис. 9.
+
+При условии, что $\phi_0>0$ и $d_0<0$ уравнение \eqref{rho_equation} имеет ненулевое состояние равновесия $\phi_*=\sqrt{-\frac{\phi_0}{d_0}}$, причем $\rho$ стремится к этому состоянию равновесия при $s \rightarrow +\infty$. Подставляя в нормальную форму \eqref{norm_form} полученное значение $\rho$ получаем асимптотическое приближение для двух пространственно неоднородных устойчивых состояний равновесия исходной системы \eqref{original_system}, \eqref{original_conditions} (см. также \cite{Glyzin}, \cite{Mardsen}):
+\begin{equation}\label{u_j_div}
+u_j = \pm \sqrt{-\varepsilon \frac{\phi_0}{d_0}} \ch \delta_u x_j + O(\varepsilon).
+\end{equation}
+
+При условии, что $\phi_0>0$ и $d_0>0$ происходит обратная бифуркация типа <<вилка>>. В этом случае уравнение \eqref{rho_equation} имеет ненулевое состояние равновесия $\rho=\rho_*$, где $\phi_*=\sqrt{\frac{\phi_0}{d_0}}$. При подстановке полученного значения $\rho$ в нормальную форму \eqref{norm_form}, получаем асимптотическое приближение \eqref{u_j_div} для двух пространственно неоднородных неустойчивых состояний равновесия, стягивающиеся к нулевому решению системы \eqref{original_system}, \eqref{original_conditions} при $\varepsilon \rightarrow 0$ и отбирающие у него устойчивость (см. также \cite{Kuznetsov}, \cite{Hassard}).
+
+Вместе с приведенным выше локальным анализом системы \eqref{original_system}, \eqref{original_conditions}, это позволяет доказать следующие теоремы.
+\begin{thm}
+Пусть $\varepsilon=\alpha-\alpha_u$ для $\gamma \leqslant \widetilde{\Gamma}$, где $\widetilde{\Gamma}$ вычисляется по формуле \eqref{gamma_tilde} и $\varepsilon=\alpha_u-\alpha$ для $\gamma_1 \geqslant \gamma \geqslant \gamma_2$, где $\gamma_1$ и $\gamma_2$ являются корнями трансцендентного уравнения \eqref{trascendent_equation}, удовлетворяющими условию \eqref{transcendent_condition}. Тогда для любого $\gamma < \widetilde{\Gamma}$ в случае $\varepsilon=\alpha-\alpha_u$ и любого $\gamma_1 > \gamma > \gamma_2$ в случае $\varepsilon=\alpha_u-\alpha$ существует $\varepsilon_0$ такое, что для $\varepsilon \in (0,\varepsilon_0]$ система \eqref{original_system}, \eqref{original_conditions} имеет в окрестности нуля два пространственно неоднородных устойчивых режима, асимптотика которых определяется формулой \eqref{u_j_div}.
+\end{thm}
+\begin{thm}
+Пусть $\varepsilon=\alpha-\alpha_u$ для $ \widetilde{\Gamma} \leqslant \gamma \leqslant \Gamma_u $, где $\widetilde{\Gamma}$ и $\Gamma_u$ вычисляются по формулам \eqref{gamma_tilde} и \eqref{gamma_u} соответственно. Тогда для любого $ \widetilde{\Gamma} < \gamma < \Gamma_u $ существует $\varepsilon_0$ такое, что для $\varepsilon \in (0,\varepsilon_0]$ система \eqref{original_system}, \eqref{original_conditions} имеет в окрестности нуля два пространственно неоднородных неустойчивых режима, асимптотика которых определяется формулой \eqref{u_j_div}.
+\end{thm}
+
+В случае чисто мнимого собственного значения $\lambda$ матрицы линеаризованной системы \eqref{original_system}, \eqref{original_conditions}, малый параметр $\varepsilon$ обозначает переход из области $S$ в область $C$ по параметру $\alpha$ для фиксированного значения $\gamma$. Здесь параметр $\varepsilon$ принимает вид
+\begin{equation}\label{eps_alpha_c}
+\varepsilon = \alpha_c - \alpha,
+\end{equation}
+где $\alpha_c$ вычисляется по формуле \eqref{alpha_c}. Также как и в случае дивергентной потери устойчивости, воспользуемся нормальной формой \eqref{norm_form}, для которой 
+$$ u_{j,0} = z(s) e^{i \omega t} \ch \delta_c x_j + \overline{z(s)} e^{-i \omega t} \overline{\ch \delta_c x_j}, $$
+где $ \delta_c = 2N\,\mbox{arsh}\,\dfrac{\sqrt{-\gamma+i\omega}}{2N} $, а $ x_j = -\dfrac{1}{2N} + \dfrac{j}{N} $ (см. также \cite{Kashchenko}). Подстановка в цепочку дифференциальных уравнений \eqref{original_system}, \eqref{original_conditions} разложения \eqref{norm_form} с учетом \eqref{eps_alpha_c} приводит к последовательно разрешимым системам для векторов $u_{j,0},\, u_{j,1}$ и $u_{j,2}$:
+$$ \dot u_{j,0} = N^2(u_{j+1,0} - 2u_{j,0} + u_{j-1,0}) + \gamma u_{j,0}, \quad j = \overline{1, N}, $$
+$$ u_{0,0} = u_{1,0}, \quad u_{N+1,0} = u_{N,0} + \dfrac{\alpha_c}{N}u_{k,0}, \qquad 1 \le k < N, $$
+$$ \dot u_{j,1} = N^2(u_{j+1,1} - 2u_{j,1} + u_{j-1,1}) + \gamma u_{j,1}, $$
+$$ u_{0,0} = u_{1,1}, \quad u_{N+1,1} = u_{N,1} + \dfrac{\alpha_c}{N}u_{k,1}, $$
+\begin{equation}\label{u2_system_c}
+	\dot u_{j,2} + \frac{\partial u_{j,0}}{\partial s} = N^2(u_{j+1,2} - 2u_{j,2} + u_{j-1,2}) + \gamma u_{j,2} - u_{j,0}^3,
+\end{equation}
+\begin{equation}\label{u2_conditions_c}
+	u_{0,2} = u_{1,2}, \quad u_{N+1,2} = u_{N,2} +  \dfrac{\alpha_c}{N}u_{k,2} - u_{k,0}.
+\end{equation} 
+Учитывая, что уравнение \eqref{original_system} содержит кубическое вычитаемое, и, тем самым, для функций $u_{j,1}$ система получается однородной, примем их значения нулевыми. Из условий разрешимости системы \eqref{u2_system_u}, \eqref{u2_conditions_u} можно получить укороченное уравнение на амплитуду колебаний нулевого решения:
+\begin{equation}\label{z_equation}
+z' = (\phi_0 + i \psi_0) z + (d_0 + i c_0) z |z|^2.
+\end{equation}
+Для уравнения \eqref{z_equation} коэффициенты $ \phi_0,\, d_0 $ выглядят следующим образом
+\begin{equation}\label{phi0_c}
+\phi_0 = -\mbox{Re} \left(\dfrac{2 \delta_c \ch \delta_c x_k}{\delta_c\ch \delta_c + \sh \delta_c - \alpha_c x_k \sh \delta_c x_k} \right),
+\end{equation}
+\begin{equation}\label{d0_c}
+d_0 = \mbox{Re} \left( \dfrac{3 \delta_c (G(\chi) + G(\eta) + 2G(\overline{\delta_c}) )}{2(\delta_c\ch \delta_c + \sh \delta_c - \alpha_c x_k \sh \delta_c x_k)} \right).
+\end{equation}
+Функция $G(a)$ вычисляется по формуле, приведенной ниже
+$$ G(a) = \dfrac{\alpha_c \ch a x_k - a \sh a}{a^2 - \delta_c^2}. $$
+
+Для коэффициентов $ \phi_0,\, d_0 $, при различных значениях индекса $k$ были построены зависимости от параметра $\gamma$. Согласно численным результатам для всех $\gamma < \Gamma_c$, где $\Gamma_c$ вычисляется по формуле \eqref{gamma_c}, $\phi_0$ оказывался положительным, а $d_0$ –- отрицательным. Другими словами, нулевое решение системы \eqref{original_system}, \eqref{original_conditions} теряло свою устойчивость колебательным способом (см. также \cite{Anischenko}): оно становилось неустойчивым, а вокруг него образовывался устойчивый цикл порядка $\sqrt{\varepsilon}$. Графики функций $ \phi_0(\gamma)$ и $d_0(\gamma) $ для индекса $ k=1 $ и критического значения параметра $\alpha=\alpha_c$ показаны на рис. 10.
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.51]{10a_oscillating_phi0_000} &
+\includegraphics[scale=0.51]{10b_oscillating_d0_000} \\
+\ а) & б) \\
+\end{tabular}
+\caption{Графики функций $ \phi_0(\gamma) $ и $ d_0(\gamma) $ для $k=1$ и $\alpha=\alpha_c$}
+\end{figure}
+
+\noindent В случае если $\varepsilon=\alpha-\alpha_f$, коэффициент $\phi_0$ рассчитывается по формуле \eqref{phi0_c}, но имеет противоположный знак, а коэффициент $d_0$ считается также, по формуле \eqref{d0_c}. Согласно численным результатам для всех $\overline{\gamma} < \gamma < \Gamma_f$, где $\Gamma_f$ вычисляется по формуле \eqref{gamma_f}, коэффициент $\phi_0$ также оказывался положительным, а $d_0$ –- отрицательным. Графики функций $ \phi_0(\gamma)$ и $d_0(\gamma) $ для индекса $ k=24 $ и критического значения параметра $\alpha=\alpha_f$ показаны на рис. 11.
+\begin{figure}[ht]
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.51]{11a_oscillating_phi0_after_tangent_047} &
+\includegraphics[scale=0.51]{11b_oscillating_d0_after_tangent_047} \\
+\ а) & б) \\
+\end{tabular}
+\caption{Графики функций $ \phi_0(\gamma) $ и $ d_0(\gamma) $ для $k=24$ и $\alpha=\alpha_f$}
+\end{figure}
+
+Осуществляя переход к полярной системе координат для $z=\rho e^{i \nu}$ уравнение \eqref{z_equation} сводится укороченной системе (см. например \cite{Glyzin}, \cite{Mitropolsky}) вида
+\begin{equation}\label{z_rho}
+	\rho' = \phi_0 \rho + d_0 \rho^3.
+\end{equation}
+\begin{equation}\label{z_nu}
+	\nu' = \psi_0 + c_0 \rho^2
+\end{equation}
+В системе \eqref{z_rho}, \eqref{z_nu} первое уравнение не зависит от второго, в связи с этим его можно решать отдельно. При условии, что $\phi_0>0$ и $d_0<0$ уравнение \eqref{z_rho} имеет ненулевое состояние равновесия $\phi_*=\sqrt{-\frac{\phi_0}{d_0}}$, причем $\rho$ стремится к этому состоянию равновесия при $s \rightarrow +\infty$. В этом случае из второго уравнения заключаем, что $ \nu(s) = \sigma s + \gamma $, где $\gamma$ -- произвольное действительное число, а коэффициент $\sigma$ вычисляется следующим образом:
+$$ \sigma = \frac{\psi_0 d_0 - c_0 \phi_0}{d_0}. $$
+Подставляя в нормальную форму \eqref{norm_form} полученные значения $\rho$ и $\nu$ получаем асимптотическое приближение для пространственно неоднородного цикла исходной системы \eqref{original_system}, \eqref{original_conditions}:
+\begin{equation}\label{u_j_osc}
+u_j = \sqrt{-\varepsilon \frac{\phi_0}{d_0}} \left( e^{i (\omega + \varepsilon \sigma) t}\,\ch \delta_c x_j + e^{-i (\omega + \varepsilon \sigma) t}\,\overline{\ch \delta_c x_j} \right) + O(\varepsilon).
+\end{equation}
+Вместе с приведенным выше локальным анализом системы (1), (2), это позволяет доказать следующую теорему.
+
+\begin{thm}
+Пусть $\varepsilon=\alpha_c-\alpha$ для $\gamma \leqslant \Gamma_c$, где $\Gamma_c$ вычисляется с помощью \eqref{gamma_c} и $\varepsilon=\alpha-\alpha_f$ для $\overline{\gamma} \leqslant \gamma \leqslant \Gamma_f$, где $\Gamma_f$ вычисляется с помощью \eqref{gamma_f}. Тогда для любого $\gamma < \Gamma_c$ в случае $\varepsilon=\alpha_c-\alpha$ и любого $\overline{\gamma} < \gamma <t \Gamma_f$ в случае $\varepsilon=\alpha-\alpha_f$ существует $\varepsilon_0$ такое, что для $\varepsilon \in (0,\varepsilon_0]$ система \eqref{original_system}, \eqref{original_conditions} имеет в окрестности неустойчивого нулевого состояния равновесия орбитально инвариантный устойчивый цикл с асимптотикой \eqref{u_j_osc}.
+\end{thm}
+
+\section{Выводы}
+
+Для цепочки дифференциальных уравнений с диффузионным взаимодействием и дополнительной внутренней связью с кубической нелинейностью были выявлены критические зависимости параметров, при которых происходят различные бифуркации нулевого состояния равновесия. Для значений параметров, близких к критическим, была построена нормальная форма и на ее основе были определены условия появления двух пространственно неоднородных устойчивых состояний равновесия в одном случае и цикла в другом.
+
+Полученные результаты могут быть использованы при решении задач численного моделирования некоторых биофизических процессов (см. например \cite{Gourley}, \cite{Britton}). Вызывает также интерес распространение этих результатов и на другие задачи с дополнительной внутренней связью (см. например \cite{Kashchenko}).
+
+\begin{thebibliography}{9}
+
+\bibitem{Amosov} %
+Амосов А. А., Дубинский Ю. А., Копченова Н. П. Вычислительные методы для инженеров. -- М.: Мир, 1998 -- 544 с.
+
+\bibitem{Anischenko} %
+Анищенко В. С., Вадивасова Т. Е. Лекции по нелинейной динамике: учебное пособие для вузов. -- 
+М.–Ижевск: НИЦ <<Регулярная и хаотическая динамика>>, 2011 -- 516 с.
+
+\bibitem{Volkov} %
+Волков Е. А. Численные методы. -- М.: Наука, 1987 -- 248 с.
+
+\bibitem{GKR_khaos} %
+Глызин С. Д., Колесов А. Ю., Розов Н. Х. Диффузионный хаос и его инвариантные числовые характеристики. -- ТМФ, 2020, т. 203 (1), с. 10–-25.
+
+\bibitem{GKR_relax} %
+Глызин С. Д., Колесов А. Ю., Розов Н. Х. Релаксационные колебания и диффузионный хаос в реакции Белоусова. -- Журнал вычислительной математики и математической физики, 2011, т. 51 (8), с. 1400--1418.
+
+\bibitem{Glyzin} %
+Глызин С. Д. Локальные методы анализа динамических систем. –- Ярославль: ЯрГУ им. П.Г Демидова, 2006 -- 91 с.
+
+\bibitem{Guckenheimer} %
+Гукенхеймер Дж., Холмс Ф. Нелинейные колебания, динамические системы и бифуркации векторных полей. –- М.: Институт компьютерных исследований, 2002 -- 560 с.
+
+\bibitem{Kashchenko} %
+Кащенко С. А. О бифуркациях при малых возмущениях в логистическом уравнении с запаздыванием. -- Моделирование и анализ информационных систем, 2017, т. 24 (2), с. 168--185.
+
+\bibitem{Kuznetsov} %
+Кузнецов А. П., Савин А. В., Седова Ю. В., Тюрюкина Л. В. Бифуркации отображений. -- Саратов: ООО ИЦ <<Наука>>, 2012 -- 196 с.
+
+\bibitem{Mardsen} %
+Марсден Дж. Е., Мак-Кракен Д. Бифуркация рождения цикла и ее приложения -– М.: Мир, 1980 –- 368 с.
+
+\bibitem{Mitropolsky} %
+Митропольский Ю. А., Лыкова О. Б. Интегральные многообразия в нелинейной динамике. -- М.: Наука, 1973 –- 512 с.
+
+\bibitem{Hassard} %
+Хэссард Б., Казаринов Н., Вэн И. Теория и приложения бифуркации рождения цикла -– М.: Мир, 1985 –- 280 с.
+
+\bibitem{Britton} %
+Britton N. F. Reaction-diffusion equations and their applications to biology. -- New York: Academic Press, 1986. –- 277 p.
+
+\bibitem{Gourley} %
+Gourley S. A., So J. W.-H., Wu J. H. Nonlocality of Reaction-Diffusion Equations Induced by Delay: Biological Modeling and Nonlinear Dynamics -- Journal of Mathematical Sciences, 2004, vol. 4 (4), pp. 5119–5153.
+
+\end{thebibliography}
+
+\end{document}

@@ -29,8 +29,7 @@ def get_sign_func_val(w):
         t = np.arctan(-w/gamma)/2.0
     else:
         t = (math.pi - np.arctan(w/gamma)) / 2.0
-    return r*np.sin(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) + \
-           r*np.cos(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
+    return r*np.sin(t)*np.sinh(r*np.cos(t))*np.cos(r*np.sin(t)) + r*np.cos(t)*np.cosh(r*np.cos(t))*np.sin(r*np.sin(t))
 
 
 if __name__ == '__main__':

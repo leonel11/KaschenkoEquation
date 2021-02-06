@@ -18,7 +18,6 @@ SAVE_DIRECTORY = '../Tracer/Variations/Integral Boundary Condition'
 if __name__ == '__main__':
     gammas = list(np.linspace(g_min, g_max, n_gammas))
     alphas_u = list(map(lambda x: -x, gammas))
-    drawer_alphau = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\alpha_u$',
-                                  save_dir=SAVE_DIRECTORY)
+    drawer_alphau = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\alpha_u$', save_dir=SAVE_DIRECTORY)
     drawer_alphau.drawAxis(show_Ox=True, show_Oy=True)
     drawer_alphau.drawCurve(gammas, alphas_u, curve_color='b')

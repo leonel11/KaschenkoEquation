@@ -26,8 +26,7 @@ def get_sign_func_val(y, x0):
     :return: value of sign function
     '''
     return (np.sinh(y)*np.cos(y) + np.cosh(y)*np.sin(y)) / \
-           (np.sinh(y)*np.cos(y) - np.cosh(y)*np.sin(y)) - \
-           np.tanh(y*x0)*np.tan(y*x0)
+           (np.sinh(y)*np.cos(y) - np.cosh(y)*np.sin(y)) - np.tanh(y*x0)*np.tan(y*x0)
 
 
 if __name__ =='__main__':
@@ -36,8 +35,7 @@ if __name__ =='__main__':
     for x0 in xs[1:]:
         y_prev = np.sqrt(w_prev/2.0)
         y_left, y_right = 0.98*y_prev, 1.1*y_prev
-        y = utils.dichotonomy_root_search(y_left, y_right,
-                                          get_sign_func_val, x0=x0)
+        y = utils.dichotonomy_root_search(y_left, y_right, get_sign_func_val, x0=x0)
         w = 2.0*y*y
         a = utils.get_alpha_c_origin(y, x0)
         print('{:.7};{:.7};{:.7};{:.7}'.format(x0,y,w,a))

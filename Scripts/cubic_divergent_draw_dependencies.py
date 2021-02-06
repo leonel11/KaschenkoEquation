@@ -10,10 +10,10 @@ import drawer
 import utils
 
 
-beta = 0.5
+beta = -1.0
 x0 = 0.49
-g_min = -4.1
-g_max = 7.7
+g_min = 10.3
+g_max = 17.5
 
 SAVE_DIRECTORY = '../Tracer/Variations/Cubic Boundary Condition' + f'/x0={x0:.2f}'
 
@@ -56,7 +56,7 @@ def get_Lyapunov_exps(gammas):
         alphas.append(utils.get_alpha_u(g, x0))
     for g, a in zip(gammas, alphas):
         phi0, d0 = get_phi(g, a, x0), get_d(g, a, x0)
-        phis.append(phi0)
+        phis.append(-phi0)
         ds.append(d0)
         amps.append(utils.get_amplitude(phi0, d0))
     return phis, ds, amps
@@ -72,19 +72,15 @@ def draw_dependencies(gammas, phis, ds, amps):
     :param amps: list of amplitude values
     '''
     # draw phi, d dependencies
-    phid_figure_name = 'divergent_phid_x0={:.5},g[{:.5},{:.5}],beta={:.5}'.format(x0, g_min, g_max, beta)
-    drawer_phid = drawer.Drawer(x_label=r'$\gamma$',
-                                figure_name=phid_figure_name,
-                                save_dir=SAVE_DIRECTORY)
+    phid_figure_name = 'cubic_divergent_phi0d0_x0={:.5},g[{:.5},{:.5}],beta={:.5}'.format(x0, g_min, g_max, beta)
+    drawer_phid = drawer.Drawer(x_label=r'$\gamma$', figure_name=phid_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_phid.drawAxis(show_Ox=True)
-    drawer_phid.drawTwoCurves(gammas, phis, ds, curve1_lbl=r'$\varphi_0$',
-                              curve2_lbl=r'$d_0$', curve1_color='darkcyan',
-                              curve2_color='darkorange')
+    drawer_phid.drawTwoCurves(gammas, phis, ds, curve1_lbl=r'$\varphi_0$', curve2_lbl=r'$d_0$',
+                              curve1_color='darkcyan', curve2_color='darkorange')
     # draw amplitude dependency
-    amp_figure_name = 'divergent_A_x0={:.5},beta={:.5}'.format(x0, beta)
+    amp_figure_name = 'cubic_divergent_Au_x0={:.5},beta={:.5}'.format(x0, beta)
     drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_u$',
-                               figure_name=amp_figure_name,
-                               save_dir=SAVE_DIRECTORY)
+                               figure_name=amp_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
     drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 

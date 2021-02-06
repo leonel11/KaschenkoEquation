@@ -10,12 +10,12 @@ import os
 import utils
 
 
-x0 = 0.45
+x0 = 0.49
 AFTER_TANGENT = True
 
-DATA_PATH = f'../Tracer/Results/x0={x0:.2f}'
-CSV_FILE = DATA_PATH + '_analytical.csv'
-AFTER_TANGENT_FILE = DATA_PATH + '_analytical_after_tangent.csv'
+DATA_PATH = f'../Tracer/Results/x0={x0:.2f}/'
+CSV_FILE = DATA_PATH + f'x0={x0:.2f}' + '_analytical.csv'
+AFTER_TANGENT_FILE = DATA_PATH + f'x0={x0:.2f}' + '_analytical_after_tangent.csv'
 
 
 def read_params():
@@ -55,8 +55,12 @@ def prepare_plot():
     Set some settings of visualization for the field of graphics
     '''
     plt.rcParams.update({'font.size': 13})
+    save_dir = '../Tracer/Results'
+    if os.path.exists(save_dir):
+        plt.rcParams['savefig.directory'] = save_dir
     plt.subplots_adjust(left=0.11, bottom=0.11, right=0.94, top=0.94)
     plt.xlabel('$\gamma$')
+    plt.ylabel(r'$\alpha_{cr}$', rotation='horizontal', position=(0.0,0.55))
     plt.grid(True)
     draw_axis(show_Ox=True, show_Oy=True)
 
@@ -73,17 +77,15 @@ def draw_alphas(gs, aus, acs, gfs, afs):
     :param afs: list of alpha_f values
     '''
     prepare_plot()
-    plt.plot(gs, aus, label=r'$\alpha_u$', color='royalblue', linewidth=2,
-             zorder=4)
+    plt.plot(gs, aus, label=r'$\alpha_u$', color='royalblue', linewidth=2, zorder=4)
     plt.plot(gs, acs, label=r'$\alpha_c$', color='red', linewidth=2, zorder=4)
     if AFTER_TANGENT:
-        plt.plot(gfs, afs, label=r'$\alpha_f$', color='olive', linewidth=2,
-                 zorder=3)
+        plt.plot(gfs, afs, label=r'$\alpha_f$', color='olive', linewidth=2, zorder=3)
         plt.scatter(gfs[-1], afs[-1], color='black', s=14, zorder=5)
     plt.legend(loc='lower right')
     plt.scatter(gs[0], acs[0], color='black', s=14, zorder=5)
     x1, x2, y1, y2 = plt.axis()
-    plt.axis((x1, x2, y1, y2))
+    plt.axis((3, x2, -30, 3))
     plt.savefig(os.path.join(DATA_PATH, f'alphas_{x0:.2f}.png'))
     plt.show()
 

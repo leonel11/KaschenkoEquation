@@ -7,14 +7,13 @@ WITH LINEAR DEVIATION in boundary conditions
 
 import pandas as pd
 import numpy as np
-import os
 import drawer
 
 
-x0 = 0.41
-AFTER_TANGENT = False
+x0 = 0.47
+AFTER_TANGENT = True
 
-SKIP_VALUES = 9 if AFTER_TANGENT else 1 # for more handsome visualization
+SKIP_VALUES = 3 # for more handsome visualization
 SUFFIX_NAME = '_after_tangent' if AFTER_TANGENT else ''
 SAVE_DIRECTORY = f'../Tracer/Results/x0={x0:.2f}'
 CSV_FILE = SAVE_DIRECTORY + f'/x0={x0:.2f}' +'_analytical.csv'
@@ -33,7 +32,10 @@ def read_params():
         df = pd.read_csv(CSV_FILE, sep=';')
         alphas = list(df['alpha_c'])
     gammas, omegas = list(df['gamma']), list(df['w'])
-    return gammas[:-SKIP_VALUES], omegas[:-SKIP_VALUES], alphas[:-SKIP_VALUES]
+    if AFTER_TANGENT:
+        return gammas[:-SKIP_VALUES], omegas[:-SKIP_VALUES], alphas[:-SKIP_VALUES]
+    else:
+        return gammas[SKIP_VALUES:], omegas[SKIP_VALUES:], alphas[SKIP_VALUES:]
 
 
 def G(y, a, mu, x0):
@@ -85,23 +87,21 @@ def draw_dependencies(gammas, phis, ds, amps):
     :param amps: list of amplitude values
     '''
     # draw phi dependency
-    phi_pict = 'oscillating_phi0{}_x0={:.5}.png'.format(SUFFIX_NAME, x0)
-    drawer_phi = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\varphi_0$')
+    phi_pict = 'oscillating_phi0{}_x0={:.5}'.format(SUFFIX_NAME, x0)
+    drawer_phi = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\varphi_0$',
+                               figure_name=phi_pict, save_dir=SAVE_DIRECTORY)
     drawer_phi.drawAxis(show_Ox=True)
-    drawer_phi.drawCurve(gammas, phis, curve_color='darkcyan',
-                         save_name=os.path.join(SAVE_DIRECTORY, phi_pict))
+    drawer_phi.drawCurve(gammas, phis, curve_color='darkcyan')
     # draw d dependency
-    d_pict = 'oscillating_d0{}_x0={:.5}.png'.format(SUFFIX_NAME, x0)
-    drawer_d = drawer.Drawer(x_label=r'$\gamma$', y_label='d_0')
+    d_pict = 'oscillating_d0{}_x0={:.5}'.format(SUFFIX_NAME, x0)
+    drawer_d = drawer.Drawer(x_label=r'$\gamma$', y_label='$d_0$', figure_name=d_pict, save_dir=SAVE_DIRECTORY)
     drawer_d.drawAxis(show_Ox=True)
-    drawer_d.drawCurve(gammas, ds, curve_color='darkorange',
-                       save_name=os.path.join(SAVE_DIRECTORY, d_pict))
+    drawer_d.drawCurve(gammas, ds, curve_color='orange')
     # draw amplitude dependency
-    amp_pict = 'oscillating_amplutude{}_x0={:.5}.png'.format(SUFFIX_NAME, x0)
-    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_c$', )
+    amp_pict = 'oscillating_Ac{}_x0={:.5}'.format(SUFFIX_NAME, x0)
+    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_c$', figure_name=amp_pict, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
-    drawer_amp.drawCurve(gammas, amps, curve_color='crimson',
-                         save_name=os.path.join(SAVE_DIRECTORY, amp_pict))
+    drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 
 
 if __name__ == '__main__':

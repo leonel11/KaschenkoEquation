@@ -40,8 +40,7 @@ if __name__ == '__main__':
         for i in range(0, k):
             left_border = max(0, i*utils.PI-utils.PI/2.0)
             right_border = i*utils.PI + utils.PI/2.0
-            y_i = utils.bisection_root_search(left_border, right_border,
-                                              get_sign_func_val)
+            y_i = utils.bisection_root_search(left_border, right_border, get_sign_func_val)
             w_i = get_omega(y_i)
             a_i = utils.get_alpha_c_origin(y_i, x0=0.0)
             print('({:.4f}, {:.4f}):\ty={:.4f},\tw={:.4f},\ta={:.4f}'.format(left_border, right_border, y_i, w_i, a_i))

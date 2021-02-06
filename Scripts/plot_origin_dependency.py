@@ -30,7 +30,5 @@ def read_params():
 if __name__ == '__main__':
     gammas, alphas = read_params()
     # draw origin dependency
-    drawer_w = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\omega$',
-                             save_dir=SAVE_DIRECTORY)
-    drawer_w.drawCurve(gammas, alphas, curve_color='darkmagenta',
-                       save_name=PICT_NAME)
+    drawer_w = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\omega$', save_dir=SAVE_DIRECTORY)
+    drawer_w.drawCurve(gammas, alphas, curve_color='darkmagenta', save_name=PICT_NAME)

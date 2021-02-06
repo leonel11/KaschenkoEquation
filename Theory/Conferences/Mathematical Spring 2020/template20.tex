@@ -1,0 +1,43 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+%\renewcommand{\baselinestretch}{1.5}
+%\textwidth=158mm
+%\textheight=232mm
+%\voffset=-24mm
+%\pagestyle{empty}
+%\setcounter{theoremE}{0}
+%\setcounter{theoremR}{0}
+%\setcounter{definitionE}{0}
+%\setcounter{definitionR}{0}
+
+
+\begin{document}
+\begin{center}
+	{\large\bf Dynamics of diffused connected systems of differential equations with internal connection}
+\end{center}  
+\medskip
+\begin{center}
+	{\bf Ivanovsky L. I.}   
+\end{center}
+\medskip
+\begin{center}
+	{\it Faculty of Computer Science}   
+\end{center}
+\begin{center}
+	{\it P.G. Demidov Yaroslavl State University}   
+\end{center}
+\bigskip
+
+Let us consider differential equation system with diffusion interaction between adjacent elements and internal connection
+$$ \dot{u}_j =  N^2(u_{j+1} - 2u_j + u_{j-1}) + \gamma u_j, \qquad j = \overline{1, N}, \eqno(1)$$
+$$ u_0 = u_1, \; u_{N+1} = u_N + \frac{\alpha}{N}u_k + \frac{\beta}{N}u_k^3, \quad 1 \le k < N, \eqno(2)$$
+where $ u_j $ is a smooth function, $ t \ge 0, $ and parameters $ \alpha, \beta, \gamma $ are real numbers.
+
+In system (1), (2) there are implemented two cases of stability loss of the homogeneous zero solution $ u_j (t) \equiv 0 $: divergent, when the zero value appears in the spectrum of stability, and oscillating, when the spectrum of stability has a pair of complex eigenvalues with maximal real parts equal to 0. The task of research was to study the nature of stability loss of zero solution and deduce asymptotic formulas for the regimes which derive from zero solution of system (1), (2) for critical values of parameters $ \alpha, \gamma $.
+
+The obtained analytical results were illustrated by the numerical solution of system (1), (2) for values of parameters close to bifurcational ones. In system (1), (2), for values of parameter $ \alpha $ close to critical ones, the normal form was given. This form allowed to determine conditions of the apperance of inhomogeneous balance states and cycles near the zero solution of system (1), (2).
+
+This work was supported by the Russian Science Foundation (project \textnumero 18-29-10055).
+
+\end{document}
