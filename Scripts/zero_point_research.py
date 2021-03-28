@@ -1,5 +1,5 @@
 '''
-
+Research zero stability by means of special function
 '''
 
 
@@ -110,11 +110,10 @@ def flexible_bisection_root_search(a_left, f_left, a_right, f_right):
 if __name__ == '__main__':
     a_values = np.arange(0.0, a_right+utils.EPS, delta_a)
     func_values = []
-    start_time = time.clock()
-    for _, a in tqdm(enumerate(a_values), total=len(a_values)):
-        f_a = second_border_func_val(u=a, v=0.0)
-        func_values.append(f_a)
-    print(f'\t elapsed time: {time.clock() - start_time}')
+    with utils.time_measure():
+        for _, a in tqdm(enumerate(a_values), total=len(a_values)):
+            f_a = second_border_func_val(u=a, v=0.0)
+            func_values.append(f_a)
     print('Roots:\na = 0.0')
     a_roots = [0.0]
     for idx in range(1, len(a_values)-1):

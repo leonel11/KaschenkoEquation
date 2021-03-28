@@ -1,16 +1,26 @@
 '''
-Some functions for commin usage
+Some functions for common usage
 '''
 
 import numpy as np
 import math
 import drawer
 
+from contextlib import contextmanager
+from time import time
+
 
 EPS = 1e-6
 H = 1e-5 #1e-3
 MAX = 1e6
 PI = math.pi
+
+
+@contextmanager
+def time_measure():
+    start_time = time()
+    yield
+    print(f'Elapsed time: {int(time() - start_time)} sec')
 
 
 def get_alpha_u(gamma, x0):

@@ -1,5 +1,5 @@
 '''
-
+Research zero stability by means of special function
 '''
 
 
@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 import drawer
 import multiprocessing
-import time
 import utils
 
 from functools import partial
@@ -22,11 +21,11 @@ COLUMNS = ['a', 'F']
 x0 = 0.45
 gamma = 6.89
 alpha = -3.41417 #-3.41414
-a_right = 0.6
+a_right = 0.8
 delta_a = 2e-2
 
 SAVE_DIRECTORY = f'../Tracer/Results/x0={x0:.2f}'
-PROCESSES = 2*multiprocessing.cpu_count()
+PROCESSES = multiprocessing.cpu_count()
 METHOD = 'Butcher'
 DRAW_U_FUNCS = False
 
@@ -141,13 +140,13 @@ if __name__ == '__main__':
     a_indices = range(len(a_values))
     func_values = []
     numerical_method = get_numerical_method()
-    start_time = time.clock()
-    # Multiprocessing calculation of function
-    func_values.extend(multiprocessing.Pool(processes=PROCESSES).map(
-        partial(second_border_func_val_multiproc, a_values=a_values, numerical_method=numerical_method), a_indices))
-    df = pd.DataFrame(func_values).sort_values(by=[COLUMNS[0]])
-    a_s, f_s = tuple(map(lambda x: df[x].tolist(), COLUMNS))
-    print(f'Elapsed time: {int(time.clock() - start_time)} sec\nSearching for roots...\na = 0')
+    with utils.time_measure():
+        # Multiprocessing calculation of function
+        func_values.extend(multiprocessing.Pool(processes=PROCESSES).map(
+            partial(second_border_func_val_multiproc, a_values=a_values, numerical_method=numerical_method), a_indices))
+        df = pd.DataFrame(func_values).sort_values(by=[COLUMNS[0]])
+        a_s, f_s = tuple(map(lambda x: df[x].tolist(), COLUMNS))
+    print('Searching for roots...\na = 0')
     a_roots = [0.0]
     for idx in range(1, len(a_s)-1):
         a_left, f_left = a_s[idx], f_s[idx]
