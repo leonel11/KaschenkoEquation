@@ -1,0 +1,101 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{ucs}
+\usepackage[english,russian]{babel}
+
+%\usepackage[math]{pscyr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{cheb21}
+
+\begin{document}
+\selectlanguage{russian}
+
+\renewcommand{\AuthorNoA}{Галкин В. А.}
+\renewcommand{\AuthorNoB}{Моргун Д. А.}
+%\renewcommand{\AuthorNoC}{}
+
+\renewcommand{\authorlist}{%
+\AuthorNoA, %
+\AuthorNoB%, %
+%\AuthorNoC%, %
+}
+
+\renewcommand{\rustitle}{Пример-шаблон тезиса}
+\PrerenderUnicode{\rustitle}
+\chebsectionrus{\authorlist}{\rustitle}
+\AddIndex{\AuthorNoA}
+\AddIndex{\AuthorNoB}
+%\AddIndex{\AuthorNoC}
+
+\begin{center}
+\textbf{\AuthorNoA${}^{1,\textit{а}}$, \AuthorNoB${}^{1,\textit{б}}$}
+
+${}^{1}$ \textit{Сургутский филиал Федерального научного центра «Научно-исследовательский институт системных исследований Российской академии наук», г. Сургут,\\ Российская Федерация}
+
+${}^{\textit{а}}$ \textit{val-gal@yandex.ru}, ${}^{\textit{б}}$ \textit{morgun\_da@office.niisi.tech}
+ 
+\end{center}
+
+\chebkeyrus{требования к оформлению, шаблон}
+
+Работа поддержана грантами XXXX № YY-YY-YYYYY, № ZZ-ZZ-ZZZZZZ.
+
+\noindent {}
+
+Требования к оформлению тезисов и примеры-шаблоны тезисов размещены на сайте конференции http://chebconf.ru. Объём тезисов, включая список литературы, 
+--- не более одной страницы формата А4 для тезисов на русском языке и не более одной страницы формата A4 для тезисов на английском языке.
+
+
+\textbf{Структура тезиса}
+
+1. Название статьи (аббревиатура в названии недопустима). Точка после названия не
+ставится.
+
+2. Фамилия (полностью), имя, отчество (инициалы) автора. После фамилии автора следует сноска 
+с указанием места работы (без аббревиатур и упоминания ведомственной принадлежности), города, страны и электронного адреса. 
+
+3. Ключевые слова (3-6) на русском языке.
+
+4. Благодарности. Здесь могут упоминаться гранты, при поддержке которых работа
+выполнялась (при наличии).
+
+5. Текст тезиса. 
+
+6. Литература. 
+
+Нумерация формул выполняется арабскими цифрами (1), (2) и только для тех формул, на которые имеются ссылки в тексте.
+Рисунки должны храниться в подкаталоге figs каталога с материалами тезиса (<<FirstAuthorIOгод-месяц-день>>, где FirstAuthorIO --- фамилия и инициалы первого автора).
+
+\begin{equation} \label{eq:Cheb19SurMathGalkin__1_} 
+\frac{\partial \textbf{H}}{\partial t} +\left(\textbf{v}\cdot \nabla \right)\textbf{H}=\left(\textbf{H}\cdot \nabla \right)\textbf{v}+\mu _{m} \Delta \textbf{H}.
+\end{equation} 
+
+Библиографические ссылки в тексте статьи выделяют квадратными скобками,
+указывая номер источника в списке литературы (например, [2]). Источники приводятся в порядке упоминания в тексте (Ванкуверский стиль).
+
+При составлении библиографических описаний статей следует пользоваться разделами Для цитирования (For Citation) в журналах и на сайтах
+сетевых изданий.
+
+
+%\noindent Литература
+
+\begin{thebibliography}{9}
+
+\bibitem{bib:Cheb21Galkin01}
+Кириллова О. В., Попова Н. Г., Скалабан А. В. и др. {\it Рекомендации по подготовке сайта научного журнала для преставления издания российскому и международному
+сообществу.} Екатеринбург: Изд-во Урал. ун-та; 2018. 92 с. Режим доступа: 10.24069/B978-5-7996-2332-6.
+
+\bibitem{bib:Cheb21Galkin02}
+Рю Д. Размышления по поводу названия журнала: в помощь российским редакторам и издателям. {\it Научный редактор и издатель.} 2016;1(1-4):46–47. DOI: 10.24069/2542-0267-2016-
+1-4-46-47.
+
+\bibitem{bib:Cheb21Galkin03}
+{\it Охват контента Scopus.} Режим доступа: \url{http://elsevierscience.ru/files/Scopus_Content_Guide_Rus_2017.pdf}.
+
+\end{thebibliography}
+
+\end{document}

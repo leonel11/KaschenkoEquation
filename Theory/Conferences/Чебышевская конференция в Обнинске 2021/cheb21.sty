@@ -1,0 +1,168 @@
+%\RequirePackage[a5paper,text={110mm,165mm},top=25mm,right=2cm]{geometry}
+\RequirePackage[a4paper,top=2cm,right=2cm,left=2cm,bottom=2cm]{geometry}
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage[overload]{textcase}
+\RequirePackage{icomma}
+\RequirePackage{indentfirst}
+\RequirePackage[figurewithin=section,labelsep=period,tablewithin=section,textfont=it,labelfont=bf]{caption}
+\RequirePackage[pdftex]{graphicx}
+
+
+\titleformat{\section}[block]{\normalfont\bfseries\filcenter}{}{0em}{\MakeUppercase}
+\titleformat{\subsection}[block]{\normalfont\bfseries\filcenter}{}{1em}{\MakeUppercase}
+\renewcommand{\thesection}{}
+
+\renewcommand{\numberline}[1]{}
+
+%\setlength\parindent{1.25cm}
+\newlength{\chebindent}
+\setlength{\chebindent}{0.5cm}
+%\renewcommand{\cftparskip}{\chebindent}
+
+
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\arabic{equation}}
+\setlength{\abovecaptionskip}{0pt}
+
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\arabic{equation}}
+\setlength{\abovecaptionskip}{0pt}
+%\renewcommand{\captionlabeldelim}{.}
+
+\renewcommand{\sectionmark}[1]{%
+\markboth{\thesection.\ #1}{}}
+
+\def\ssp{\def\baselinestretch{1.0}\large\normalsize}
+\def\dsp{\def\baselinestretch{1.5}\large\normalsize}
+
+\def\smallssp{\def\baselinestretch{1.0}\large\small}
+\def\scriptsizessp{\def\baselinestretch{1.0}\large\scriptsize}
+
+% http://stackoverflow.com/questions/1037905/bibliography-as-section-in-latex-bibtex
+\makeatletter
+\renewenvironment{thebibliography}[1]
+     {\subsection*{\bibname}% <-- this line was changed from \chapter* to \section*
+      \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+      \list{\@biblabel{\@arabic\c@enumiv}}%
+           {\settowidth\labelwidth{\@biblabel{#1}}%
+            \leftmargin\labelwidth
+            \advance\leftmargin\labelsep
+	    \setlength{\itemsep}{0pt}% <-- from compactbib
+	    \setlength{\parsep}{0pt}%  <-- from compactbib
+            \@openbib@code
+            \usecounter{enumiv}%
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+      \sloppy
+      \clubpenalty4000
+      \@clubpenalty \clubpenalty
+      \widowpenalty4000%
+      \sfcode`\.\@m}
+     {\def\@noitemerr
+       {\@latex@warning{Empty `thebibliography' environment}}%
+      \endlist}
+
+\renewcommand{\@biblabel}[1]{#1.}
+
+\providecommand*{\BibDash}{} % Убираем тире из разделителя блоков в библиографии, формируемой BiBTeX по стилю ГОСТ
+
+\newenvironment{chebabstractrus}
+    {
+    \selectlanguage{russian}\begin{normalsize}\indent
+    }
+    {
+    \end{normalsize} 
+    }
+
+\newenvironment{chebabstracteng}
+    {
+    \selectlanguage{english}\begin{normalsize}\indent
+    }
+    {
+    \end{normalsize} 
+    }
+
+
+\newcommand{\chebtitle}[1]{\begin{center}\textbf{\expandafter\MakeUppercase\expandafter{#1}}\end{center}}
+
+%\newcommand{\chebkeywords}[1]{\noindent{\textbf{\textit{#1}}}}
+\newcommand{\chebkeywords}[1]{\textbf{\textit{#1}}}
+\newcommand{\chebkeys}[2]{\textit{#1}: \normalfont{#2}.}
+\newcommand{\chebkeyrus}[1]{\chebkeys{Ключевые слова}{#1}}
+\newcommand{\chebkeyeng}[1]{\chebkeys{Keywords}{#1}}
+
+\renewcommand\labelenumi{\arabic{enumi})}
+
+%
+% https://en.wikibooks.org/wiki/LaTeX/Footnotes_and_Margin_Notes
+\@addtoreset{footnote}{section}
+\def\blfootnote{\xdef\@thefnmark{}\@footnotetext}
+
+%\def\url@foostyle{%
+%  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\normalfont}}}
+
+\makeatother
+
+%\urlstyle{foo}
+
+\setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{1}
+\renewcommand{\emph}[1]{\textit{#1}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\addto\captionsenglish{%
+\renewcommand{\bibname}{REFERENCES}
+}
+
+% Оформление заголовков таблиц по ГОСТу
+% http://riki-koen.livejournal.com/81269.html
+\DeclareCaptionFormat{GOSTtable}{#2#1\\#3}
+\DeclareCaptionLabelSeparator{fill}{\hfill}
+\DeclareCaptionLabelFormat{fullparents}{\bothIfFirst{#1}{~}#2}
+\captionsetup[table]{
+     format=GOSTtable,
+     font={normalsize},
+     labelformat=fullparents,
+     labelsep=fill,
+     labelfont=it,
+     textfont=it,
+     justification=centering,
+     singlelinecheck=true
+     }
+
+\newcommand{\chebsectionrus}[2]{%
+\section[\hspace{\chebindent}\textbf{#1}\\\hspace{\chebindent}#2]
+{{#2}}%
+}
+
+\newcommand{\chebsectionruscl}[2]{%
+\addcontentsline{toc}{section}{\protect{\hspace{\chebindent}\textbf{#1}\\\hspace{\chebindent}#2}}%
+%{\centering\bfseries{#2}\\}%
+}%
+
+\newcommand{\AddIndex}[1]{\expandafter\index\expandafter{#1}}
+\newcommand{\AuthorNoA}{}
+\newcommand{\AuthorNoB}{}
+\newcommand{\AuthorNoC}{}
+\newcommand{\AuthorNoD}{}
+\newcommand{\AuthorNoE}{}
+\newcommand{\AuthorNoF}{}
+\newcommand{\AuthorNoG}{}
+\newcommand{\AuthorNoH}{}
+\newcommand{\AuthorNoI}{}
+\newcommand{\AuthorNoJ}{}
+\newcommand{\AuthorNoK}{}
+\newcommand{\AuthorNoL}{}
+\newcommand{\AuthorNoM}{}
+
+
+\newcommand{\authorlist}{}
+\newcommand{\rustitle}{}
+\newcommand{\engtitle}{}
+\newcommand{\thesispath}{}
+\newcommand{\basethesispath}{}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+
+
+\endinput

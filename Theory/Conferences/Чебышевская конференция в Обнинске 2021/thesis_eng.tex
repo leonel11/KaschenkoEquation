@@ -1,0 +1,63 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{ucs}
+\usepackage[english,russian]{babel}
+
+%\usepackage[math]{pscyr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{cheb21}
+
+\begin{document}
+\selectlanguage{english}
+
+\renewcommand{\AuthorNoA}{Ivanovskii L. I.}
+
+\renewcommand{\rustitle}{Stability of the zero solution in one parabolic boundary-value problem with an auxiliary internal connection}
+\PrerenderUnicode{\rustitle}
+\chebsectionrus{\authorlist}{\rustitle}
+\AddIndex{\AuthorNoA}
+
+\begin{center}
+\textbf{\AuthorNoA${}^{1,a}$}
+
+${}^{1}$ \textit{P.G. Demidov Yaroslavl State University, Yaroslavl, Russian Federation}
+
+${}^{a}$ \textit{leon19unknown@gmail.com}
+ 
+\end{center}
+
+\chebkeyeng{parabolic boundary-value problem, zero balance state, stability loss, bifurcations}
+
+This study is supported by RFBR grant 18-29-10055.
+
+\noindent {}
+
+Let us consider one parabolic boundary-value problem
+\begin{equation} \label{eq:Ivanovskii_1} 
+\dot u = u'' + \gamma u - u^3,
+\end{equation} 
+with an auxiliary internal connection in the second edge condition
+\begin{equation} \label{eq:Ivanovskii_2} 
+u'(0, t) \, = 0, \qquad u'(1, t) \, = \alpha\,u(x_0, t),
+\end{equation} 
+where function $ u(x, t)$ is smooth for $t\ge 0, \: x\in[0,1]$, parameters $ \alpha, \gamma \in \mathbb{R} $ and $ x_0 \in [0, 1) $. For the zero solution of boundary-value problem \eqref{eq:Ivanovskii_1}, \eqref{eq:Ivanovskii_2} there are two ways of stability loss: divergent, when a zero appears in the stability spectrum of zero balance state, and oscillating, when a pair of complex conjugate eigenvalues have moved from the left complex half plane to the imaginary axis. Our task was to find critical values of parameters $ \alpha, \; \gamma $ and $ x_0 $ and develop asympotic formulae for regimes derived from the zero balance state.
+
+Since it is rather difficult to obtain required critical values ​​of the parameters by means of analytical methods, the numerical research was carried out. As a result of numerical research, there were given critical values ​​of parameters $ \alpha, \: \gamma $ and $ x_0 $, when different bifurcations of the zero balance state of boundary-value problem \eqref{eq:Ivanovskii_1}, \eqref{eq:Ivanovskii_2} occur. For various values ​​of parameter $ \alpha $ close to critical, the normal form was constructed and using it there were received the conditions for the appearance of spatially inhomogeneous balance states and cycles. 
+
+%\noindent REFERENCES
+
+\begin{thebibliography}{9}
+
+\bibitem{bib:Clyzin}
+Glyzin S. D., Kolesov A. Yu., Rozov N. Kh. Diffusion chaos and its invariant numerical characteristics {\it Theoret. and Math. Phys.} 202;203(1): 443–456. DOI: https://doi.org/10.4213/tmf9824. 
+
+\bibitem{bib:Ivanovskii}
+Ivanovskiy L. I. Dynamics of one system of diffusionally coupled differential equations with auxiliary internal connection {\it University proceedings. Volga region. Physical and mathematical sciences} 2020;3(55):15–30. (In Russ.) DOI: 10.21685/2072-3040-2020-3-2.
+
+\end{thebibliography}
+
+\end{document}

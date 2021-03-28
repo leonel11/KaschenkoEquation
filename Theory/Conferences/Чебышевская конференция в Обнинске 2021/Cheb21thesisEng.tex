@@ -1,0 +1,91 @@
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{ucs}
+\usepackage[english,russian]{babel}
+
+%\usepackage[math]{pscyr}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{cheb21}
+
+\begin{document}
+\selectlanguage{English}
+
+\renewcommand{\AuthorNoA}{Galkin V. A.}
+\renewcommand{\AuthorNoB}{Morgun D. A.}
+%\renewcommand{\AuthorNoC}{}
+
+\renewcommand{\authorlist}{%
+\AuthorNoA, %
+\AuthorNoB%, %
+%\AuthorNoC%, %
+}
+
+\renewcommand{\rustitle}{Abstract Template}
+\PrerenderUnicode{\rustitle}
+\chebsectionrus{\authorlist}{\rustitle}
+\AddIndex{\AuthorNoA}
+\AddIndex{\AuthorNoB}
+%\AddIndex{\AuthorNoC}
+
+\begin{center}
+\textbf{\AuthorNoA${}^{1,a}$, \AuthorNoB${}^{1,b}$}
+
+${}^{1}$ \textit{Surgut Office, Scientific Research Institute for System Analysis of the Russian Academy of Sciences, Surgut, Russian Federation}
+
+${}^{a}$ \textit{val-gal@yandex.ru}, ${}^{b}$ \textit{morgun\_da@office.niisi.tech}
+ 
+\end{center}
+
+\chebkeyeng{requirements for presentation, template}
+
+This study is supported by XXXX grants YY-YY-YYYYY, ZZ-ZZ-ZZZZZZ.
+
+\noindent {}
+
+Please visit the conference website http://chebconf.ru for the abstract layout guidelines and an abstract template. The abstract, including a list of references, shall not exceed one A4 page.
+
+\textbf{Abstract structure}
+
+1. Title (no abbreviations  in the title, please.) No period in the end.
+
+2. Last name and initials of the authors. The author's name is followed by a footnote indicating their affiliation (no abbreviations, no department names), city, country, and e-mail address.
+
+3. Keywords (3--6).
+
+4. Acknowledgments. This may include grants that supported the work (if any.)
+
+5. Body text.
+
+6. References.
+
+Equations referenced in the text are numbered in Arabic numerals (1). Figures should be saved in the figs subfolder of the abstract folder (the folder name structure is ``FirstAuthorIOyear-month-day'', where FirstAuthorIO is the last name and initials of the first author.)
+
+\begin{equation} \label{eq:Cheb19SurMathGalkin__1_} 
+\frac{\partial \textbf{H}}{\partial t} +\left(\textbf{v}\cdot \nabla \right)\textbf{H}=\left(\textbf{H}\cdot \nabla \right)\textbf{v}+\mu _{m} \Delta \textbf{H}.
+\end{equation} 
+
+References in the text are in brackets (for example, [2]). The list should be arranged in the order of citation in the text (Vancouver style.)
+
+For the reference list entries please use the ``Cite this article'' sections in journals and online publications. 
+
+
+%\noindent Литература
+
+\begin{thebibliography}{9}
+
+\bibitem{bib:Cheb21Galkin01eng}
+Kirillova O. V., Popova N. G., Skalaban A. V. et al. \textit{Guidelines for Scientific Journal Web Site as a Presentation Tool for Domestic and International Audience.} Yekaterinburg: Urals Univ. Press; 2018. 92 p. (In Russ.) Available at: 10.24069/B978-5-7996-2332-6.
+
+\bibitem{bib:Cheb21Galkin02eng}
+Rew D. Thoughts on Journal Titles for Russian Editors and Publishers. \textit{Science Editor and Publisher.} 2016;1(1-4):46–47. (In Russ.) DOI: 10.24069/2542-0267-2016-1-4-46-47.
+
+\bibitem{bib:Cheb21Galkin03eng}
+\textit{Scopus Content Selection and Advisory Board.} Available at: \url{https://www.elsevier.com/solutions/scopus/how-scopus-works/content/scopus-content-selection-and-advisory-board}.
+
+\end{thebibliography}
+
+\end{document}
