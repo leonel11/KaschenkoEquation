@@ -10,8 +10,8 @@ import numpy as np
 import drawer
 
 
-x0 = 0.47
-AFTER_TANGENT = True
+x0 = 0.33
+AFTER_TANGENT = False
 
 SKIP_VALUES = 3 # for more handsome visualization
 SUFFIX_NAME = '_after_tangent' if AFTER_TANGENT else ''
@@ -98,8 +98,8 @@ def draw_dependencies(gammas, phis, ds, amps):
     drawer_d.drawAxis(show_Ox=True)
     drawer_d.drawCurve(gammas, ds, curve_color='orange')
     # draw amplitude dependency
-    amp_pict = 'oscillating_Ac{}_x0={:.5}'.format(SUFFIX_NAME, x0)
-    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_c$', figure_name=amp_pict, save_dir=SAVE_DIRECTORY)
+    amp_pict = 'oscillating_pho_star_{}_x0={:.5}'.format(SUFFIX_NAME, x0)
+    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\rho_*$', figure_name=amp_pict, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
     drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
 

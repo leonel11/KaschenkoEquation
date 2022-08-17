@@ -88,8 +88,8 @@ def draw_dependencies(gammas, phis, ds, amps):
     drawer_phid.drawAxis(show_Ox=True)
     drawer_phid.drawTwoCurves(gammas, phis, ds, r'$\varphi_0$', r'$d_0$', 'darkcyan', 'darkorange')
     # draw amplitude dependency
-    amp_figure_name = 'cubic_oscillating_A{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
-    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label='$A_c$',
+    amp_figure_name = 'cubic_oscillating_pho_star{}_x0={:.5},beta={:.5}'.format(SUFFIX_NAME, x0, beta)
+    drawer_amp = drawer.Drawer(x_label=r'$\gamma$', y_label=r'$\rho_*$',
                                figure_name=amp_figure_name, save_dir=SAVE_DIRECTORY)
     drawer_amp.drawAxis(show_Ox=True)
     drawer_amp.drawCurve(gammas, amps, curve_color='crimson')
